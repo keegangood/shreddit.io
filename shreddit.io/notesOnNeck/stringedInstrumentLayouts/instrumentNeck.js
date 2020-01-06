@@ -8,18 +8,10 @@ class InstrumentNeck {
 
         this.curKey = teoria.note('c');
 
+        this.scaleOrChord = 'scale';
+
         this.scale = this.curKey.scale('ionian');
         this.markedNotes = this.scale.simple();
-
-        console.log(this.scale.scale);
-        console.log(this.markedNotes);
-        
-
-        this.scale = this.curKey.chord('13');
-        this.markedNotes = this.scale.simple();
-        console.log(this.scale.intervals.toString().split(','));
-        console.log(this.markedNotes)
-        
 
         this.container = document.querySelector('#neck');
         this.stringNames = this.getInstrumentTunings();

@@ -11,7 +11,9 @@ let instrumentInput = document.querySelector('#instrument-input'),
     scaleInput = document.querySelector('#scale-formula-input'),
     scaleName,
     keyInput = document.querySelector('#key-input'),
-    key;
+    key,
+    chordQualityInput = document.querySelector('#chord-quality'),
+    chordName;
 
 for(let i in instruments){
     instrument = instruments[i]; 
@@ -45,13 +47,26 @@ updateTunings(neck.instrument);
 // grabs current input for scale name and key,
 // sends that info to the neck object
 // then removes old markers and places new ones
-const updateScale = () => {
-    scaleName = scaleInput.value;
+const updateNoteMarkers = () => {
     key = keyInput.value;
-
     neck.curKey = teoria.note(key);
-    neck.scale = neck.curKey.scale(scaleName);
-    neck.markedNotes = neck.scale.simple()
+
+    if(neck.scaleOrChord == 'scale'){
+        scaleName = scaleInput.value;
+        neck.scale = neck.curKey.scale(scaleName);
+        neck.markedNotes = neck.scale.simple();
+
+        // console.log(`neck.scale: ${neck.scale.scale}`);
+        // console.log(`neck.markedNotes: ${neck.markedNotes}`);
+
+    } else if(neck.scaleOrChord == 'chord'){
+        chordName = chordQualityInput.value;
+        neck.scale = neck.curKey.chord(chordName).voicing();//.toString().split(',');
+        console.log(`neck.scale: ${neck.scale}`);
+        neck.markedNotes = neck.curKey.chord(chordName).simple();
+        console.log(`neck.markedNotes: ${neck.markedNotes}`);
+
+    }
 
     neck.removeNoteMarkers();
 
@@ -64,8 +79,6 @@ const updateInstrument = () => {
     let newInstrument = instrumentInput.value;
     let newTuning = tuningInput.value;
     
-    // tuningInput.selectedIndex = newTuning;
-
     for(let i in neck.strings){
         neck.strings[i].container.remove();
     }
@@ -92,8 +105,19 @@ tuningInput.addEventListener('change', function(){
     updateInstrument();
 });
 
-scaleInput.addEventListener('change', updateScale);
-keyInput.addEventListener('change', updateScale);
+scaleInput.addEventListener('change', () => {
+    neck.scaleOrChord = 'scale';
+    updateNoteMarkers();    
+});
+
+keyInput.addEventListener('change', () => {
+    updateNoteMarkers();
+});
+
+chordQualityInput.addEventListener('change', () => {
+    neck.scaleOrChord = 'chord';
+    updateNoteMarkers();
+});
 
 let n1 = teoria.note('cb');
 // let n2 = teoria.note('');
