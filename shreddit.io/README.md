@@ -8,10 +8,13 @@
 
 * Interface for pairing chords with compatible scales
 
-* Support for displaying chord formulas on neck
-
 * Step sequencers for drum and chord rhythms
 
 * Display probabilities of particular chords following user's selected chord
 
 * Identify chords based on user-placed markers
+
+
+# Complete:
+
+* Support for displaying chord formulas on neck 

@@ -56,21 +56,16 @@ const updateNoteMarkers = () => {
         neck.scale = neck.curKey.scale(scaleName);
         neck.markedNotes = neck.scale.simple();
 
-        // console.log(`neck.scale: ${neck.scale.scale}`);
-        // console.log(`neck.markedNotes: ${neck.markedNotes}`);
-
     } else if(neck.scaleOrChord == 'chord'){
         chordName = chordQualityInput.value;
         neck.scale = neck.curKey.chord(chordName).voicing();//.toString().split(',');
-        console.log(`neck.scale: ${neck.scale}`);
         neck.markedNotes = neck.curKey.chord(chordName).simple();
-        console.log(`neck.markedNotes: ${neck.markedNotes}`);
 
     }
 
     neck.removeNoteMarkers();
-
     neck.placeNoteMarkers();
+
 }
 neck.placeNoteMarkers();
 
@@ -94,6 +89,7 @@ const updateInstrument = () => {
     updateScale();
 }
 
+
 instrumentInput.addEventListener('change', function(){
     newInstrument = instrumentInput.value;
     
@@ -101,23 +97,28 @@ instrumentInput.addEventListener('change', function(){
     updateInstrument();
 });
 
+
 tuningInput.addEventListener('change', function(){
     updateInstrument();
 });
+
 
 scaleInput.addEventListener('change', () => {
     neck.scaleOrChord = 'scale';
     updateNoteMarkers();    
 });
 
+
 keyInput.addEventListener('change', () => {
     updateNoteMarkers();
 });
+
 
 chordQualityInput.addEventListener('change', () => {
     neck.scaleOrChord = 'chord';
     updateNoteMarkers();
 });
+
 
 let n1 = teoria.note('cb');
 // let n2 = teoria.note('');
