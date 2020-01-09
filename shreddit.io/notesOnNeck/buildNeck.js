@@ -60,11 +60,12 @@ const updateNoteMarkers = () => {
         chordName = chordQualityInput.value;
         neck.scale = neck.curKey.chord(chordName).voicing();//.toString().split(',');
         neck.markedNotes = neck.curKey.chord(chordName).simple();
-
+        neck.findCompatibleScales();
     }
 
     neck.removeNoteMarkers();
     neck.placeNoteMarkers();
+    
 
 }
 neck.placeNoteMarkers();
@@ -118,6 +119,7 @@ chordQualityInput.addEventListener('change', () => {
     neck.scaleOrChord = 'chord';
     updateNoteMarkers();
 });
+
 
 
 let n1 = teoria.note('cb');

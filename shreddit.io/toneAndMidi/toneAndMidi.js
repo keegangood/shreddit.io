@@ -23,12 +23,17 @@ const chordLoop = [
     },
     {
         'time': '2',
-        'chord': ['A4', 'C4', 'E4'],
+        'chord': ['E4', 'B4', 'G4'],
         'velocity': '.3',
     },
     {
         'time': '4',
         'chord': ['G4', 'B4', 'D4'],
+        'velocity': '.3',
+    },
+    {
+        'time': '6',
+        'chord': ['E4', 'G4', 'B4'],
         'velocity': '.3',
     },
 ]

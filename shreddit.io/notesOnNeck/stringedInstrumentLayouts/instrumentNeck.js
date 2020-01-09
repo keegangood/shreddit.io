@@ -1,5 +1,12 @@
 class InstrumentNeck {
     constructor(instrument, tuning, startFret, endFret){
+        this.allKeys = [
+            'Cb', 'C', 'C#', 'Db',
+            'D', 'D#', 'E', 'F',
+            'F#', 'Gb', 'G', 'G#',
+            'Ab', 'A', 'A#', 'Bb', 'B'
+        ]
+
         this.instrument = instrument;
         this.tuning = tuning;
         this.startFret = startFret;
@@ -10,7 +17,7 @@ class InstrumentNeck {
 
         this.scaleOrChord = 'scale';
 
-        this.scale = this.curKey.scale('ionian');
+        this.scale = this.curKey.chord('');
         this.markedNotes = this.scale.simple();
 
         this.container = document.querySelector('#neck');
@@ -92,6 +99,120 @@ class InstrumentNeck {
         return notes
     }
 
+    // Given a chord, return a list of scales 
+    // that contain all the chord's tones
+
+
+    // Needs to calculate scale and chord
+    // notes in the given key 
+    // rather than raw intervals
+
+    // find scale in note names
+    // find each note in chord from tonic to its interval
+    // if that note is in the scale, add to list
+
+    findCompatibleScales(){
+        let tempKey,
+            knownScales = teoria.Scale.KNOWN_SCALES,
+            scale,
+            chord = this.scale.toString().split(','),
+            chordInterval,
+            chordIntervalInt,
+            noteAtInterval,
+            noteMatches = [],
+            compatibleScales = [],
+            i,j,k,l;
+
+        console.log();
+        console.log();
+        console.log(`chord: ${chord}`);
+
+        // subtract 7 from all intervals above M7
+        // 'P11' => 'P4', 'M13' => 'M6'
+        for(i in chord){
+            chordInterval = chord[i]; 
+
+            if(chordInterval == 'd7'){
+                chord[i] = 'm7';
+            }
+            console.log(chord[i]);
+            console.log(this.curKey.interval(chord[i]).toString().slice(0,-1));
+            
+            chordIntervalInt = parseInt(chord[i].substring(1, chordInterval.length));
+            if(chordIntervalInt > 7){
+                chord[i] = teoria.interval(chord[i]).simple();
+                // chord[i] = `${chordInterval[0]}${chordIntervalInt - 7}`
+            }
+        }
+
+        console.log(`chord: ${chord}`);
+
+        for(j in this.allKeys){
+            tempKey = teoria.note(this.allKeys[j]);
+            
+            for(k in knownScales){
+                scale = tempKey.scale(knownScales[k]).simple(); // array of scale's note names
+                
+                console.log();
+    
+                console.log(`scaleName: ${knownScales[k]}`);
+                console.log(`scale: ${scale}`);
+                
+                noteMatches = [];
+                for(l in chord){
+                    chordInterval = chord[l];
+                    noteAtInterval = this.curKey.interval(chordInterval).toString().slice(0,-1);
+                    console.log(`chordInterval: ${chordInterval} - noteAtInterval: ${noteAtInterval}`);
+                    if(scale.includes(noteAtInterval)){
+                        
+                        noteMatches.push(noteAtInterval);
+                    }
+                }
+                console.log(`noteMatches: ${noteMatches}`);
+                if(noteMatches.length == chord.length){
+                    compatibleScales.push(
+                        {
+                            'key':tempKey.toString().slice(0,-1),
+                            'name':knownScales[k],
+                        }
+                        );
+                }
+            }
+        }
+
+        console.log(`${compatibleScales.length} compatible scales found for ${chord}`);
+        
+        for(let x in compatibleScales){
+            console.log(`key: ${compatibleScales[x].key}, scale: ${compatibleScales[x].name}`);
+        }
+        
+    }
+            
+    //         noteMatches = [];
+
+    //         for(l in chord){
+    //             chordInterval = chord[k];
+    //             console.log(`chordInterval: ${chordInterval}`);
+
+    //             noteAtInterval = neck.curKey.interval(chordInterval).toString().slice(0,-1);
+    //             console.log(`noteAtInterval: ${noteAtInterval}`);
+                
+    //             if(scale.includes(noteAtInterval)){
+    //                 console.log(`match: ${noteAtInterval}`);
+                    
+    //                 noteMatches.push(noteAtInterval);
+    //             }
+                
+    //         }
+
+    //         console.log(`noteMatches: ${noteMatches}`);
+            
+    //         if(noteMatches.length == chord.length){
+    //             compatibleScales.push(knownScales[j]);
+    //         }
+    //     }
+    //     return compatibleScales
+
     placeNoteMarkers(){
         let markedNotes,
             markedNote,
@@ -115,12 +236,14 @@ class InstrumentNeck {
 
             for(let i=0; i<matchingFrets.length; i++){
                 matchingFret = matchingFrets[i];
-                                
-                //create new NoteMarker and place in matching fret
-                marker = new NoteMarker(neck, matchingFret);
-                // console.log(matchingFret);
-                
-                matchingFret.append(marker.container);
+
+                // if fret doesn't already have a marker,
+                // create new NoteMarker and place in matching fret
+                if(!matchingFret.hasChildNodes()){
+
+                    marker = new NoteMarker(neck, matchingFret);
+                    matchingFret.append(marker.container);
+                }
             }
         }
     }
