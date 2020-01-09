@@ -81,7 +81,6 @@ class InstrumentNeck {
         notes = this.markedNotes.slice();
 
         for(i in notes){
-            // console.log(notes[i]);
             note = teoria.note(notes[i])
             enharmonics = note.enharmonics().toString().replace(/[0-9]/g, '').split(','); 
 
@@ -101,16 +100,6 @@ class InstrumentNeck {
 
     // Given a chord, return a list of scales 
     // that contain all the chord's tones
-
-
-    // Needs to calculate scale and chord
-    // notes in the given key 
-    // rather than raw intervals
-
-    // find scale in note names
-    // find each note in chord from tonic to its interval
-    // if that note is in the scale, add to list
-
     findCompatibleScales(){
         let tempKey,
             knownScales = teoria.Scale.KNOWN_SCALES,
@@ -123,11 +112,7 @@ class InstrumentNeck {
             compatibleScales = [],
             i,j,k,l;
 
-        console.log();
-        console.log();
-        console.log(`chord: ${chord}`);
-
-        // subtract 7 from all intervals above M7
+        // reduce compound intervals into simple ones:
         // 'P11' => 'P4', 'M13' => 'M6'
         for(i in chord){
             chordInterval = chord[i]; 
@@ -135,47 +120,40 @@ class InstrumentNeck {
             if(chordInterval == 'd7'){
                 chord[i] = 'm7';
             }
-            console.log(chord[i]);
-            console.log(this.curKey.interval(chord[i]).toString().slice(0,-1));
-            
+
             chordIntervalInt = parseInt(chord[i].substring(1, chordInterval.length));
             if(chordIntervalInt > 7){
                 chord[i] = teoria.interval(chord[i]).simple();
-                // chord[i] = `${chordInterval[0]}${chordIntervalInt - 7}`
             }
         }
-
-        console.log(`chord: ${chord}`);
 
         for(j in this.allKeys){
             tempKey = teoria.note(this.allKeys[j]);
             
             for(k in knownScales){
                 scale = tempKey.scale(knownScales[k]).simple(); // array of scale's note names
-                
-                console.log();
-    
-                console.log(`scaleName: ${knownScales[k]}`);
-                console.log(`scale: ${scale}`);
-                
+
+                // check each the note at eachchord interval in the 
+                // current key to see if they are in the current scale
                 noteMatches = [];
                 for(l in chord){
                     chordInterval = chord[l];
                     noteAtInterval = this.curKey.interval(chordInterval).toString().slice(0,-1);
-                    console.log(`chordInterval: ${chordInterval} - noteAtInterval: ${noteAtInterval}`);
+                    
                     if(scale.includes(noteAtInterval)){
-                        
                         noteMatches.push(noteAtInterval);
                     }
                 }
-                console.log(`noteMatches: ${noteMatches}`);
+
+                // if all notes in chord are in the scale
+                // add scale name to compatible scale array 
                 if(noteMatches.length == chord.length){
                     compatibleScales.push(
                         {
                             'key':tempKey.toString().slice(0,-1),
                             'name':knownScales[k],
                         }
-                        );
+                    );
                 }
             }
         }
@@ -187,31 +165,6 @@ class InstrumentNeck {
         }
         
     }
-            
-    //         noteMatches = [];
-
-    //         for(l in chord){
-    //             chordInterval = chord[k];
-    //             console.log(`chordInterval: ${chordInterval}`);
-
-    //             noteAtInterval = neck.curKey.interval(chordInterval).toString().slice(0,-1);
-    //             console.log(`noteAtInterval: ${noteAtInterval}`);
-                
-    //             if(scale.includes(noteAtInterval)){
-    //                 console.log(`match: ${noteAtInterval}`);
-                    
-    //                 noteMatches.push(noteAtInterval);
-    //             }
-                
-    //         }
-
-    //         console.log(`noteMatches: ${noteMatches}`);
-            
-    //         if(noteMatches.length == chord.length){
-    //             compatibleScales.push(knownScales[j]);
-    //         }
-    //     }
-    //     return compatibleScales
 
     placeNoteMarkers(){
         let markedNotes,
@@ -222,7 +175,6 @@ class InstrumentNeck {
             marker;
 
         markedNotes = this.addEnharmonics();
-        // console.log(`markedNotes: ${markedNotes}`);
         
         // check each marked note to see if it matches
         // the name of any frets. If so, mark them, if not, 
