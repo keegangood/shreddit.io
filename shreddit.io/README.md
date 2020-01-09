@@ -1,4 +1,4 @@
-# Future Features:
+# Future Features
 
 * Differently shaped markers for each interval for colorblind accessability
 
@@ -14,7 +14,6 @@
 
 * Identify chords based on user-placed markers
 
+## Complete
 
-# Complete:
-
-* Support for displaying chord formulas on neck 
+* Support for displaying chord formulas on neck

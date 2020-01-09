@@ -60,6 +60,7 @@ const updateNoteMarkers = () => {
         chordName = chordQualityInput.value;
         neck.scale = neck.curKey.chord(chordName).voicing();//.toString().split(',');
         neck.markedNotes = neck.curKey.chord(chordName).simple();
+        neck.chordName = chordName;
         neck.findCompatibleScales();
     }
 
@@ -88,6 +89,13 @@ const updateInstrument = () => {
     neck.strings = neck.drawStrings();
     
     updateScale();
+}
+
+
+// update DOM to display compatible 
+// scales for selected chord/key
+const updateCompatibleScales = () => {
+    
 }
 
 

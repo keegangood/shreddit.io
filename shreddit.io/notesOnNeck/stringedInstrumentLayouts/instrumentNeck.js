@@ -17,6 +17,9 @@ class InstrumentNeck {
 
         this.scaleOrChord = 'scale';
 
+        this.chordName = '';
+        this.compatibleScales = [];
+        
         this.scale = this.curKey.chord('');
         this.markedNotes = this.scale.simple();
 
@@ -104,13 +107,16 @@ class InstrumentNeck {
         let tempKey,
             knownScales = teoria.Scale.KNOWN_SCALES,
             scale,
-            chord = this.scale.toString().split(','),
+            chord = this.scale.toString().split(','), // Major => ['P1', 'M3', 'M5']
             chordInterval,
             chordIntervalInt,
             noteAtInterval,
             noteMatches = [],
             compatibleScales = [],
             i,j,k,l;
+
+        // reset array
+        this.compatibleScales = [];
 
         // reduce compound intervals into simple ones:
         // 'P11' => 'P4', 'M13' => 'M6'
@@ -158,7 +164,7 @@ class InstrumentNeck {
             }
         }
 
-        console.log(`${compatibleScales.length} compatible scales found for ${chord}`);
+        console.log(`${compatibleScales.length} compatible scales found for ${this.curKey.scientific().toString().slice(0,-1)}${this.chordName}`);
         
         for(let x in compatibleScales){
             console.log(`key: ${compatibleScales[x].key}, scale: ${compatibleScales[x].name}`);

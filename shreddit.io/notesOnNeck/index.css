@@ -28,9 +28,9 @@ body {
 .neck-container {
     display: flex;
     flex-direction: column;
-    height: 60vh;
+    height: 40vh;
     margin: 25px;
-    max-height: 600px;
+    max-height: 400px;
     max-width: 80%;
     width: 80%;
 }
@@ -88,17 +88,25 @@ body {
     color: rgb(248, 241, 241);
     font-family: sans-serif;
     font-size: 1.4rem;
-    height: 6vh;
-    max-height: 6vw;
-    max-width: 6vh;
+    height: 5vh;
+    max-height: 5vw;
+    max-width: 5vh;
     position: relative;
     text-align: center;
     top: calc(-50%);
-    width: 6vw;
+    width: 5vw;
 }
 
 .x-marker {
     background: none;
     border: none;
     color: black;
+}
+
+label {
+    padding: 15px;
+}
+
+select {
+    padding: 5px;
 }
