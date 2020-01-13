@@ -129,7 +129,6 @@ chordQualityInput.addEventListener('change', () => {
 });
 
 
-
 let n1 = teoria.note('cb');
 // let n2 = teoria.note('');
 
