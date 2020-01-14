@@ -134,7 +134,6 @@ let stopButton = document.querySelector('#stop');
 startButton.addEventListener('click', () => {
     // startLoops();
     Tone.Transport.start();
-
 });
 
 stopButton.addEventListener('click', () => {
@@ -143,8 +142,9 @@ stopButton.addEventListener('click', () => {
 
 
 let instrument = SampleLibrary.load({
-    instruments: 'clarinet',//['piano', 'bass-electric', 'bassoon', 'cello', 'clarinet', 'contrabass', 'flute', 'french-horn', 'guitar-acoustic', 'guitar-electric','guitar-nylon', 'harmonium', 'harp', 'organ', 'saxophone', 'trombone', 'trumpet', 'tuba', 'violin', 'xylophone'],
-    baseUrl: "tonejs-instruments/samples/"
+    instruments: 'cello', //['piano', 'bass-electric', 'bassoon', 'cello', 'clarinet', 'contrabass', 'flute', 'french-horn', 'guitar-acoustic', 'guitar-electric','guitar-nylon', 'harmonium', 'harp', 'organ', 'saxophone', 'trombone', 'trumpet', 'tuba', 'violin', 'xylophone'],
+    baseUrl: "tonejs-instruments/samples/",
+    minify: true,
 });
 
 console.log(instrument);
@@ -154,38 +154,55 @@ Tone.Buffer.on('load', function(){
     instrument.toMaster();
     // instrument.triggerAttackRelease(["A2","C#3","E3"], '2n', 1);
 
-
     const chordLoop = [
         {
             'time': '0',
-            'chord': ['C2', 'E2', 'G2'],
-            'velocity': .2,
+            'chord': ['C3', 'E3', 'G3'],
+            'velocity': .1,
         },
         {
             'time': '2',
-            'chord': ['E2', 'B2', 'G2'],
-            'velocity': .2,
+            'chord': ['E3', 'B3', 'G3'],
+            'velocity': .1,
         },
         {
             'time': '4',
-            'chord': ['G2', 'B2', 'D2'],
-            'velocity': .2,
+            'chord': ['G3', 'B3', 'D3'],
+            'velocity': .1,
         },
         {
             'time': '6',
-            'chord': ['E2', 'G2', 'B2'],
-            'velocity': .2,
+            'chord': ['E3', 'G3', 'B3'],
+            'velocity': .1,
         },
     ]
 
     const chordPart = new Tone.Part(function(time, event){
         instrument.triggerAttackRelease(event.chord, '1m', time, event.velocity);
-    
+        instrument.humanize = true;
         console.log(event);
     }, chordLoop).start(0);
 
     chordPart.loop = true;
     chordPart.loopEnd = `${chordLoop.length}m` // 2 chords => '2m', 6 chords => '6m'
 
-    // Tone.Transport.start();
+    /*
+    KICK
+    */
+    let kick = new Tone.MembraneSynth({
+        "envelope" : {
+            "sustain" : 0,
+            "attack" : 0.02,
+            "decay" : 0.8
+        },
+        "octaves" : 10
+    }).toMaster();
+
+    let kickLoop= ["C2", ["C2","C2"], "C2", "C2"]//["C2", ["C2", ["C2", "C2"]], "C2", ["C2", "C2"]];
+
+    let kickPart = new Tone.Sequence(function(time, note){
+        kick.triggerAttackRelease(note, "8n", time);
+    }, kickLoop).start(0);
+
+    // kickPart.loopEnd = '1m';
 });
