@@ -25,59 +25,130 @@ body {
     flex-direction: column;
 }
 
-.neck-container {
-    display: flex;
-    flex-direction: column;
-    height: 40vh;
-    margin: 25px;
-    max-height: 400px;
-    max-width: 80%;
-    width: 80%;
-}
+/* mobile only */
+@media only screen and (max-width: 400px){
+    .neck-container {
+        display: flex;
+        height: 70vh;
+        margin: 25px;
+        max-height: 700px;
+        max-width: 80%;
+        width: 80%;
+    }
 
-.string {
-    background-color: #eaeaea;
-    display: flex;
-    height: 10vh;
-    width: 100%;
-}
+    
+    .string {
+        background-color: #eaeaea;
+        display: flex;
+        flex-direction: column;
+        /* height: 100%; */
+        width: 100%;
+    }
 
-.invisible-string {
-    background: none;
-    border: none;
-}
+    .invisible-string {
+        background: none;
+        border: none;
+    }
 
-.fret {
-    align-items: center;
-    background-color: #eaeaea;
-    border: 1px solid #8a8a8a;
-    display: flex;
-    height: 100%;
-    justify-content: center;
-    max-height: 15vh;
-    width: 100%;
-}
+    .fret {
+        align-items: center;
+        background-color: #eaeaea;
+        border: 1px solid #8a8a8a;
+        display: flex;
+        height: 100%;
+        justify-content: center;
+        max-width: 15vh;
+        width: 100%;
+    }
 
-.inlay-fret {
-    background-color: #c9c8c8;
-}
+    .inlay-fret {
+        background-color: #c9c8c8;
+    }
+    
+    .invisible-fret {
+        background: none;
+        border: none;
+    }
+    
+    .open-fret {
+        align-items: center;
+        border-bottom: 6px double black;
+        display: flex;
+        justify-content: center;
+        /* width: 5%; */
+        min-height: 5%;
+    }
+    
+    .invisible-open-fret {
+        border: none;
+        height: 5vh;
+    }
 
-.invisible-fret {
-    background: none;
-    border: none;
+    .note-marker {
+        right: calc(-50%);
+    }
 }
+@media only screen and (min-width: 400px){
+    .neck-container {
+        display: flex;
+        flex-direction: column;
+        height: 40vh;
+        margin: 25px;
+        max-height: 400px;
+        max-width: 80%;
+        width: 80%;
+    }
 
-.open-fret {
-    align-items: center;
-    border-right: 6px double black;
-    display: flex;
-    justify-content: center;
-    width: 50vw;
-}
+    .string {
+        background-color: #eaeaea;
+        display: flex;
+        height: 10vh;
+        width: 100%;
+    }
+    
+    .invisible-string {
+        background: none;
+        border: none;
+    }
+    
+    .fret {
+        align-items: center;
+        background-color: #eaeaea;
+        border: 1px solid #8a8a8a;
+        display: flex;
+        height: 100%;
+        justify-content: center;
+        max-height: 15vh;
+        width: 100%;
+    }
+    
+    .inlay-fret {
+        background-color: #c9c8c8;
+    }
+    
+    .invisible-fret {
+        background: none;
+        border: none;
+    }
+    
+    .open-fret {
+        align-items: center;
+        border-right: 6px double black;
+        display: flex;
+        justify-content: center;
+        width: 50vw;
+    }
+    
+    .invisible-open-fret {
+        border: none;
+        width: 55vw;
+    }
 
-.invisible-open-fret {
-    border: none;
-    width: 55vw;
+    .note-marker {
+        top: calc(-50%);
+    }
+
+
 }
 
 .note-marker {
@@ -93,7 +164,6 @@ body {
     max-width: 5vh;
     position: relative;
     text-align: center;
-    top: calc(-50%);
     width: 5vw;
 }
 

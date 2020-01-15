@@ -1,4 +1,3 @@
-
 let neck = new InstrumentNeck('guitar', 'standard', 0, 13);
 
 let instrumentInput = document.querySelector('#instrument-input'),
@@ -88,10 +87,27 @@ const updateInstrument = () => {
     neck.totalStrings = neck.stringNames.length;
     neck.strings = neck.drawStrings();
     
-    updateScale();
+    updateNoteMarkers();
+}
+
+let windowWidthChange = mediaQuery => {
+    if(mediaQuery.matches){
+        neck.orientation = 'horizontal';
+        updateInstrument();
+    } else {
+        neck.orientation = 'vertical';
+        updateInstrument();
+
+    }
 }
 
 
+
+const mediaQuery = window.matchMedia("(min-width: 400px)");
+
+mediaQuery.addListener(windowWidthChange);
+
+windowWidthChange(mediaQuery);
 // update DOM to display compatible 
 // scales for selected chord/key
 const updateCompatibleScales = () => {

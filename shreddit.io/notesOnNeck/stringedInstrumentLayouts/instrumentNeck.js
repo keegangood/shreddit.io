@@ -24,6 +24,8 @@ class InstrumentNeck {
         this.markedNotes = this.scale.simple();
 
         this.container = document.querySelector('#neck');
+        this.orientation = '';
+
         this.stringNames = this.getInstrumentTunings();
         this.totalStrings = this.stringNames.length;
         this.strings = this.drawStrings();
@@ -64,7 +66,15 @@ class InstrumentNeck {
             let stringNum = i;
             let string = new InstrumentString(this, stringNum, this.stringNames[i]);
 
-            this.container.prepend(string.container);
+            if(this.orientation == 'vertical'){
+                console.log("< 400px");
+                
+                this.container.append(string.container);
+            } else if(this.orientation == 'horizontal') {
+                console.log("> 400px");
+                
+                this.container.prepend(string.container);
+            }
             strings.push(string);
         }
 
