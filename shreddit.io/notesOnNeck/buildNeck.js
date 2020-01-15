@@ -100,7 +100,7 @@ let windowWidthChange = mediaQuery => {
     }
 }
 
-const mediaQuery = window.matchMedia("(min-width: 400px)");
+const mediaQuery = window.matchMedia("(min-width: 768px)");
 
 mediaQuery.addListener(windowWidthChange);
 

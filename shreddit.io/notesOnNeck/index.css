@@ -26,10 +26,10 @@ body {
 }
 
 /* mobile only */
-@media only screen and (max-width: 400px){
+@media only screen and (max-width: 768px){
     .neck-container {
         display: flex;
-        height: 70vh;
+        height: 90vh;
         margin: 25px;
         max-height: 700px;
         max-width: 80%;
@@ -88,7 +88,8 @@ body {
         right: calc(-50%);
     }
 }
-@media only screen and (min-width: 400px){
+
+@media only screen and (min-width: 768px){
     .neck-container {
         display: flex;
         flex-direction: column;
@@ -159,12 +160,12 @@ body {
     color: rgb(248, 241, 241);
     font-family: sans-serif;
     font-size: 1.4rem;
-    height: 5vh;
-    max-height: 5vw;
-    max-width: 5vh;
+    height: 4vh;
+    max-height: 4vw;
+    max-width: 4vh;
     position: relative;
     text-align: center;
-    width: 5vw;
+    width: 4vw;
 }
 
 .x-marker {
