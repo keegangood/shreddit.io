@@ -97,17 +97,15 @@ let windowWidthChange = mediaQuery => {
     } else {
         neck.orientation = 'vertical';
         updateInstrument();
-
     }
 }
-
-
 
 const mediaQuery = window.matchMedia("(min-width: 400px)");
 
 mediaQuery.addListener(windowWidthChange);
 
 windowWidthChange(mediaQuery);
+
 // update DOM to display compatible 
 // scales for selected chord/key
 const updateCompatibleScales = () => {
