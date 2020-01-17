@@ -8,11 +8,7 @@
             {% csrf_token %}
 
             <fieldset>
-                Email: {{ form.email }}<br/>
-                Username: {{ form.username }}<br/>
-                Password: {{ form.password1 }}<br/>
-                Confirm password: {{ form.password2 }}<br/>
-
+                {{ form.as_p }}
             </fieldset>
 
             <div class="form-submit">
