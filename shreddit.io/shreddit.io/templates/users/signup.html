@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="teal lighten-2">Sign up</h1>
+
+    <div class="register-form">
+        <form method="POST">
+            {% csrf_token %}
+
+            <fieldset>
+                Email: {{ form.email }}<br/>
+                Username: {{ form.username }}<br/>
+                Password: {{ form.password1 }}<br/>
+                Confirm password: {{ form.password2 }}<br/>
+
+            </fieldset>
+
+            <div class="form-submit">
+                <button class="submit-button">Sign Up!</button>
+            </div>
+        </form>
+
+        <div class="register-links">
+            <small>Already have an account? <a href="#">Sign In</a></small><br/>
+            <small>Forgot password? <a href="#">Reset</a></small>
+        </div>
+    </div>
+{% endblock %}

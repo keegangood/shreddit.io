@@ -38,8 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'users',
     'pages',
+    'chord_progressions',
+
+    
 ]
 
 MIDDLEWARE = [
@@ -124,4 +126,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-AUTH_USER_MODEL = 'users.CustomUser'
+# Default layout to use with "crispy_forms"
+CRISPY_TEMPLATE_PACK = 'materialize_css_forms'
+
+# AUTH_USER_MODEL = 'users.CustomUser'
