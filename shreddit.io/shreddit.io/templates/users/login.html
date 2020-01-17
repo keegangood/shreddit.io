@@ -1,18 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1 class="blue-text text-darken-2">Sign up</h1>
+    <h1 class="blue-text text-darken-2">Login</h1>
 
     <div class="register-form">
         <form method="POST">
             {% csrf_token %}
 
             <fieldset>
-                Email: {{ form.email }}<br/>
-                Username: {{ form.username }}<br/>
-                Password: {{ form.password1 }}<br/>
-                Confirm password: {{ form.password2 }}<br/>
-
+                {{ form }}
             </fieldset>
 
             <div class="form-submit">
@@ -21,7 +17,7 @@
         </form>
 
         <div class="register-links">
-            <small>Already have an account? <a href="{% url 'login' %}">Sign In</a></small><br/>
+            <small>Need an account? <a href="{% url 'signup' %}">Sign Up</a></small><br/>
             <small>Forgot password? <a href="#">Reset</a></small>
         </div>
     </div>
