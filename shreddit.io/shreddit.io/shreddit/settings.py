@@ -131,4 +131,5 @@ CRISPY_TEMPLATE_PACK = 'materialize_css_forms'
 
 # AUTH_USER_MODEL = 'users.CustomUser'
 
+LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'pages-home'
