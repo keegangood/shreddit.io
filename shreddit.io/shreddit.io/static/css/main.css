@@ -1,0 +1,18 @@
+body {
+    background-color: #263238;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 2rem;
+}
+
+h1 {
+    font-family: 'Pacifico', cursive;
+    padding: 1rem;
+    text-decoration: underline;
+    text-decoration-style: wavy;
+    text-underline-offset: .5rem;
+    text-shadow: 0 0 10px #455a64;
+}
+
+h5 {
+    font-family: 'Quicksand', sans-serif;
+}

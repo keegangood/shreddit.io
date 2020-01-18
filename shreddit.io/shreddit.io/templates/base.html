@@ -10,10 +10,18 @@
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     
+    <!-- reset css -->
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     
+    <!-- load css from static/ -->
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+    <!-- load fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Pacifico|Quicksand|Source+Sans+Pro&display=swap" rel="stylesheet"> 
 
     <title>Shreddit.io</title>
 </head>
@@ -24,8 +32,10 @@
         {% endfor %}
     {% endif %}
 
-    {% block content %}
-    {% endblock %}
+    <div class="blue-grey">
+        {% block content %}
+        {% endblock %}
+    </div>
 
     
       <!--JavaScript at end of body for optimized loading-->
