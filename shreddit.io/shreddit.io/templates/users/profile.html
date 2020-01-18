@@ -3,11 +3,25 @@
 {% block content %}
     <div class="user-info-container">
 
-        <p>{{ user.profile.avatar.url }}</p>
-
         <img class="circle user-avatar" 
              src="{{ user.profile.avatar.url }}" alt="{{ user.username }}">
         <h2>{{ user.username }}</h2>
         <p>{{ user.email }}</p>
+    </div>
+
+    <div class="update-form">
+        <legend>Profile Info</legend>
+        <form method="POST" enctype="multipart/form-data"> 
+            {% csrf_token %}
+
+            <fieldset>
+                {{ u_form.as_p }}
+                {{ p_form.as_p }}
+            </fieldset>
+
+            <div class="form-submit">
+                <button class="submit-button">Update</button>
+            </div>
+        </form>
     </div>
 {% endblock %}

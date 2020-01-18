@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+from PIL import Image
+
 class Profile(models.Model):
     user        = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar      = models.ImageField(default='default.jpg', upload_to='avatars')
@@ -11,6 +13,15 @@ class Profile(models.Model):
     def __str__(self):
         return f'{self.user.username}\'s profile'
 
+    def save(self):
+        super().save()
+
+        img = Image.open(self.avatar.path)
+        
+        if img.height > 500 or img.width > 500:
+            output_size = (500,500)
+            img.thumbnail(output_size)
+            img.save(self.avatar.path)
 
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):
