@@ -1,0 +1,48 @@
+#home-content {
+    min-height: 100vh;
+}
+
+.note-icon {
+    margin: 0 2rem;
+}
+
+#intro {
+    font-size: 2rem;
+    line-height: 3rem;
+}
+
+.get-started-list {
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.get-started-list-item {
+    padding: 1rem;
+}
+
+.get-started-item-label {
+    font-size: 7rem;
+    letter-spacing: 1rem;
+    padding: 5px;
+}
+
+.get-started-item-content {
+    font-size: 3rem;
+    padding: 1rem;
+}
+
+.get-started-button {
+    border: 2px solid #253137;
+    border-radius: 15px;
+    box-shadow: 0 0 10px #203138;
+    font-family: 'Pacifico', cursive;
+    font-size: 3.5rem;
+    letter-spacing: .3rem;
+    padding: 2rem 1rem;
+    text-shadow: 0 0 10px #203138;
+    transition: all .3s ease;
+}
+
+.get-started-button:hover {
+    box-shadow: 0 0 10px #203138;
+}

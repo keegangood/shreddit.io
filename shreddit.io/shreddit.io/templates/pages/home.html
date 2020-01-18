@@ -1,38 +1,85 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    
+    <div id="home-content" class="blue-grey">
 
-    <div class="row z-depth-5">
-        <div class="col s12 center">
-            <h1 class="blue-grey-text text-lighten-4">Shreddit.io</h1>
-            <h5>&sung; &nbsp; Let's jam! &nbsp; &sung;</h5>
-        </div>
-    </div>
+        <div class="row blue-grey darken-1">
+            <div class="col s12 center">
 
-    <div class="row">
-        <div class="col s12 center">
-            <div class="intro-p">
-                Shreddit let's you quickly and easily explore the relationships between chords and scales!
+                <h1 class=" blue-grey darken-2 blue-grey-text text-lighten-4 z-depth-3">
+                    Shreddit.io
+                </h1>
+
+                <h4 class="blue-grey-text text-darken-4">
+                    <span class="note-icon blue-grey-text text-darken-2">&sung;</span>
+                        Let's jam!
+                    <span class="note-icon blue-grey-text text-darken-2">&sung;</span>
+                </h4>
+
             </div>
         </div>
-    </div>
 
-    <div class="row center get-started-links">
-        <p>Get started!</p>
+        <div class="row">
+            <div class="col s10 offset-s1 center">
+                <div id="intro">
+                    Quickly and easily explore the relationships between chords and scales.
+                </div>
+            </div>
+        </div>
+        
+        <div id="get-started" class="row center blue-grey">
+            <ul class="get-started-list">
 
+                <li class="get-started-list-item">
+                    <div class="get-started-item-label blue-grey-text text-lighten-1">
+                        - 1 -
+                    </div>
+                    <div class="get-started-item-content blue-grey-text text-darken-4">
+                        Choose a chord
+                    </div>
+                </li>
+
+                <li class="get-started-list-item">
+                    <div class="get-started-item-label blue-grey-text text-lighten-1">
+                        - 2 -
+                    </div>
+                    <div class="get-started-item-content blue-grey-text text-darken-4">
+                        Choose a scale
+                    </div>
+                </li>
+
+                <li class="get-started-list-item">
+                    <div class="get-started-item-label blue-grey-text text-lighten-1">
+                        - 3 -
+                    </div>
+                    <div class="get-started-item-content blue-grey-text text-darken-4">
+                        Jam!
+                    </div>
+                </li>
+            </ul>
+
+            <div class="row center">
+                <div class="col s4 offset-s4">
+                    <a href="#">
+                        <div class="get-started-button blue-grey darken-2 blue-grey-text text-lighten-4">
+                            Go!
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 
 
 
     <!-- change DOM when user is logged in -->
-
+<!-- 
     {% if user.is_authenticated %}
         <a href="{% url 'profile' %}">Account</a><br/>
         <a href="{% url 'logout' %}">Logout</a>
     {% else %}
         <a href="{% url 'login' %}">Login</a><br/>
         <a href="{% url 'signup' %}">Sign up</a>
-    {% endif %}
+    {% endif %} -->
 
 {% endblock %}
