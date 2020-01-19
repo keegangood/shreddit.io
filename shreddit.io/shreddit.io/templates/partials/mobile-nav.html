@@ -6,6 +6,35 @@
     <span class="burger-set-item blue-grey darken-4 bottom-bun"></span>
 </div>
 
-
 <div class="mobile-nav-menu blue-grey lighten-1">
+    <div class="row">
+        <div class="col s6">
+            <h1>Shreddit.io</h1>
+        </div>
+        <div class="col s6"></div>
+            {% if user.is_authenticated %}
+                <div class="avatar">
+                    <a href="{% url 'profile' %}">
+                        <img src="{{ user.profile.avatar.url }}" 
+                             alt="{{ user.username }}\'s avatar">
+                    </a>
+                </div>
+            {% else %}
+                <div class="login-link right">
+                    <a href="{% url 'login' %}">Login</a>
+                </div>
+                <div class="signup-link right">
+                    <a href="{% url 'signup' %}">Sign up</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+
+            <div class="menu-items">
+                
+            </div>
+        </div>
+    </div>
 </div>

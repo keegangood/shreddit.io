@@ -12,7 +12,6 @@
 
 /* Hamburger menu toggle */
 .hamburger {
-    background-color: #000;
     border: 2px solid #263238;
     border-radius: 5px;
     box-shadow: 0 0 5px #263238;
@@ -69,6 +68,11 @@
 }
 
 /* Menu */
+.mobile-nav h1 {
+    margin: 0;
+    padding: 1rem;
+}
+
 .content-cover {
     height: 100vh;
     left: 100vw;
@@ -76,27 +80,54 @@
     position: absolute;
     top: 0;
     transition: opacity .8s ease, left .5s ease;
-    width: 100vw;
+    width: 30vw;
     z-index: 2;
 }
 
 .content-cover-active {
     left: 0;
     opacity: .6;
-    position: fixed;
+    position: absolute;
     top: 0;
 }
 
 .mobile-nav-menu {
     height: 100vh;
     left: -100vw;
-    position: fixed;
+    position: absolute;
     top: 0;
     transition: left .5s ease;
-    width: 100vw;
+    width: 80vw;
     z-index: 2;
 }
 
 .mobile-menu-active {
-    left: calc(15%);
+    left: 20vw;
+}
+
+.mobile-nav .avatar {
+    height: 20vh;
+    margin-top: 3vh;
+    max-height: 20vw;
+    max-width: 20vh;
+    width: 20vw;
+}
+
+.mobile-nav .avatar img {
+    border-radius: 50%;
+    height: 100%;
+    width: 100%;
+}
+
+.mobile-nav a {
+    color: #37474f;
+    text-decoration: none;
+}
+
+.login-link {
+    padding: 3px 10px;
+}
+
+.signup-link {
+    padding: 3px 10px;
 }
