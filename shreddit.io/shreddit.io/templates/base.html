@@ -26,23 +26,23 @@
 
     <title>Shreddit.io</title>
 </head>
-<body></body>
-    {% if messages %}
-        {% for msg in messages %}
-            <div>{{ msg }}</div>
-        {% endfor %}
-    {% endif %}
-
-    <div class="row mobile-nav hide-on-large-only blue-grey darken-1">
-        <div class="col s6">
-            <div class="">
-                {% include 'partials/mobile-nav.html' %}
-            </div>
-        </div>
+<body>
+    <div class="main-content">
+        {% if messages %}
+            {% for msg in messages %}
+                <div>{{ msg }}</div>
+            {% endfor %}
+        {% endif %}
+    
+    
+    <div class="mobile-nav hide-on-large-only">
+        {% include 'partials/mobile-nav.html' %}
     </div>
-
-    {% block content %}
-    {% endblock %}
+    
+    
+        {% block content %}
+        {% endblock %}
+    </div>
 
 
 

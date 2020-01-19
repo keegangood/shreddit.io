@@ -1,9 +1,16 @@
+.no-scroll {
+    overflow-y: hidden;
+}
+
 .mobile-nav {
     display: flex;
     margin: 0;
     padding: 10px;
+    position: relative;
+    z-index: 3;
 }
 
+/* Hamburger menu toggle */
 .hamburger {
     background-color: #000;
     border: 2px solid #263238;
@@ -16,26 +23,79 @@
     left: 2vw;
     max-height: 40px;
     max-width: 40px;
+    padding: 4px;
     position: absolute;
+    transition: all 1s ease;
     width: 40px;
+    z-index: 4;
 }
 
-  .burger-set-item {
+.hamburger-active {
+    box-shadow: 0 0 5px #cfd8dc;
+}
+
+.burger-set-item {
     border-radius: 5px;
     height: 3px;
     margin: 6% 12.5%;
-    transition: all .3s ease;
+    transition: all 1s ease-out;
     width: 75%;
 }
 
+.top-bun {
+    transition: all 1s ease;
+}
+
+.meat {
+    transition: all 1s ease;
+}
+
+.bottom-bun {
+    transition: all 1s ease;
+}
+
 .top-bun-active {
-    transform: translateY(8px) rotate(315deg);
+    transform: translateY(6px) rotate(315deg);
 }
 
 .meat-active {
     opacity: 0;
+    transform: scaleX(0);
+    transition: .5s;
 }
 
 .bottom-bun-active {
-    transform: translateY(-8px) rotate(-315deg);
+    transform: translateY(-6px) rotate(-315deg);
+}
+
+/* Menu */
+.content-cover {
+    height: 100vh;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    transition: opacity .8s ease;
+    width: 100vw;
+    z-index: 2;
+}
+
+.content-cover-active {
+    opacity: .6;
+    position: fixed;
+    top: 0;
+}
+
+.mobile-nav-menu {
+    height: 100vh;
+    left: -100vw;
+    position: fixed;
+    top: 0;
+    transition: left .5s ease;
+    width: 100vw;
+    z-index: 2;
+}
+
+.mobile-menu-active {
+    left: calc(15%);
 }

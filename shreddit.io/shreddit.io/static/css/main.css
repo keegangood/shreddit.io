@@ -8,6 +8,11 @@ body {
     font-size: 2rem;
 }
 
+.main-content {
+    min-height: 100vh;
+    width: 100vw;
+    position: relative;
+}
 h1 {
     font-family: 'Pacifico', cursive;
     padding: 3rem;
