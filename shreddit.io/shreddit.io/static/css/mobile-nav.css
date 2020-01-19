@@ -1,0 +1,41 @@
+.mobile-nav {
+    display: flex;
+    margin: 0;
+    padding: 10px;
+}
+
+.hamburger {
+    background-color: #000;
+    border: 2px solid #263238;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #263238;
+    height: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    left: 2vw;
+    max-height: 40px;
+    max-width: 40px;
+    position: absolute;
+    width: 40px;
+}
+
+  .burger-set-item {
+    border-radius: 5px;
+    height: 3px;
+    margin: 6% 12.5%;
+    transition: all .3s ease;
+    width: 75%;
+}
+
+.top-bun-active {
+    transform: translateY(8px) rotate(315deg);
+}
+
+.meat-active {
+    opacity: 0;
+}
+
+.bottom-bun-active {
+    transform: translateY(-8px) rotate(-315deg);
+}
