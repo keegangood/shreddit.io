@@ -4,10 +4,10 @@ let burger = document.querySelector('.hamburger'),
     bottomBun = document.querySelector('.bottom-bun'),
     cover = document.querySelector('.content-cover'),
     menu = document.querySelector('.mobile-nav-menu');
-    body = document.querySelector('body');
+    mainContent = document.querySelector('.main-content');
 
 burger.addEventListener('click', () => {
-    body.classList.toggle('no-scroll');
+    mainContent.classList.toggle('no-scroll');
 
     burger.classList.toggle('hamburger-active');
 

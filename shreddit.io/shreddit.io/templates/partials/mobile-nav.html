@@ -7,17 +7,18 @@
 </div>
 
 <div class="mobile-nav-menu blue-grey lighten-1">
+    <h2>Shreddit.io</h2>
     <div class="row">
-        <div class="col s6">
-            <h1>Shreddit.io</h1>
-        </div>
-        <div class="col s6"></div>
+        <div class="col s12 avatar-container">
             {% if user.is_authenticated %}
                 <div class="avatar">
                     <a href="{% url 'profile' %}">
                         <img src="{{ user.profile.avatar.url }}" 
                              alt="{{ user.username }}\'s avatar">
                     </a>
+                </div>
+                <div class="username-display">
+                    <p>Logged in as <br/><span>{{ user.username }}</span></p>
                 </div>
             {% else %}
                 <div class="login-link right">
