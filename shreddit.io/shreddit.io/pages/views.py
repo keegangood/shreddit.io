@@ -5,3 +5,5 @@ def home(request):
     messages.info(request, 'Welcome to the home page')
     return render(request, 'pages/home.html')
 
+def explore(request):
+    return render(request, 'pages/explore.html')
