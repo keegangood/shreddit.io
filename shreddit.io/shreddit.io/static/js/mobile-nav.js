@@ -22,12 +22,8 @@ burger.addEventListener('click', () => {
 
 });
 
-
-
 if(messageCloseX){
-    console.log(messageCloseX);
     messageCloseX.addEventListener('click', () => {
-        alert("hello")
         messageCloseX.parentElement.remove();
     });
 }

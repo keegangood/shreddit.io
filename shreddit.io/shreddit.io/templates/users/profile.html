@@ -1,27 +1,76 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="user-info-container">
-
-        <img class="circle user-avatar" 
-             src="{{ user.profile.avatar.url }}" alt="{{ user.username }}">
-        <h2>{{ user.username }}</h2>
-        <p>{{ user.email }}</p>
-    </div>
-
-    <div class="update-form">
-        <legend>Profile Info</legend>
-        <form method="POST" enctype="multipart/form-data"> 
-            {% csrf_token %}
-
-            <fieldset>
-                {{ u_form.as_p }}
-                {{ p_form.as_p }}
-            </fieldset>
-
-            <div class="form-submit">
-                <button class="submit-button">Update</button>
+    <div id="profile-content" class="blue-grey">
+        <div class="row">
+            <div class="col s12 avatar-container">
+                <div class="avatar">
+                    <img class=""
+                        src="{{ user.profile.avatar.url }}" alt="{{ user.username }}">
+                </div>
             </div>
-        </form>
+        </div>
+        
+        <div class="row">
+            <div class="col s12 center">
+                <div class="username-display">
+                    <h1>{{ user.username }}</h1>
+                    <h4>{{ user.email }}</h4>
+                    <p><small>Joined:</small><br/>{{ user.date_joined }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s8 offset-s2 center">
+                <p><b>Update avatar</b></p>
+                <div class="update-form center">
+                    <form method="POST" enctype="multipart/form-data"> 
+                        {% csrf_token %}
+                        {% for field in p_form %}
+                            {{ field }}<br/>
+                        {% endfor %}
+
+                        <div class="form-submit">
+                            <button class="submit-button">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="chord-progressions">
+            <h1>Saved Progressions</h1>
+            <p>No progressions yet</p>
+        </div>
+        
     </div>
+    <!-- <div class="row">
+        <div class="col s12">
+            <div class="user-info-container">
+                <div class="avatar">
+                    <img class=""
+                         src="{{ user.profile.avatar.url }}" alt="{{ user.username }}">
+                </div>
+                <h2>{{ user.username }}</h2>
+                <p>{{ user.email }}</p>
+            </div>
+        
+            <div class="update-form">
+                <legend>Profile Info</legend>
+                <form method="POST" enctype="multipart/form-data"> 
+                    {% csrf_token %}
+        
+                    <fieldset>
+                        {{ u_form.as_p }}
+                        {{ p_form.as_p }}
+                    </fieldset>
+        
+                    <div class="form-submit">
+                        <button class="submit-button">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div> -->
 {% endblock %}
