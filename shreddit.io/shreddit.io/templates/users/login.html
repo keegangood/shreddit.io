@@ -1,24 +1,29 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1 class="blue-text text-darken-2">Login</h1>
+    <div id="login-content" class="blue-grey">
+        <h1>Login</h1>
 
-    <div class="register-form">
-        <form method="POST">
-            {% csrf_token %}
-
-            <fieldset>
-                {{ form }}
-            </fieldset>
-
-            <div class="form-submit">
-                <button class="submit-button">Sign Up!</button>
+        <div class="row">
+            <div class="col s12 form-container">
+                <form method="POST" class="login-form">
+                    {% csrf_token %}
+                    
+                    <fieldset>
+                        {{ form }}
+                    </fieldset>
+        
+                    <div class="form-submit">
+                        <button class="submit-button blue-grey blue-grey-text text-darken-4" type="submit">Login</button>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
 
         <div class="register-links">
             <small>Need an account? <a href="{% url 'signup' %}">Sign Up</a></small><br/>
             <small>Forgot password? <a href="#">Reset</a></small>
         </div>
     </div>
+
 {% endblock %}
