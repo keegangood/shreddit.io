@@ -4,7 +4,8 @@ let burger = document.querySelector('.hamburger'),
     bottomBun = document.querySelector('.bottom-bun'),
     cover = document.querySelector('.content-cover'),
     menu = document.querySelector('.mobile-nav-menu');
-    mainContent = document.querySelector('.main-content');
+    mainContent = document.querySelector('.main-content'),
+    messageCloseX = document.querySelector('#message-close-x');
 
 burger.addEventListener('click', () => {
     mainContent.classList.toggle('no-scroll');
@@ -21,3 +22,12 @@ burger.addEventListener('click', () => {
 
 });
 
+
+
+if(messageCloseX){
+    console.log(messageCloseX);
+    messageCloseX.addEventListener('click', () => {
+        alert("hello")
+        messageCloseX.parentElement.remove();
+    });
+}

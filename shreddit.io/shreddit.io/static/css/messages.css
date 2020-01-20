@@ -1,0 +1,41 @@
+.message-display {
+    align-items: center;
+    background-color: #b0bec5;
+    border: 2px solid #455a64;
+    border-radius: 15px;
+    box-shadow: 0 0 10px #263238;
+    display: flex;
+    flex-direction: column;
+    left: 5vw;
+    margin: 0;
+    padding: 10px;
+    position: absolute;
+    top: 5vw;
+    width: 90vw;
+    z-index: 6;
+}
+
+.message-display .message {
+    font-size: 1.5rem;
+    padding: .5rem;
+}
+
+.message-display .close-x {
+    align-items: center;
+    border: 2px solid #455a64;
+    display: flex;
+    font-size: 5vw;
+    height: 6vh;
+    justify-content: center;
+    left: 90%;
+    max-height: 6vw;
+    max-width: 6vh;
+    padding: 10px;
+    position: absolute;
+    width: 6vw;
+    z-index: 11;
+}
+
+.message-display .close-x:hover{
+    cursor: pointer;
+}

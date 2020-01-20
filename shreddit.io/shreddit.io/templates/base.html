@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     
     <!-- load css from static/ -->
+    <link rel="stylesheet" href="{% static 'css/messages.css' %}">
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <link rel="stylesheet" href="{% static 'css/mobile-nav.css' %}">
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
@@ -28,18 +29,19 @@
 </head>
 <body>
     <div class="main-content">
-        {% if messages %}
-            {% for msg in messages %}
-                <div>{{ msg }}</div>
-            {% endfor %}
-        {% endif %}
-    
+
         <div class="mobile-nav hide-on-large-only">
             {% include 'partials/mobile-nav.html' %}
         </div>
-    
+
         {% block content %}
         {% endblock %}
+
+        {% if messages %}
+            {% with messages=messages %}
+                {% include 'partials/messages.html' %}
+            {% endwith %}
+        {% endif %}
     </div>
 
 
