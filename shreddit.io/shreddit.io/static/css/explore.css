@@ -1,0 +1,6 @@
+#explore-content {
+    height: 100vh;
+    position: absolute;
+    width: 100vw;
+    z-index: 2;
+}

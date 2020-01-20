@@ -23,9 +23,8 @@
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
-
-
-
+    <link rel="stylesheet" href="{% static 'css/explore.css' %}">
+    <link rel="stylesheet" href="{% static 'css/stringedInstrument.css' %}">
 
     <!-- load fonts -->
     <link href="https://fonts.googleapis.com/css?family=Pacifico|Quicksand|Source+Sans+Pro&display=swap" rel="stylesheet">
@@ -43,9 +42,7 @@
         {% endblock %}
 
         {% if messages %}
-            {% with messages=messages %}
-                {% include 'partials/messages.html' %}
-            {% endwith %}
+            {% include 'partials/messages.html' %}
         {% endif %}
     </div>
 
@@ -53,6 +50,16 @@
     <!--JavaScript at end of body for optimized loading-->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="{% static 'js/mobile-nav.js' %}"></script>
+
+    <!-- Teoria JS -->
+    <script src="{% static 'js/teoria/teoria-master/teoria.js' %}"></script>
+
+    <!-- JS for displaying notes on necks -->
+    <script src="{% static 'js/notesOnNeck/stringedInstrumentLayouts/instrumentNeck.js' %}"></script>
+    <script src="{% static 'js/notesOnNeck/stringedInstrumentLayouts/instrumentString.js' %}"></script>
+    <script src="{% static 'js/notesOnNeck/stringedInstrumentLayouts/instrumentFret.js' %}"></script>
+    <script src="{% static 'js/notesOnNeck/noteMarker.js' %}"></script>
+    <script src="{% static 'js/notesOnNeck/buildStringedInstrument.js' %}"></script>
 
 </body>
 </html>
