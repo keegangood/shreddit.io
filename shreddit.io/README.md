@@ -1,5 +1,7 @@
 # Future Features
 
+* Media breakpoints for sm, med, lg screens as well as portrait vs landscape orientations.
+
 * Differently shaped markers for each interval for colorblind accessability
 
 * Vertically oriented neck for vertical mobile displays
