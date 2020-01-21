@@ -1,24 +1,44 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1 class="blue-text text-darken-2">Sign up</h1>
-
-    <div class="register-form">
-        <form method="POST">
-            {% csrf_token %}
-
-            <fieldset>
-                {{ form.as_p }}
-            </fieldset>
-
-            <div class="form-submit">
-                <button class="submit-button">Sign Up!</button>
+    <div id="signup-content" class="blue-grey">
+        <div class="row">
+            <div class="col s12 center">
+                <h1>Shreddit.io</h1>
+                <h2>Sign up</h2>
             </div>
-        </form>
-    </div>
-    
-    <div class="register-links">
-        <small>Already have an account? <a href="{% url 'login' %}">Sign In</a></small><br/>
-        <small>Forgot password? <a href="#">Reset</a></small>
+        </div>
+        <div class="row">
+            <div class="col s10 offset-s1">
+                <div class="signup-form">
+                    <form method="POST">
+                        {% csrf_token %}
+            
+                        <fieldset>
+                            {{ form.as_p }}
+                        </fieldset>
+            
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12">
+                <div class="form-submit">
+                    <button class="submit-button blue-grey darken-2 blue-grey-text text-lighten-4" type="submit">Sign Up!</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12">
+                <div class="signup-links">
+                    <small>Already have an account? <a href="{% url 'login' %}">Sign In</a></small><br/>
+                    <small>Forgot password? <a href="#">Reset</a></small>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

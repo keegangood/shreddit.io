@@ -1,0 +1,58 @@
+#signup-content {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: absolute;
+    width: 100vw;
+}
+
+#signup-content .helptext {
+    font-size: 1.5rem;
+    margin-bottom: 100px;
+    padding: 10px;
+}
+
+#signup-content label {
+    color: #37474f;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+#signup-content ul {
+    font-size: 1.3rem;
+    margin: 10px;
+}
+
+#signup-content li {
+    margin: 10px;
+
+}
+
+#signup-content .signup-form{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+#signup-content button {
+    border: none;
+}
+
+#signup-content .submit-button {
+    border: 2px solid #253137;
+    border-radius: 15px;
+    box-shadow: 0 0 10px #203138;
+    font-family: 'Pacifico', cursive;
+    font-size: 3.5rem;
+    letter-spacing: .3rem;
+    margin: 15px;
+    padding: 2rem 1rem;
+    text-shadow: 0 0 10px #203138;
+    transition: all .3s ease;
+}
+
+#signup-content .signup-links {
+    text-align: center;
+}
