@@ -1,6 +1,6 @@
 #explore-content {
-    height: 100vh;
-    position: absolute;
-    width: 100vw;
-    z-index: 2;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
