@@ -97,12 +97,12 @@
     position: absolute;
     top: 0;
     transition: left .5s ease;
-    width: 80vw;
+    width: 90vw;
     z-index: 2;
 }
 
 .mobile-menu-active {
-    left: 20vw;
+    left: 11vw;
 }
 
 .mobile-nav .avatar {
