@@ -18,10 +18,17 @@ body {
     z-index: 0;
 }
 
+.hover-text:hover {
+    color: #cfd8dc;
+    text-shadow: 0 0 10px #90a4ae;
+}
+
 h1,h2 {
     font-family: 'Pacifico', cursive;
     padding: 3rem;
     text-shadow: 0 0 10px #203138;
+    transition: color .5s ease;
+
 }
 
 h4 {
@@ -30,6 +37,7 @@ h4 {
     margin-bottom: 2rem;
     padding: .2rem;
 }
+
 
 .row {
     margin: 0;
