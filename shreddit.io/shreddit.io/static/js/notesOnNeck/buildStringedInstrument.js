@@ -12,7 +12,9 @@ let instrumentInput = document.querySelector('#instrument-input'),
     keyInput = document.querySelector('#key-input'),
     key,
     chordQualityInput = document.querySelector('#chord-quality'),
-    chordName;
+    chordName,
+    noteLegendVertical = document.querySelector('.note-legend-vertical'),
+    noteLegendHorizontal = document.querySelector('.note-legend-horizontal');
 
 for(let i in instruments){
     instrument = instruments[i]; 
@@ -102,6 +104,7 @@ let windowWidthChange = mediaQuery => {
     }
 }
 
+// DOM listeners below
 const mediaQuery = window.matchMedia("(min-width: 768px)");
 
 mediaQuery.addListener(windowWidthChange);
@@ -115,6 +118,9 @@ const updateCompatibleScales = () => {
     
 }
 
+const updateNoteLegend = () => {
+    
+}
 
 instrumentInput.addEventListener('change', function(){
     newInstrument = instrumentInput.value;
@@ -146,8 +152,10 @@ chordQualityInput.addEventListener('change', () => {
 });
 
 
-let n1 = teoria.note('cb');
-console.log(n1);
+
+
+// let n1 = teoria.note('cb');
+// console.log(n1);
 
 // let n2 = teoria.note('');
 

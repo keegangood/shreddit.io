@@ -1,19 +1,25 @@
 #explore-content {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
+    /* align-items: center; */
+    /* display: flex; */
+    /* flex-direction: column; */
     min-height: 100vh;
 }
 
-.note-legend {
-    /* align-items: center; */
+.note-legend-vertical {
+    align-items: center;
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
+    height: 60vh;
+    justify-content: center;
+}
+
+.note-legend-horizontal {
+    display: flex;
+    justify-content: center;
 }
 
 .note-legend-marker {
-    background-color: rgb(82, 15, 15);
+    background-color: rgb(255, 255, 255);
     border: 2px solid black;
     border-radius: 50%;
     box-shadow: 0 0 5px black;
@@ -27,3 +33,4 @@
     text-align: center;
     width: 6vw;
 }
+
