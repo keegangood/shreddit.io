@@ -42,6 +42,14 @@
     font-weight: bold;
 }
 
+.settings-icon div {
+    transition: 1s transform ease;
+}
+
+.settings-icon-active div{
+    transform: rotate(180deg);
+}
+
 /* Hamburger menu toggle icon*/
 .hamburger {
     height: 30px;
@@ -201,5 +209,23 @@
 
 }
 
+/* settings menu */
+.settings-menu-content {
+    opacity: 1;
+    position: relative;
+    top: -20vh;
+    transition: transform .1s ease, opacity 2s ease;
+    transition-delay: .1s; 
+}
 
+.content-inactive {
+    transition-delay: 1s;
+    opacity: 0;
+}
 
+.mobile-nav-content {
+    opacity: 1;
+    transition: transform .1s ease, opacity 2s ease;
+    transition-delay: .1s; 
+
+}

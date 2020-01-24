@@ -8,35 +8,35 @@
     </div>
     
     <div class="settings-icon mobile-nav-icon blue-grey darken-2 blue-grey-text text-darken-4">
-        <span>&#x26ED;</span>
+        <div>&#x26ED;</div>
     </div>
 </div>
 
 <div class="mobile-nav-menu blue-grey lighten-1">
     <h2>Shreddit.io</h2>
-    <div class="mobile-nav-content">
-        <div class="row">
-            <div class="col s12 avatar-container">
-                {% if user.is_authenticated %}
-                    <div class="avatar">
-                        <a href="{% url 'profile' %}">
-                            <img src="{{ user.profile.avatar.url }}" 
-                                 alt="{{ user.username }}\'s avatar">
-                        </a>
-                    </div>
-                    <div class="username-display">
-                        <p>Logged in as <br/><span>{{ user.username }}</span></p>
-                    </div>
-                {% else %}
-                    <div class="login-link right">
-                        <a href="{% url 'login' %}">Login</a>
-                    </div>
-                    <div class="signup-link right">
-                        <a href="{% url 'signup' %}">Sign up</a>
-                    </div>
-                {% endif %}
-            </div>
+    <div class="row">
+        <div class="col s12 avatar-container">
+            {% if user.is_authenticated %}
+                <div class="avatar">
+                    <a href="{% url 'profile' %}">
+                        <img src="{{ user.profile.avatar.url }}" 
+                             alt="{{ user.username }}\'s avatar">
+                    </a>
+                </div>
+                <div class="username-display">
+                    <p>Logged in as <br/><span>{{ user.username }}</span></p>
+                </div>
+            {% else %}
+                <div class="login-link right">
+                    <a href="{% url 'login' %}">Login</a>
+                </div>
+                <div class="signup-link right">
+                    <a href="{% url 'signup' %}">Sign up</a>
+                </div>
+            {% endif %}
         </div>
+    </div>
+    <div class="mobile-nav-content">
         <div class="row">
             <div class="col s12">
                 <div class="menu-items">
@@ -61,17 +61,19 @@
             </div>
         </div>
     </div>
-    <div class="settings-menu-content">
-
-        <div class="instrument-inputs input-field">
-            <p>Instrument:</p>
-            <select name="instrument-input" id="instrument-input">
-                <!-- add options with JS -->
-            </select>
-        
-            <select name="tuning-input" id="tuning-input">
-                <!-- add options with JS -->
-            </select>
+    <div class="row settings-menu-content center">
+        <div class="col s6 offset-s3">
+            <div class="instrument-inputs input-field">
+                <h4>Instrument:</h4>
+                <select name="instrument-input" id="instrument-input">
+                    <!-- add options with JS -->
+                </select>
+                
+                <h4>Tuning:</h4>
+                <select name="tuning-input" id="tuning-input">
+                    <!-- add options with JS -->
+                </select>
+            </div>
         </div>
     </div>
 </div>

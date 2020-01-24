@@ -5,14 +5,18 @@ let burger = document.querySelector('.hamburger'),
     bottomBun = document.querySelector('.bottom-bun'),
     cover = document.querySelector('.content-cover'),
     menu = document.querySelector('.mobile-nav-menu');
-    navContent = document.querySelector('mobile-nav-content')
+    navMenuContent = document.querySelector('.mobile-nav-content'),
+    settingsMenuContent = document.querySelector('.settings-menu-content'),
     mainContent = document.querySelector('.main-content'),
     messageCloseX = document.querySelector('#message-close-x');
 
 burger.addEventListener('click', () => {
     mainContent.classList.toggle('no-scroll');
 
-    burger.classList.toggle('mobile-icon-active');
+    settingsMenuContent.classList.toggle('hidden');
+    navMenuContent.classList.toggle('content-inactive');
+
+    burger.classList.toggle('mobile-nav-icon-active');
     settingsIcon.classList.toggle('hidden');
     topBun.classList.toggle('top-bun-active');
     meat.classList.toggle('meat-active');
@@ -21,7 +25,19 @@ burger.addEventListener('click', () => {
     cover.classList.toggle('content-cover-active');
 
     menu.classList.toggle('mobile-menu-active');
-    
+});
+
+settingsIcon.addEventListener('click', () => {
+    settingsIcon.classList.toggle('mobile-nav-icon-active');
+    settingsIcon.classList.toggle('settings-icon-active')
+    navMenuContent.classList.toggle('hidden');
+    settingsMenuContent.classList.toggle('content-inactive');
+
+
+    burger.classList.toggle('hidden');
+
+    cover.classList.toggle('content-cover-active');
+    menu.classList.toggle('mobile-menu-active');
 });
 
 if(messageCloseX){
