@@ -42,3 +42,17 @@
     text-align: center;
 }
 
+#scales-and-chords-content .audio-controls {
+    display: flex;
+    justify-content: center;
+}
+
+#scales-and-chords-content .audio-buttons {
+    display: flex;
+    justify-content: center;
+    margin: 3rem;
+}
+
+#scales-and-chords-content .audio-controls i{
+    font-size: 4rem;
+}

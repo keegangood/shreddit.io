@@ -31,7 +31,6 @@ settingsIcon.addEventListener('click', () => {
     settingsIcon.classList.toggle('mobile-nav-icon-active');
     settingsIcon.classList.toggle('settings-icon-active')
     navMenuContent.classList.toggle('hidden');
-    settingsMenuContent.classList.toggle('content-inactive');
 
 
     burger.classList.toggle('hidden');
