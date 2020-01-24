@@ -1,51 +1,77 @@
 <div class="content-cover blue-grey darken-4"></div>
 
-<div class="hamburger blue-grey darken-2">
-    <span class="burger-set-item blue-grey darken-4 top-bun   "></span>
-    <span class="burger-set-item blue-grey darken-4 meat      "></span>
-    <span class="burger-set-item blue-grey darken-4 bottom-bun"></span>
+<div class="mobile-nav-icons">
+    <div class="hamburger mobile-nav-icon blue-grey darken-2">
+        <span class="burger-set-item blue-grey darken-4 top-bun   "></span>
+        <span class="burger-set-item blue-grey darken-4 meat      "></span>
+        <span class="burger-set-item blue-grey darken-4 bottom-bun"></span>
+    </div>
+    
+    <div class="settings-icon mobile-nav-icon blue-grey darken-2 blue-grey-text text-darken-4">
+        <span>&#x26ED;</span>
+    </div>
 </div>
 
 <div class="mobile-nav-menu blue-grey lighten-1">
     <h2>Shreddit.io</h2>
-    <div class="row">
-        <div class="col s12 avatar-container">
-            {% if user.is_authenticated %}
-                <div class="avatar">
-                    <a href="{% url 'profile' %}">
-                        <img src="{{ user.profile.avatar.url }}" 
-                             alt="{{ user.username }}\'s avatar">
+    <div class="mobile-nav-content">
+        <div class="row">
+            <div class="col s12 avatar-container">
+                {% if user.is_authenticated %}
+                    <div class="avatar">
+                        <a href="{% url 'profile' %}">
+                            <img src="{{ user.profile.avatar.url }}" 
+                                 alt="{{ user.username }}\'s avatar">
+                        </a>
+                    </div>
+                    <div class="username-display">
+                        <p>Logged in as <br/><span>{{ user.username }}</span></p>
+                    </div>
+                {% else %}
+                    <div class="login-link right">
+                        <a href="{% url 'login' %}">Login</a>
+                    </div>
+                    <div class="signup-link right">
+                        <a href="{% url 'signup' %}">Sign up</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <div class="menu-items">
+                    <a href="{% url 'pages-home' %}">
+                        <div class="menu-item">
+                            <a href="{% url 'pages-home' %}" class="hover-text blue-grey-text text-darken-4">
+                                Home
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a href="{% url 'pages-scales-and-chords' %}" class="hover-text blue-grey-text text-darken-4">
+                                Scales & Chords
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a href="{% url 'pages-progression-builder' %}" class="hover-text blue-grey-text text-darken-4">
+                                Progression Builder
+                            </a>
+                        </div>
                     </a>
                 </div>
-                <div class="username-display">
-                    <p>Logged in as <br/><span>{{ user.username }}</span></p>
-                </div>
-            {% else %}
-                <div class="login-link right">
-                    <a href="{% url 'login' %}">Login</a>
-                </div>
-                <div class="signup-link right">
-                    <a href="{% url 'signup' %}">Sign up</a>
-                </div>
-            {% endif %}
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col s12">
-            <div class="menu-items">
-                <a href="{% url 'pages-explore' %}">
-                    <div class="menu-item">
-                        <a href="{% url 'pages-home' %}" class="hover-text blue-grey-text text-darken-4">
-                            Home
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a href="{% url 'pages-explore' %}" class="hover-text blue-grey-text text-darken-4">
-                            Explore
-                        </a>
-                    </div>
-                </a>
-            </div>
+    <div class="settings-menu-content">
+
+        <div class="instrument-inputs input-field">
+            <p>Instrument:</p>
+            <select name="instrument-input" id="instrument-input">
+                <!-- add options with JS -->
+            </select>
+        
+            <select name="tuning-input" id="tuning-input">
+                <!-- add options with JS -->
+            </select>
         </div>
     </div>
 </div>

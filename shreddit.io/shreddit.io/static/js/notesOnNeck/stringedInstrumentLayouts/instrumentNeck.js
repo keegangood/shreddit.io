@@ -68,15 +68,15 @@ class InstrumentNeck {
             let stringNum = i;
             let string = new InstrumentString(this, stringNum, this.stringNames[i]);
 
-            console.log(string);
+            // console.log(string);
             
             if(this.orientation == 'vertical'){
                 
-                console.log("< 400px");
+                // console.log("< 400px");
                 
                 this.container.append(string.container);
             } else if(this.orientation == 'horizontal') {
-                console.log("> 400px");
+                // console.log("> 400px");
                 
                 this.container.prepend(string.container);
             }
