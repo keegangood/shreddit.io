@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib import messages
 
 def home(request):
-    messages.info(request, 'Welcome to the home page')
+    # messages.info(request, 'Welcome to the home page')
     return render(request, 'pages/home.html')
 
 def scales_and_chords(request):

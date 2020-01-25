@@ -1,5 +1,5 @@
 let burger = document.querySelector('.hamburger'),
-    settingsIcon = document.querySelector('.settings-icon'),
+    settingsIcon,
     topBun = document.querySelector('.top-bun'),
     meat = document.querySelector('.meat'),
     bottomBun = document.querySelector('.bottom-bun'),
@@ -10,21 +10,28 @@ let burger = document.querySelector('.hamburger'),
     mainContent = document.querySelector('.main-content'),
     messageCloseX = document.querySelector('#message-close-x');
 
+    if(document.querySelector('.settings-menu-content')){
+        settingsIcon = document.querySelector('.settings-icon');
+    }
+
 burger.addEventListener('click', () => {
     mainContent.classList.toggle('no-scroll');
-
-    settingsMenuContent.classList.toggle('hidden');
+    
     navMenuContent.classList.toggle('content-inactive');
-
-    burger.classList.toggle('mobile-nav-icon-active');
-    settingsIcon.classList.toggle('hidden');
+    
     topBun.classList.toggle('top-bun-active');
+    burger.classList.toggle('mobile-nav-icon-active');
     meat.classList.toggle('meat-active');
     bottomBun.classList.toggle('bottom-bun-active');
-
+    
     cover.classList.toggle('content-cover-active');
-
     menu.classList.toggle('mobile-menu-active');
+    settingsMenuContent.classList.toggle('hidden');
+
+    if(document.querySelector('.settings-menu-content')){
+        settingsIcon = document.querySelector('.settings-icon');
+        settingsIcon.classList.toggle('hidden');
+    }
 });
 
 settingsIcon.addEventListener('click', () => {

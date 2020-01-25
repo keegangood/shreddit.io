@@ -224,8 +224,8 @@
 }
 
 .mobile-nav-content {
+    margin-top: 10vh;
     opacity: 1;
     transition: transform .1s ease, opacity 2s ease;
     transition-delay: .1s; 
-
 }

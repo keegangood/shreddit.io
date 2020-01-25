@@ -6,10 +6,12 @@
         <span class="burger-set-item blue-grey darken-4 meat      "></span>
         <span class="burger-set-item blue-grey darken-4 bottom-bun"></span>
     </div>
-    
+
+    {% if request.path == '/scales-and-chords/' or request.path == '/progression-builder/' %}
     <div class="settings-icon mobile-nav-icon blue-grey darken-2 blue-grey-text text-darken-4">
         <div>&#x26ED;</div>
     </div>
+    {% endif %}
 </div>
 
 <div class="mobile-nav-menu blue-grey lighten-1">
