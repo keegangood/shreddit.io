@@ -13,8 +13,9 @@ let instrumentInput = document.querySelector('#instrument-input'),
     key,
     chordQualityInput = document.querySelector('#chord-quality'),
     chordName,
-    noteLegendVertical = document.querySelector('.note-legend-vertical'),
-    noteLegendHorizontal = document.querySelector('.note-legend-horizontal');
+    noteLegend,
+    noteLegendMarkers,
+    noteLegendType = document.querySelector('#note-legend-type');
 
 for(let i in instruments){
     instrument = instruments[i]; 
@@ -94,13 +95,16 @@ const updateInstrument = () => {
     updateNoteMarkers();
 }
 
+// update neck when screen size changes
 let windowWidthChange = mediaQuery => {
     if(mediaQuery.matches){
         neck.orientation = 'horizontal';
         updateInstrument();
+        noteLegend = document.querySelector('.note-legend-horizontal .note-legend-markers')
     } else {
         neck.orientation = 'vertical';
         updateInstrument();
+        noteLegend = document.querySelector('.note-legend-vertical .note-legend-markers')
     }
 }
 
@@ -118,41 +122,84 @@ const updateCompatibleScales = () => {
     
 }
 
-const updateNoteLegend = () => {
-    
-}
-
 instrumentInput.addEventListener('change', function(){
     newInstrument = instrumentInput.value;
     
     updateTunings(newInstrument);
     updateInstrument();
+    updateNoteLegend();
+
 });
 
 
 tuningInput.addEventListener('change', function(){
     updateInstrument();
+    updateNoteLegend();
+
 });
 
 
 scaleInput.addEventListener('change', () => {
     neck.scaleOrChord = 'scale';
     updateNoteMarkers();
+    updateNoteLegend();
+
 });
 
 
 keyInput.addEventListener('change', () => {
     updateNoteMarkers();
+    updateNoteLegend();
+
 });
 
 
 chordQualityInput.addEventListener('change', () => {
     neck.scaleOrChord = 'chord';
     updateNoteMarkers();
+    updateNoteLegend();
+
 });
 
 
+noteLegendType.addEventListener('change', () => {
+    updateNoteLegend();
+});
 
+const updateNoteLegend = () => {
+    let notes = neck.markedNotes,
+        noteLegendMarker,
+        noteName,
+        interval,
+        displayType = noteLegendType.value;
+
+    while(noteLegend.hasChildNodes()){
+        noteLegend.removeChild(noteLegend.lastChild);
+    }
+
+    for(i in notes){
+        noteLegendMarker = document.createElement('div');
+        noteLegendMarker.classList.add('note-legend-marker');
+
+        noteName = notes[i];
+        interval = neck.scale.scale[i];
+
+        noteLegendMarker.dataset.noteName = noteName;
+        noteLegendMarker.dataset.interval = interval;
+
+        noteLegendMarker.style.backgroundColor = 
+            'var(--' + interval + '-color)';
+
+        if(displayType == 'intervals'){
+            noteLegendMarker.innerText = interval;
+        } else {
+            noteLegendMarker.innerText = noteName.toUpperCase();
+        }
+        noteLegend.append(noteLegendMarker);
+    }
+}
+
+updateNoteLegend();
 
 // let n1 = teoria.note('cb');
 // console.log(n1);
