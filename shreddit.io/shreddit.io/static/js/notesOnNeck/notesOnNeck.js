@@ -167,33 +167,51 @@ noteLegendType.addEventListener('change', () => {
 });
 
 const updateNoteLegend = () => {
-    let notes = neck.markedNotes,
+    let notes,
         noteLegendMarker,
         noteName,
         interval,
+        intervals,
         displayType = noteLegendType.value;
 
     while(noteLegend.hasChildNodes()){
         noteLegend.removeChild(noteLegend.lastChild);
     }
 
+    
+
+    if(neck.scaleOrChord == 'scale'){
+        notes = neck.markedNotes;
+        intervals = neck.scale.scale;
+    } else {
+        notes = neck.markedNotes;
+        intervals = neck.scale.toString().split(',');
+    }
+
+
     for(i in notes){
+
         noteLegendMarker = document.createElement('div');
         noteLegendMarker.classList.add('note-legend-marker');
 
         noteName = notes[i];
-        interval = neck.scale.scale[i];
+        interval = intervals[i];
+
+        console.log("noteName: ", noteName);
+        console.log("interval: ", interval);
+        
+        
 
         noteLegendMarker.dataset.noteName = noteName;
         noteLegendMarker.dataset.interval = interval;
 
         noteLegendMarker.style.backgroundColor = 
-            'var(--' + interval + '-color)';
+            'var(--' + teoria.interval(interval).simple() + '-color)';
 
         if(displayType == 'intervals'){
             noteLegendMarker.innerText = interval;
         } else {
-            noteLegendMarker.innerText = noteName.toUpperCase();
+            noteLegendMarker.innerText = noteName[0].toUpperCase() + noteName.substring(1, noteName.length);
         }
         noteLegend.append(noteLegendMarker);
     }

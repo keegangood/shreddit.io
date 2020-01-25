@@ -6,7 +6,7 @@ class InstrumentString{
         this.container = this.draw();
         this.frets = this.createFrets();
     }
-    
+
     draw(){
         let totalStrings = this.neck.totalStrings;
         let newString = document.createElement('div');
