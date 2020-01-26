@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import  UserSignupForm, UserUpdateForm, ProfileUpdateForm
+from chord_progressions.models import ChordProgression
+from django.contrib.auth.models import User
 
 def signup(request):
     if request.method == 'POST':
@@ -31,12 +33,21 @@ def profile(request):
             messages.success(request, f'Your account has been updated!')
             return redirect('profile')
     else:
+        # user = User.objects.get(pk=request.user.id)
+        progressions = ChordProgression.objects.filter(creator=request.user)
+        #request.user
+        #ChordProgression.objects.get()
+        #ChordProgression.objects.get(creator=request.user)
+
+        print(f'PROGRESSIONS*** {request.user}')
+
         u_form = UserUpdateForm(instance=request.user)
-        p_form = ProfileUpdateForm(instance=request.user.profile)  
+        p_form = ProfileUpdateForm(instance=request.user.profile)
 
     context = {
         'u_form':u_form,
-        'p_form':p_form
+        'p_form':p_form,
+        'progressions':progressions,
     }
     return render(request, 'users/profile.html', context)
 

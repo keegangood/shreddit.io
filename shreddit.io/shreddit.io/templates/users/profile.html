@@ -41,7 +41,12 @@
 
         <div class="chord-progressions">
             <h1>Saved Progressions</h1>
-            <p>No progressions yet</p>
+
+            {% for progression in progressions %}
+                <p>{{ progression.progression }}</p>
+            {% empty %}
+                <p>No progressions yet</p>
+            {% endfor %}
         </div>
         
     </div>
