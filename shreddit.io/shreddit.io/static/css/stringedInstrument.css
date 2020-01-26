@@ -23,8 +23,8 @@
 @media only screen and (max-width:768px){
     #instrument-container {
         display: flex;
-        height: 70vh;
-        /* margin-left: 10vw; */
+        height: 60vh;
+        /* margin-top: 10vw; */
         max-height: 800px;
         width: 70vw;
     }

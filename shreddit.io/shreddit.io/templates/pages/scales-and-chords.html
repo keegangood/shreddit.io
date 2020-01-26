@@ -99,6 +99,38 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col s12 scale-info">
+                <div class="scale-key">
+                    <!-- insert key with JS -->
+                </div>
+                <div class="scale-name">
+                    <!-- insert scale name with JS -->
+                </div>
+            </div>
+        </div>
+
+        <div class="row progression-info">
+            <div class="previous-chord blue-grey-text text-darken-2">F</div>
+            <div class="current-chord  blue-grey-text text-darken-4">
+                <p>&middot;</p>
+                <p>&middot;</p>
+                <p>&middot;</p>
+                <div class='current-chord-name'>
+                    <div class="root">
+                        Cb
+                    </div>
+                    <div class="quality">
+                        m7b5
+                    </div>
+                </div>
+                <p>&middot;</p>
+                <p>&middot;</p>
+                <p>&middot;</p>
+            </div>
+            <div class="next-chord     blue-grey-text text-darken-2">Bb</div>
+        </div>
+
         <div class="row audio-controls">
             <div class="col s6 offset-s3 audio-buttons">
                 <div class="play-button">
@@ -114,7 +146,7 @@
             <div class="scale-selects col s8 offset-s2 input-field">
                 <h4>Key:</h4>
                 <select name="key" id="key-input">
-                    <option value="C">C</option>
+                    <option value="C" selected>C</option>
                     <option value="C#">C#</option>
                     <option value="Db">Db</option>
                     <option value="D">D</option>
@@ -135,7 +167,7 @@
                 
                 <h4>Scale:</h4>
                 <select name="scales" id="scale-formula-input">
-                    <option value="ionian">Major</option>
+                    <option value="ionian" selected>Major</option>
                     <option value="aeolian">Minor</option>
                     <option disabled value="#">--- Modes ---</option>
                     <option value="ionian">Ionian</option>
@@ -161,7 +193,7 @@
 
                 <h4>Chord:</h4>
                 <select name="chord-quality" id="chord-quality">
-                    <option selected="selected" value="">Major</option>
+                    <option value="" selected>Major</option>
                     <option value="m">Minor</option>
                     <option value="6">6</option>
                     <option value="m6">m6</option>

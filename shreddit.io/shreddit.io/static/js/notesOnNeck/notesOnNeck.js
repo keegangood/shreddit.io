@@ -15,7 +15,9 @@ let instrumentInput = document.querySelector('#instrument-input'),
     chordName,
     noteLegend,
     noteLegendMarkers,
-    noteLegendType = document.querySelector('#note-legend-type');
+    noteLegendType = document.querySelector('#note-legend-type'),
+    scaleNameDisplay = document.querySelector('.scale-name'),
+    keyDisplay = document.querySelector('.scale-key');
 
 for(let i in instruments){
     instrument = instruments[i]; 
@@ -141,6 +143,7 @@ tuningInput.addEventListener('change', function(){
 
 scaleInput.addEventListener('change', () => {
     neck.scaleOrChord = 'scale';
+    scaleNameDisplay.innerText = scaleInput.options[scaleInput.selectedIndex].innerText;
     updateNoteMarkers();
     updateNoteLegend();
 
@@ -148,6 +151,7 @@ scaleInput.addEventListener('change', () => {
 
 
 keyInput.addEventListener('change', () => {
+    keyDisplay.innerText = keyInput.value;
     updateNoteMarkers();
     updateNoteLegend();
 
@@ -218,6 +222,10 @@ const updateNoteLegend = () => {
 }
 
 updateNoteLegend();
+
+
+scaleNameDisplay.innerText = scaleInput.options[scaleInput.selectedIndex].innerText
+keyDisplay.innerText = keyInput.value;
 
 // let n1 = teoria.note('cb');
 // console.log(n1);

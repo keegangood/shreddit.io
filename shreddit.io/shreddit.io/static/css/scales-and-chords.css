@@ -11,9 +11,9 @@
     align-items: center;
     display: flex;
     flex-direction: column;
-    height: 70vh;
+    /* max-height: 70vh; */
     justify-content: center;
-    margin-top: 12vh;
+    margin-top: 7vh;
 }
 
 .note-legend-horizontal {
@@ -64,5 +64,63 @@
 }
 
 #scales-and-chords-content .audio-controls i{
+    font-size: 4rem;
+}
+
+.scale-info {
+    align-items: flex-end;
+    display: flex;
+    justify-content: center;
+}
+
+.scale-key {
+    font-size: 3rem;
+    padding: 10px 5px;
+}
+
+.scale-name {
+    font-size: 3rem;
+    padding: 10px 0;
+}
+
+.progression-info {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+}
+
+.current-chord {
+    display: flex;
+    flex-direction: row;
+    font-size: 4rem;
+    font-weight: bold;
+    margin: 3vh 0;
+    padding: 0 5px;
+}
+
+.current-chord-name {
+    padding: 0 5px;
+}
+
+.current-chord-name .root {
+    font-size: 4rem;
+    text-align: center;
+
+}
+
+.current-chord .quality {
+    font-size: 3rem;
+}
+
+.current-chord p {
+    padding: 3px;
+    margin: 0 1vw;
+}
+
+.current-chord p {
+    padding-top: 8%;
+}
+.next-chord, .previous-chord {
     font-size: 4rem;
 }
