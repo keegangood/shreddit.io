@@ -44,9 +44,14 @@ h4 {
 }
 
 select {
-    font-size: 2.5rem;
-    padding: 10px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
     height: 5vh;
     text-align: center;
+}
+
+select:active option {
+    font-family: 'Quicksand', sans-serif;
 }
 

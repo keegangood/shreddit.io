@@ -6,13 +6,24 @@
     padding-top: 5vh;
 }
 
+.note-legend-type-container {
+    /* padding: 20px; */
+}
+
+#note-legend-type {
+    font-size: 1.2rem;
+    height: 4vh;
+    margin: 5px;
+    text-align: center;
+}
 
 .note-legend-vertical {
     align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-top: 7vh;
+    margin-top: 5vh;
+    padding-bottom: 5vh;
 }
 
 .note-legend-horizontal {
@@ -31,13 +42,13 @@
     font-family: 'Quicksand', sans-serif;
     font-size: 2rem;
     font-weight: bold;
-    height: 12vh;
+    height: 11vh;
     justify-content: center;
     margin: 3px;
-    max-height: 12vw;
-    max-width: 12vh;
+    max-height: 11vw;
+    max-width: 11vh;
     text-align: center;
-    width: 12vw;
+    width: 11vw;
 }
 
 #scales-and-chords-content .audio-controls {

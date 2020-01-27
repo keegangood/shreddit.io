@@ -4,7 +4,7 @@
     <div id="scales-and-chords-content" class="blue-grey">
 
         <div class="row">
-            <div class="col s3 hide-on-large-only note-legend note-legend-vertical">
+            <div class="col s4 hide-on-large-only note-legend note-legend-vertical">
                 <div class="note-legend-markers">
                     <div class="note-legend-marker">
                         <div>
@@ -42,10 +42,10 @@
                         </div> 
                     </div>
                 </div>
-                <div class="row note-legend-type">
-                    <div class="col s12 input-field center">
+                <div class="row note-legend-type-container">
+                    <div class="col 12 input-field center">
                         <p>View As:</p>
-                        <select name="note-legend-type" id="note-legend-type" class="browser-default">
+                        <select name="note-legend-type" id="note-legend-type" class="browser-default blue-grey-text text-darken-4 blue-grey lighten-1">
                             <option value="intervals">Intervals</option>
                             <option value="notes">Notes</option>
                         </select>
@@ -53,7 +53,7 @@
                 </div>
             </div>
 
-            <div class="col s9 lg12" id="instrument-container">
+            <div class="col s7 lg12" id="instrument-container">
                 <!-- build instrument with JS -->
             </div>
         </div>
@@ -163,7 +163,7 @@
         <div class="row center">
             <div class="scale-selects col s8 offset-s2 input-field">
                 <h4>Key:</h4>
-                <select name="key" id="key-input" class="browser-default blue-grey-text text-darken-4 blue-grey">
+                <select name="key" id="key-input" class="browser-default blue-grey-text text-darken-4 blue-grey lighten-1">
                     <option value="C">C</option>
                     <option value="C#">C#</option>
                     <option value="Db">Db</option>
@@ -184,7 +184,7 @@
                 </select>
                 
                 <h4>Scale:</h4>
-                <select name="scales" id="scale-formula-input" class="browser-default">
+                <select name="scales" id="scale-formula-input" class="browser-default blue-grey-text text-darken-4 blue-grey lighten-1">
                     <option value="ionian" selected>Major</option>
                     <option value="aeolian">Minor</option>
                     <option disabled value="#">--- Modes ---</option>
@@ -210,7 +210,7 @@
                 <h4>- or -</h4>
 
                 <h4>Chord:</h4>
-                <select name="chord-quality" id="chord-quality" class="browser-default">
+                <select name="chord-quality" id="chord-quality" class="browser-default blue-grey-text text-darken-4 blue-grey lighten-1">
                     <option value="" selected>Major</option>
                     <option value="m">Minor</option>
                     <option value="6">6</option>
