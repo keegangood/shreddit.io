@@ -1,5 +1,5 @@
 
-const instrumentInput = document.querySelector('#instrument-input'),
+let instrumentInput = document.querySelector('#instrument-input'),
     scaleInput = document.querySelector('#scale-formula-input'),
     keyInput = document.querySelector('#key-input'),
     chordQualityInput = document.querySelector('#chord-quality'),
@@ -37,7 +37,11 @@ window.addEventListener('load', () => {
         option.innerText = `${instrument[0].toUpperCase()}${instrument.substring(1)}`;
 
         instrumentInput.append(option);
-        M.FormSelect.init(instrumentInput);
+
+        // let elems = document.querySelectorAll('select');
+        // M.FormSelect.init(instrumentInput);
+        let elems = document.querySelectorAll('select');
+        let instances = M.FormSelect.init(elems);
     }
 
     // update input options to
@@ -57,9 +61,14 @@ window.addEventListener('load', () => {
             option.innerText = `${tuning[0].toUpperCase()}${tuning.substring(1)}`;
 
             tuningInput.append(option);
-            M.FormSelect.init(tuningInput);
+
+            // M.FormSelect.init(tuningInput);
+            let elems = document.querySelectorAll('select');
+            let options = {class:'browser-default'}
+            let instances = M.FormSelect.init(elems, options);
         }
     }
+
     updateTunings(neck.instrument);
 
 // grabs current input for scale name and key,
@@ -202,6 +211,7 @@ const updateNoteMarkers = () => {
         updateTunings(newInstrument);
         updateInstrument();
         updateNoteLegend();
+        
     });
 
 
@@ -223,6 +233,7 @@ const updateNoteMarkers = () => {
         updateNoteMarkers();
         updateNoteLegend();
         updateScaleOrChordInfo();
+
     });
 
     chordQualityInput.addEventListener('change', () => {
@@ -240,8 +251,6 @@ const updateNoteMarkers = () => {
     exploreModeInput.addEventListener('change', () => {
         exploreMode = exploreModeInput.value;
     });
-
-
 
 })
 

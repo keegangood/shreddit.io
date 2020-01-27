@@ -40,17 +40,6 @@
     width: 12vw;
 }
 
-.select-wrapper input{
-    font-size: 3rem;
-    letter-spacing: .1rem;
-    text-align: center;
-}
-
-
-.select-wrapper svg{
-    display: none;
-}
-
 #scales-and-chords-content .audio-controls {
     display: flex;
     justify-content: center;
@@ -107,7 +96,6 @@
 .current-chord-name .root {
     font-size: 4rem;
     text-align: center;
-
 }
 
 .current-chord .quality {

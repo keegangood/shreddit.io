@@ -215,7 +215,7 @@
     position: relative;
     top: -30vh;
     transition: transform .1s ease, opacity 2s ease;
-    transition-delay: .1s; 
+    transition-delay: .1s;
 }
 
 .instrument-inputs {
