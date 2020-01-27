@@ -16,14 +16,14 @@ let burger = document.querySelector('.hamburger'),
 
 burger.addEventListener('click', () => {
     mainContent.classList.toggle('no-scroll');
-    
+
     navMenuContent.classList.toggle('content-inactive');
-    
+
     topBun.classList.toggle('top-bun-active');
     burger.classList.toggle('mobile-nav-icon-active');
     meat.classList.toggle('meat-active');
     bottomBun.classList.toggle('bottom-bun-active');
-    
+
     cover.classList.toggle('content-cover-active');
     menu.classList.toggle('mobile-menu-active');
     settingsMenuContent.classList.toggle('hidden');
@@ -38,7 +38,6 @@ settingsIcon.addEventListener('click', () => {
     settingsIcon.classList.toggle('mobile-nav-icon-active');
     settingsIcon.classList.toggle('settings-icon-active')
     navMenuContent.classList.toggle('hidden');
-
 
     burger.classList.toggle('hidden');
 
@@ -55,4 +54,5 @@ if(messageCloseX){
 document.addEventListener('DOMContentLoaded', function() {
     let elems = document.querySelectorAll('select');
     let instances = M.FormSelect.init(elems);
+
 });

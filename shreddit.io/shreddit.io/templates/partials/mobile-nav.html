@@ -7,7 +7,7 @@
         <span class="burger-set-item blue-grey darken-4 bottom-bun"></span>
     </div>
 
-    {% if request.path == '/scales-and-chords/' or request.path == '/progression-builder/' %}
+    {% if request.path == '/explore/' %}
     <div class="settings-icon mobile-nav-icon blue-grey darken-2 blue-grey-text text-darken-4">
         <div>&#x26ED;</div>
     </div>
@@ -49,13 +49,8 @@
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a href="{% url 'pages-scales-and-chords' %}" class="hover-text blue-grey-text text-darken-4">
-                                Scales & Chords
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a href="{% url 'pages-progression-builder' %}" class="hover-text blue-grey-text text-darken-4">
-                                Progression Builder
+                            <a href="{% url 'pages-explore' %}" class="hover-text blue-grey-text text-darken-4">
+                                Explore
                             </a>
                         </div>
                     </a>
@@ -64,18 +59,29 @@
         </div>
     </div>
     <div class="row settings-menu-content center">
-        <div class="col s6 offset-s3">
-            <div class="instrument-inputs input-field">
-                <h4>Instrument:</h4>
-                <select name="instrument-input" id="instrument-input">
-                    <!-- add options with JS -->
-                </select>
-                
-                <h4>Tuning:</h4>
-                <select name="tuning-input" id="tuning-input">
-                    <!-- add options with JS -->
-                </select>
+        <div class="col s10 offset-s1 instrument-inputs input-field">
+            <h4>Instrument:</h4>
+            <select name="instrument-input" id="instrument-input">
+                <!-- add options with JS -->
+            </select>
+            
+            <h4>Tuning:</h4>
+            <select name="tuning-input" id="tuning-input">
+                <!-- add options with JS -->
+            </select>
+
+            <div class="nav-divider">
+                <span class="blue-grey-text text-lighten-2">&middot;</span class="blue-grey lighten-2">
+                <span class="blue-grey-text text-lighten-2">&middot;</span>
+                <span class="blue-grey-text text-lighten-2">&middot;</span>
             </div>
+
+            <h4>Explore:</h4>
+            <select name="explore-mode" id="explore-mode-input">
+                <option value="chord-progressions">Chord Progression Builder</option>
+                <option value="scales-and-chords">Scales and chords</option>
+            </select>
         </div>
     </div>
+
 </div>

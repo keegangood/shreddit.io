@@ -11,7 +11,6 @@
     align-items: center;
     display: flex;
     flex-direction: column;
-    /* max-height: 70vh; */
     justify-content: center;
     margin-top: 7vh;
 }
@@ -76,7 +75,7 @@
 
 .scale-key {
     font-size: 3rem;
-    padding: 10px 5px;
+    padding: 10px;
 }
 
 .scale-name {
@@ -123,6 +122,19 @@
 .current-chord p {
     padding-top: 8%;
 }
-.next-chord, .previous-chord {
-    font-size: 4rem;
+
+.next-chord {
+    text-align: center;
+}
+
+.next-chord .chord-name .root {
+    font-size: 3rem;
+}
+
+.previous-chord {
+    text-align: center;
+}
+
+.previous-chord .chord-name .root {
+    font-size: 3rem;
 }

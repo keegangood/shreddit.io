@@ -49,6 +49,7 @@ class InstrumentNeck {
         }
         
         if(instrument == ''){
+
             // Returns string names 
             return instruments[this.instrument][this.tuning]
         } else if(instrument == 'all'){
@@ -67,8 +68,6 @@ class InstrumentNeck {
             
             let stringNum = i;
             let string = new InstrumentString(this, stringNum, this.stringNames[i]);
-
-            // console.log(string);
             
             if(this.orientation == 'vertical'){
                 
@@ -193,7 +192,8 @@ class InstrumentNeck {
             markedNoteName,
             matchingFrets,
             matchingFret,
-            marker;
+            marker,
+            neck = this;
 
         markedNotes = this.addEnharmonics();
         

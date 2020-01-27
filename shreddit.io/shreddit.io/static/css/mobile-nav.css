@@ -213,9 +213,23 @@
 .settings-menu-content {
     opacity: 1;
     position: relative;
-    top: -20vh;
+    top: -30vh;
     transition: transform .1s ease, opacity 2s ease;
     transition-delay: .1s; 
+}
+
+.instrument-inputs {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-divider {
+    border-radius: 5px;
+    font-size: 3rem;
+    height: 3px;
+    margin: 10px 0;
+    width: 80%;
 }
 
 .content-inactive {
@@ -229,3 +243,4 @@
     transition: transform .1s ease, opacity 2s ease;
     transition-delay: .1s; 
 }
+
