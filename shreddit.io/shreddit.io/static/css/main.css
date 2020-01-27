@@ -55,3 +55,6 @@ select:active option {
     font-family: 'Quicksand', sans-serif;
 }
 
+.hide {
+    z-index: -1;
+}

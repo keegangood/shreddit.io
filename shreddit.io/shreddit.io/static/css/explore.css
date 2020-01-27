@@ -6,9 +6,6 @@
     padding-top: 5vh;
 }
 
-.note-legend-type-container {
-    /* padding: 20px; */
-}
 
 #note-legend-type {
     font-size: 1.2rem;
@@ -136,4 +133,34 @@
 
 .previous-chord .chord-name .root {
     font-size: 3rem;
+}
+
+.progression-builder h2 {
+    margin: 15px 0;
+    padding: 5px;
+}
+
+.progression-builder .key-input {
+
+}
+
+.progression-builder .scale-name {
+    font-size: 2rem;
+}
+
+.progression-builder .chord-name {
+    font-size: 2rem;
+
+}
+
+.progression-builder .add-button {
+    border: 2px solid #263238;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #263238;
+    margin: 10px;
+    padding: 10px;
+}
+
+.progression-builder .add-button:hover {
+    box-shadow: 0 0 5px #cfd8dc;
 }

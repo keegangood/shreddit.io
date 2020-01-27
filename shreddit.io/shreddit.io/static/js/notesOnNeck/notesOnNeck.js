@@ -7,7 +7,9 @@ let instrumentInput = document.querySelector('#instrument-input'),
     scaleNameDisplay = document.querySelector('.scale-name'),
     keyDisplay = document.querySelector('.scale-key'),
     exploreModeInput = document.querySelector('#explore-mode-input'),
-    tuningInput = document.querySelector('#tuning-input');
+    tuningInput = document.querySelector('#tuning-input'),
+    scalesAndChordsSection = document.querySelector('.scale-selects'),
+    progressionBuilderSection = document.querySelector('.progression-builder');
 
 let instruments,
     instrument,
@@ -195,15 +197,33 @@ const updateNoteMarkers = () => {
     exploreMode = exploreModeInput.value;
 
     neck.placeNoteMarkers();
+    updateScaleOrChordInfo();
 
     updateNoteLegend();
 
     // update DOM to display compatible 
     // scales for selected chord/key
     const updateCompatibleScales = () => {
+
+    }
+
+    const changeExploreMode = () => {
+        exploreMode = exploreModeInput.value;
+
+        console.log(scalesAndChordsSection);
+        
+
+        if(exploreMode == 'progression-builder'){
+            scalesAndChordsSection.classList.add('hide');
+            progressionBuilderSection.classList.remove('hide');
+        } else {
+            scalesAndChordsSection.classList.remove('hide');
+            progressionBuilderSection.classList.add('hide');
+        }
         
     }
 
+    changeExploreMode();
     // Event listeners
     instrumentInput.addEventListener('change', function(){
         newInstrument = instrumentInput.value;
@@ -249,7 +269,7 @@ const updateNoteMarkers = () => {
     });
 
     exploreModeInput.addEventListener('change', () => {
-        exploreMode = exploreModeInput.value;
+        changeExploreMode();
     });
 
 })
