@@ -88,11 +88,16 @@
     margin: 0;
 }
 
+.progression-builder select {
+    height: 7vh;
+}
+
 .current-chord {
     display: flex;
     flex-direction: row;
     font-size: 4rem;
     font-weight: bold;
+    justify-content: center;
     margin: 3vh 0;
     padding: 0 5px;
 }
@@ -145,32 +150,55 @@
 }
 
 .progression-builder .scale-label {
+    align-items: center;
+    display: flex;
+    justify-content: center;
     font-size: 2rem;
 }
 
 .progression-builder .chord-label {
+    align-items: center;
+    display: flex;
+    justify-content: center;
     font-size: 2rem;
+}
 
+.progression-builder .progression-item {
+    padding: 5px;
 }
 
 .progression-builder .scale-name {
-    font-size: 2rem;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    font-size: 1.8rem;
+    /* text-align: center; */
 }
 
 .progression-builder .chord-name {
-    font-size: 2rem;
-
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    font-size: 1.8rem;
 }
 
 .progression-builder .add-button {
     border: 2px solid #263238;
     border-radius: 5px;
     box-shadow: 0 0 5px #263238;
-    margin: 10px;
+    margin: 30px;
     padding: 10px;
 }
 
 .progression-builder .add-button:hover {
     box-shadow: 0 0 5px #cfd8dc;
     cursor: pointer;
+}
+
+.progression-builder .delete-button {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    text-align: center;
 }

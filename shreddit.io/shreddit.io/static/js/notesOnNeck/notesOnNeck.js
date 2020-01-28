@@ -97,183 +97,183 @@ const updateNoteMarkers = () => {
     neck.placeNoteMarkers();
 
 }
-    // Update instrument neck 
-    // when input selection changes
-    const updateInstrument = () => {
-        let newInstrument = instrumentInput.value;
-        let newTuning = tuningInput.value;
+// Update instrument neck 
+// when input selection changes
+const updateInstrument = () => {
+    let newInstrument = instrumentInput.value;
+    let newTuning = tuningInput.value;
 
-        for(let i in neck.strings){
-            neck.strings[i].container.remove();
-        }
-
-        neck.instrument = newInstrument;
-        neck.tuning = newTuning;
-
-        neck.stringNames = neck.getInstrumentTunings();
-
-        neck.totalStrings = neck.stringNames.length;
-        neck.strings = neck.drawStrings();
-
-        updateNoteMarkers();
+    for(let i in neck.strings){
+        neck.strings[i].container.remove();
     }
 
-    updateInstrument();
+    neck.instrument = newInstrument;
+    neck.tuning = newTuning;
 
-    // update neck and change note legend orientation
-    // when screen size changes
-    let windowWidthChange = mediaQuery => {
-        if(mediaQuery.matches){
-            neck.orientation = 'horizontal';
-            noteLegend = document.querySelector('.note-legend-horizontal .note-legend-markers')
-            updateInstrument();
+    neck.stringNames = neck.getInstrumentTunings();
+
+    neck.totalStrings = neck.stringNames.length;
+    neck.strings = neck.drawStrings();
+
+    updateNoteMarkers();
+}
+
+updateInstrument();
+
+// update neck and change note legend orientation
+// when screen size changes
+let windowWidthChange = mediaQuery => {
+    if(mediaQuery.matches){
+        neck.orientation = 'horizontal';
+        noteLegend = document.querySelector('.note-legend-horizontal .note-legend-markers')
+        updateInstrument();
+    } else {
+        neck.orientation = 'vertical';
+        noteLegend = document.querySelector('.note-legend-vertical .note-legend-markers')
+        updateInstrument();
+    }
+}
+
+// listen for screen width changes
+const mediaQuery = window.matchMedia("(min-width: 768px)");
+mediaQuery.addListener(windowWidthChange);
+windowWidthChange(mediaQuery);
+
+// remove all children nodes
+const removeChildren = parent => {
+    while(parent.hasChildNodes()){
+        parent.removeChild(parent.lastChild);
+    }
+}
+
+// clear old legend markers 
+// and generate new ones
+const updateNoteLegend = () => {
+    let notes,
+        noteLegendMarker,
+        noteName,
+        interval,
+        intervals,
+        displayType = noteLegendType.value;
+
+    while(noteLegend.hasChildNodes()){
+        noteLegend.removeChild(noteLegend.lastChild);
+    }
+
+    if(neck.scaleOrChord == 'scale'){
+        notes = neck.markedNotes;
+        intervals = neck.scale.scale;
+    } else if(neck.scaleOrChord == 'chord'){
+        notes = neck.markedNotes;
+        intervals = neck.scale.toString().split(',');
+    }
+
+    for(i in notes){
+
+        noteLegendMarker = document.createElement('div');
+        noteLegendMarker.classList.add('note-legend-marker');
+
+        noteName = notes[i];
+        interval = intervals[i];
+
+        noteLegendMarker.dataset.noteName = noteName;
+        noteLegendMarker.dataset.interval = interval;
+
+        noteLegendMarker.style.backgroundColor = 
+            'var(--' + teoria.interval(interval).simple() + '-color)';
+
+        if(displayType == 'intervals'){
+            noteLegendMarker.innerText = interval;
         } else {
-            neck.orientation = 'vertical';
-            noteLegend = document.querySelector('.note-legend-vertical .note-legend-markers')
-            updateInstrument();
+            noteLegendMarker.innerText = noteName[0].toUpperCase() + noteName.substring(1, noteName.length);
         }
+        noteLegend.append(noteLegendMarker);
     }
+}
 
-    // listen for screen width changes
-    const mediaQuery = window.matchMedia("(min-width: 768px)");
-    mediaQuery.addListener(windowWidthChange);
-    windowWidthChange(mediaQuery);
-
-    // remove all children nodes
-    const removeChildren = parent => {
-        while(parent.hasChildNodes()){
-            parent.removeChild(parent.lastChild);
-        }
+const updateScaleOrChordInfo = () => {
+    keyDisplay.innerText = keyInput.value;
+    
+    if(neck.scaleOrChord == 'scale'){
+        scaleNameDisplay.innerText = scaleInput.options[scaleInput.selectedIndex].innerText;
+    } else if(neck.scaleOrChord == 'chord'){
+        scaleNameDisplay.innerText = chordQualityInput.options[chordQualityInput.selectedIndex].innerText;
     }
+}
 
-    // clear old legend markers 
-    // and generate new ones
-    const updateNoteLegend = () => {
-        let notes,
-            noteLegendMarker,
-            noteName,
-            interval,
-            intervals,
-            displayType = noteLegendType.value;
-    
-        while(noteLegend.hasChildNodes()){
-            noteLegend.removeChild(noteLegend.lastChild);
-        }
-    
-        if(neck.scaleOrChord == 'scale'){
-            notes = neck.markedNotes;
-            intervals = neck.scale.scale;
-        } else if(neck.scaleOrChord == 'chord'){
-            notes = neck.markedNotes;
-            intervals = neck.scale.toString().split(',');
-        }
-    
-        for(i in notes){
-    
-            noteLegendMarker = document.createElement('div');
-            noteLegendMarker.classList.add('note-legend-marker');
-    
-            noteName = notes[i];
-            interval = intervals[i];
-    
-            noteLegendMarker.dataset.noteName = noteName;
-            noteLegendMarker.dataset.interval = interval;
-    
-            noteLegendMarker.style.backgroundColor = 
-                'var(--' + teoria.interval(interval).simple() + '-color)';
-    
-            if(displayType == 'intervals'){
-                noteLegendMarker.innerText = interval;
-            } else {
-                noteLegendMarker.innerText = noteName[0].toUpperCase() + noteName.substring(1, noteName.length);
-            }
-            noteLegend.append(noteLegendMarker);
-        }
-    }
+exploreMode = exploreModeInput.value;
 
-    const updateScaleOrChordInfo = () => {
-        keyDisplay.innerText = keyInput.value;
-        
-        if(neck.scaleOrChord == 'scale'){
-            scaleNameDisplay.innerText = scaleInput.options[scaleInput.selectedIndex].innerText;
-        } else if(neck.scaleOrChord == 'chord'){
-            scaleNameDisplay.innerText = chordQualityInput.options[chordQualityInput.selectedIndex].innerText;
-        }
-    }
+neck.placeNoteMarkers();
+updateScaleOrChordInfo();
 
+updateNoteLegend();
+
+const changeExploreMode = () => {
     exploreMode = exploreModeInput.value;
 
-    neck.placeNoteMarkers();
+    if(exploreMode == 'progression-builder'){
+        scalesAndChordsSection.classList.add('hide');
+        progressionBuilderSection.classList.remove('hide');
+        neck.removeNoteMarkers();
+        removeChildren(noteLegend);
+        keyDisplay.innerText = '';
+        scaleNameDisplay.innerText = '';
+    } else {
+        scalesAndChordsSection.classList.remove('hide');
+        progressionBuilderSection.classList.add('hide');
+    }
+    
+}
+
+changeExploreMode();
+// Event listeners
+instrumentInput.addEventListener('change', function(){
+    newInstrument = instrumentInput.value;
+    
+    updateTunings(newInstrument);
+    updateInstrument();
+    updateNoteLegend();
+    
+});
+
+
+tuningInput.addEventListener('change', function(){
+    updateInstrument();
+    updateNoteLegend();
+});
+
+
+scaleInput.addEventListener('change', () => {
+    neck.scaleOrChord = 'scale';
+    updateNoteMarkers();
+    updateNoteLegend();
+    updateScaleOrChordInfo();
+});
+
+
+keyInput.addEventListener('change', () => {
+    updateNoteMarkers();
+    updateNoteLegend();
     updateScaleOrChordInfo();
 
+});
+
+chordQualityInput.addEventListener('change', () => {
+    neck.scaleOrChord = 'chord';
+    updateNoteMarkers();
     updateNoteLegend();
+    updateScaleOrChordInfo();
+    updateCompatibleScales();
+});
 
-    const changeExploreMode = () => {
-        exploreMode = exploreModeInput.value;
 
-        if(exploreMode == 'progression-builder'){
-            scalesAndChordsSection.classList.add('hide');
-            progressionBuilderSection.classList.remove('hide');
-            neck.removeNoteMarkers();
-            removeChildren(noteLegend);
-            keyDisplay.innerText = '';
-            scaleNameDisplay.innerText = '';
-        } else {
-            scalesAndChordsSection.classList.remove('hide');
-            progressionBuilderSection.classList.add('hide');
-        }
-        
-    }
+noteLegendType.addEventListener('change', () => {
+    updateNoteLegend();
+});
 
+exploreModeInput.addEventListener('change', () => {
     changeExploreMode();
-    // Event listeners
-    instrumentInput.addEventListener('change', function(){
-        newInstrument = instrumentInput.value;
-        
-        updateTunings(newInstrument);
-        updateInstrument();
-        updateNoteLegend();
-        
-    });
+});
 
 
-    tuningInput.addEventListener('change', function(){
-        updateInstrument();
-        updateNoteLegend();
-    });
-
-
-    scaleInput.addEventListener('change', () => {
-        neck.scaleOrChord = 'scale';
-        updateNoteMarkers();
-        updateNoteLegend();
-        updateScaleOrChordInfo();
-    });
-
-
-    keyInput.addEventListener('change', () => {
-        updateNoteMarkers();
-        updateNoteLegend();
-        updateScaleOrChordInfo();
-
-    });
-
-    chordQualityInput.addEventListener('change', () => {
-        neck.scaleOrChord = 'chord';
-        updateNoteMarkers();
-        updateNoteLegend();
-        updateScaleOrChordInfo();
-        updateCompatibleScales();
-    });
-
-
-    noteLegendType.addEventListener('change', () => {
-        updateNoteLegend();
-    });
-
-    exploreModeInput.addEventListener('change', () => {
-        changeExploreMode();
-    });
-
-// })
 
