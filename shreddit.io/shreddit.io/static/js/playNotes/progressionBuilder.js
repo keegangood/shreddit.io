@@ -2,10 +2,9 @@ let progressionKeyInput = document.querySelector('.progression-builder #key-inpu
     progressionChordQuality = document.querySelector('.progression-builder #chord-quality'),
     compatibleScaleSelect = document.querySelector('#compatible-scales'),
     progressionItemDeleteButtons = document.querySelectorAll('.progression-builder .delete-button'),
-    progressionAddButton = document.querySelector('.progression-builder .add-button');
-    
-    console.log(progressionKeyInput);
-    console.log(progressionChordQuality);
+    progressionAddButton = document.querySelector('.progression-builder .add-button'),
+    playButton = document.querySelector('.play-button');
+
     
 const fullScaleNames = {
     'aeolian'           :'Aeolian',
@@ -68,9 +67,7 @@ const updateCompatibleScales = () => {
 }
 
 const addProgressionItem = () => {
-    let compatibleScales = neck.compatibleScales,
-        // scaleName = `${compatibleScales[i].key[0].toUpperCase()}${compatibleScales[i].key.substring(1, compatibleScales[i].length)} ${fullScaleNames[compatibleScales[i].name]}`,
-        scaleName = compatibleScaleSelect.options[compatibleScaleSelect.selectedIndex].innerText,
+    let scaleName = compatibleScaleSelect.options[compatibleScaleSelect.selectedIndex].innerText,
         chordName = `${progressionKeyInput.value}${progressionChordQuality.value}`,
         newRow = document.createElement('div'),
         progressionContainer = document.querySelector('.current-progression'),
@@ -89,6 +86,11 @@ const addProgressionItem = () => {
 
     newRow.innerHTML = template;
 
+    newRow.dataset.chordKey = progressionKeyInput.value;
+    newRow.dataset.chordQuality = progressionChordQuality.value;
+    newRow.dataset.scaleKey = compatibleScaleSelect.options[compatibleScaleSelect.selectedIndex].value.split(' ')[0];
+    newRow.dataset.scaleName = compatibleScaleSelect.options[compatibleScaleSelect.selectedIndex].value.split(' ')[1];
+    
     newDelete = newRow.lastChild.firstChild;
     newDelete.addEventListener('click', () => {
         newDelete.parentElement.parentElement.remove();
@@ -117,37 +119,101 @@ progressionAddButton.addEventListener('click', () => {
     addProgressionItem();
 });
 
+playButton.addEventListener('click', () => {
+    compileChordScalePairs();
+
+})
 
 updateCompatibleScales();
-const playNotes = () => {
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//**** Prepare chord progression for saving/playing ****/
+const compileChordScalePairs = () => {
+    let item,
+        items = document.querySelectorAll('.progression-item'),
+        chordKey,
+        chordQuality,
+        scaleKey,
+        scaleName;
+
+    for(let i=0; i<items.length; i++){
+        item = items[i];
+
+        chordKey = item.childNodes[0];
+        console.log(chordKey);
+        
+        
+        
+    }
 }
 
-// playNotes("","")
+compileChordScalePairs()
 
 const compileProgression = chordScalePairs => {
+    let progression = {};
+
+    progression['chordScalePairs'] = [];
+
+    for(let i in chordScalePairs){
+
+    }
+
+    console.log(progression);
     
 }
 
-progression = [
-        {
-            'chord': {
-                'key':'C',
-                'quality':'Cmaj7',
-            },
-            'scale': {
-                'key':'C',
-                'name':'ionian',
-            }
-        },
-        {
-            'chord': {
-                'key':'A',
-                'quality':'m6',
-            },
-            'scale': {
-                'key':'A',
-                'name':'Aeolian',
-            }
-        },
-    ] // end chordScalePairs
+
+
+compileProgression('');
+// progression = {
+//     'chordScalePairs':[
+//         {
+//             'chord': {
+//                 'key':'C',
+//                 'quality':'Cmaj7',
+//             },
+//             'scale': {
+//                 'key':'C',
+//                 'name':'ionian',
+//             }
+//         },
+//         {
+//             'chord': {
+//                 'key':'A',
+//                 'quality':'m6',
+//             },
+//             'scale': {
+//                 'key':'A',
+//                 'name':'Aeolian',
+//             }
+//         },
+//     ], // end chordScalePairs
+//     'rhythm': {
+//         'kickLoop':[],
+//         'snareLoop':[],
+//         'hatLoop':[],
+//     },
+// }
