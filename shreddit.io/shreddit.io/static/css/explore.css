@@ -144,6 +144,15 @@
 
 }
 
+.progression-builder .scale-label {
+    font-size: 2rem;
+}
+
+.progression-builder .chord-label {
+    font-size: 2rem;
+
+}
+
 .progression-builder .scale-name {
     font-size: 2rem;
 }
@@ -163,4 +172,5 @@
 
 .progression-builder .add-button:hover {
     box-shadow: 0 0 5px #cfd8dc;
+    cursor: pointer;
 }

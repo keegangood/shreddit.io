@@ -56,14 +56,14 @@
     <!-- Teoria JS -->
     <script src="{% static 'js/notesOnNeck/teoria/teoria-master/teoria.js' %}"></script>
     
+    <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.js"></script>
+    <script src="{% static 'js/mobileNav.js' %}"></script>
+    
     <!-- JS for playing audio -->
     <script src="{% static 'js/playNotes/tone/build/Tone.js' %}"></script>
     <script src="{% static 'js/playNotes/playNotes.js' %}"></script>
     <script src="{% static 'js/playNotes/tonejs-instruments/Tonejs-Instruments.js' %}"></script>
-    
-    <!--JavaScript at end of body for optimized loading-->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.js"></script>
-    <script src="{% static 'js/mobileNav.js' %}"></script>
     
     <!-- JS for displaying notes on necks -->
     <script src="{% static 'js/notesOnNeck/stringedInstrumentLayouts/instrumentNeck.js' %}"></script>
@@ -71,6 +71,7 @@
     <script src="{% static 'js/notesOnNeck/stringedInstrumentLayouts/instrumentFret.js' %}"></script>
     <script src="{% static 'js/notesOnNeck/noteMarker.js' %}"></script>
     <script src="{% static 'js/notesOnNeck/notesOnNeck.js' %}"></script>
+    
     
 </body>
 </html>

@@ -168,7 +168,7 @@ class InstrumentNeck {
                 // if all notes in chord are in the scale
                 // add scale name to compatible scale array 
                 if(noteMatches.length == chord.length){
-                    compatibleScales.push(
+                    this.compatibleScales.push(
                         {
                             'key':tempKey.toString().slice(0,-1),
                             'name':knownScales[k],
@@ -178,12 +178,11 @@ class InstrumentNeck {
             }
         }
 
-        console.log(`${compatibleScales.length} compatible scales found for ${this.curKey.scientific().toString().slice(0,-1)}${this.chordName}`);
+        console.log(`${this.compatibleScales.length} compatible scales found for ${this.curKey.scientific().toString().slice(0,-1)}${this.chordName}`);
         
-        for(let x in compatibleScales){
-            console.log(`key: ${compatibleScales[x].key}, scale: ${compatibleScales[x].name}`);
+        for(let x in this.compatibleScales){
+            console.log(`key: ${this.compatibleScales[x].key}, scale: ${this.compatibleScales[x].name}`);
         }
-        
     }
 
     placeNoteMarkers(){

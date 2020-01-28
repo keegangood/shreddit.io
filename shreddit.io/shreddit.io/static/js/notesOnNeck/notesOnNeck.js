@@ -24,7 +24,7 @@ let instruments,
     exploreMode;
 
 
-window.addEventListener('load', () => {
+// window.addEventListener('load', () => {
     let neck = new InstrumentNeck('guitar', 'standard', 0, 13);
 
     instruments = neck.getInstrumentTunings('all');
@@ -139,6 +139,13 @@ const updateNoteMarkers = () => {
     mediaQuery.addListener(windowWidthChange);
     windowWidthChange(mediaQuery);
 
+    // remove all children nodes
+    const removeChildren = parent => {
+        while(parent.hasChildNodes()){
+            parent.removeChild(parent.lastChild);
+        }
+    }
+
     // clear old legend markers 
     // and generate new ones
     const updateNoteLegend = () => {
@@ -201,21 +208,16 @@ const updateNoteMarkers = () => {
 
     updateNoteLegend();
 
-    // update DOM to display compatible 
-    // scales for selected chord/key
-    const updateCompatibleScales = () => {
-
-    }
-
     const changeExploreMode = () => {
         exploreMode = exploreModeInput.value;
-
-        console.log(scalesAndChordsSection);
-        
 
         if(exploreMode == 'progression-builder'){
             scalesAndChordsSection.classList.add('hide');
             progressionBuilderSection.classList.remove('hide');
+            neck.removeNoteMarkers();
+            removeChildren(noteLegend);
+            keyDisplay.innerText = '';
+            scaleNameDisplay.innerText = '';
         } else {
             scalesAndChordsSection.classList.remove('hide');
             progressionBuilderSection.classList.add('hide');
@@ -261,6 +263,7 @@ const updateNoteMarkers = () => {
         updateNoteMarkers();
         updateNoteLegend();
         updateScaleOrChordInfo();
+        updateCompatibleScales();
     });
 
 
@@ -272,5 +275,5 @@ const updateNoteMarkers = () => {
         changeExploreMode();
     });
 
-})
+// })
 
