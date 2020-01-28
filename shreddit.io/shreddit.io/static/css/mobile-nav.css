@@ -19,7 +19,8 @@
 /* nav toggle icons */
 .mobile-nav-icons {
     left: 3vw;
-    position: absolute;
+    position: fixed;
+    top: 2vh;
     z-index: 4;
 
 }
@@ -118,14 +119,14 @@
 .content-cover-active {
     left: 0;
     opacity: .9;
-    position: absolute;
+    position: fixed;
     top: 0;
 }
 
 .mobile-nav-menu {
     height: 100vh;
     left: -100vw;
-    position: absolute;
+    position: fixed;
     top: 0;
     transition: left .5s ease;
     width: 90vw;
