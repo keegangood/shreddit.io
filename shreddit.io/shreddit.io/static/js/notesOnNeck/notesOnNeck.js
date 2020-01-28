@@ -214,6 +214,8 @@ const changeExploreMode = () => {
     if(exploreMode == 'progression-builder'){
         scalesAndChordsSection.classList.add('hide');
         progressionBuilderSection.classList.remove('hide');
+        neck.scale = '';
+        neck.markedNotes = '';
         neck.removeNoteMarkers();
         removeChildren(noteLegend);
         keyDisplay.innerText = '';
