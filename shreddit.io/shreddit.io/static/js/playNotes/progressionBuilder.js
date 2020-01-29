@@ -86,7 +86,7 @@ const addProgressionItem = () => {
 
     newRow.innerHTML = template;
 
-    newRow.dataset.chordKey = progressionKeyInput.value;
+    newRow.dataset.chordKey = progressionKeyInput.value.toLowerCase();
     newRow.dataset.chordQuality = progressionChordQuality.value;
     newRow.dataset.scaleKey = compatibleScaleSelect.options[compatibleScaleSelect.selectedIndex].value.split(' ')[0];
     newRow.dataset.scaleName = compatibleScaleSelect.options[compatibleScaleSelect.selectedIndex].value.split(' ')[1];
@@ -120,8 +120,9 @@ progressionAddButton.addEventListener('click', () => {
 });
 
 playButton.addEventListener('click', () => {
-    compileChordScalePairs();
+    let pairs = compileChordScaleObject();
 
+    compileProgression(pairs);
 })
 
 updateCompatibleScales();
@@ -151,43 +152,83 @@ updateCompatibleScales();
 
 
 //**** Prepare chord progression for saving/playing ****/
-const compileChordScalePairs = () => {
-    let item,
-        items = document.querySelectorAll('.progression-item'),
+
+// Collects all user-generated
+// progression-item divs and creates
+// an object based on their dataset values for chords/scales
+const compileChordScaleObject = () => {
+    let progressionItems = document.querySelectorAll('.progression-item'),
+        progressionItem,
         chordKey,
         chordQuality,
         scaleKey,
-        scaleName;
+        scaleName,
+        chordScaleObject = {},
+        chordScaleObjects = [];
 
-    for(let i=0; i<items.length; i++){
-        item = items[i];
+    for(let i=0; i<progressionItems.length; i++){
+        chordScaleObject = {}
+        progressionItem = progressionItems[i];
 
-        chordKey = item.childNodes[0];
-        console.log(chordKey);
+        chordKey = progressionItem.dataset.chordKey;
+        chordQuality = progressionItem.dataset.chordQuality;
+        scaleKey = progressionItem.dataset.scaleKey;
+        scaleName = progressionItem.dataset.scaleName;
+
+        chordScaleObject['chord'] = 
+            {
+                'key':     chordKey, 
+                'quality': chordQuality,
+                'notes':   teoria.note(chordKey).chord(chordQuality).simple(),
+            };
+        chordScaleObject['scale'] = 
+            {
+                'key':   scaleKey, 
+                'name':  scaleName,
+                'notes': teoria.note(scaleKey).scale(scaleName).simple(),
+            };
         
-        
-        
+        chordScaleObjects.push(chordScaleObject);
     }
+
+    return chordScaleObjects
+    
 }
 
-compileChordScalePairs()
+const compileProgression = objects => {
 
-const compileProgression = chordScalePairs => {
-    let progression = {};
+    console.log(objects);
+    
+    let progression = {},
+        chord,
+        chordLoop,
+        obj;
 
-    progression['chordScalePairs'] = [];
+    progression['chordScaleObjects'] = objects;
 
-    for(let i in chordScalePairs){
+    chordLoop = [];
+    for(let i=0; i<objects.length;i++){
+        obj = objects[i];
 
+        chord = obj.chord.notes;
+
+        chordLoop.push(
+            {
+                'time':     `${i*2}`,
+                'chord':    chord,
+                'velocity': 0.1,
+            }
+        ) 
     }
+    progression['chordLoop'] = chordLoop;
 
-    console.log(progression);
+    progression['rhythm'] = [];
+
+    console.log('progression: ', progression);
     
 }
 
 
-
-compileProgression('');
 // progression = {
 //     'chordScalePairs':[
 //         {
@@ -211,6 +252,7 @@ compileProgression('');
 //             }
 //         },
 //     ], // end chordScalePairs
+//     'chordLoop': [],
 //     'rhythm': {
 //         'kickLoop':[],
 //         'snareLoop':[],

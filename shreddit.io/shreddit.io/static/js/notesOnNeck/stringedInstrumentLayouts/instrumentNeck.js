@@ -21,8 +21,8 @@ class InstrumentNeck {
         this.chordName = '';
         this.compatibleScales = [];
         
-        this.scale = this.curKey.chord('');
-        this.markedNotes = this.scale.simple();
+        this.scale = this.curKey.chord('');     // Array of interval names => ['P1', 'm3', 'P5', 'm7']
+        this.markedNotes = this.scale.simple(); // Array of note names => ['e', 'f#','g#']
 
         this.container = document.querySelector('#instrument-container');
         this.orientation = '';

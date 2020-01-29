@@ -228,6 +228,8 @@ const changeExploreMode = () => {
 }
 
 changeExploreMode();
+
+
 // Event listeners
 instrumentInput.addEventListener('change', function(){
     newInstrument = instrumentInput.value;
