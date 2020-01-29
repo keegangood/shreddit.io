@@ -11,8 +11,8 @@ let instrumentInput = document.querySelector('#instrument-input'),
     scalesAndChordsSection = document.querySelector('.scale-selects'),
     progressionBuilderSection = document.querySelector('.progression-builder');
 
-let instruments,
-    instrument,
+let instrumentNames,
+    instrumentName,
     tunings,
     tuning,
     option,
@@ -27,16 +27,16 @@ let instruments,
 // window.addEventListener('load', () => {
     let neck = new InstrumentNeck('guitar', 'standard', 0, 13);
 
-    instruments = neck.getInstrumentTunings('all');
+    instrumentNames = neck.getInstrumentTunings('all');
     tunings = neck.getInstrumentTunings('guitar');
 
 
-    for(let i in instruments){
-        instrument = instruments[i]; 
+    for(let i in instrumentNames){
+        instrumentName = instrumentNames[i]; 
 
         option = document.createElement('option');
-        option.value = instrument;
-        option.innerText = `${instrument[0].toUpperCase()}${instrument.substring(1)}`;
+        option.value = instrumentName;
+        option.innerText = `${instrumentName[0].toUpperCase()}${instrumentName.substring(1)}`;
 
         instrumentInput.append(option);
 

@@ -142,12 +142,11 @@ stopButton.addEventListener('click', () => {
 
 
 let instrument = SampleLibrary.load({
-    instruments: 'cello', //['piano', 'bass-electric', 'bassoon', 'cello', 'clarinet', 'contrabass', 'flute', 'french-horn', 'guitar-acoustic', 'guitar-electric','guitar-nylon', 'harmonium', 'harp', 'organ', 'saxophone', 'trombone', 'trumpet', 'tuba', 'violin', 'xylophone'],
+    instruments: 'piano', //['piano', 'bass-electric', 'bassoon', 'cello', 'clarinet', 'contrabass', 'flute', 'french-horn', 'guitar-acoustic', 'guitar-electric','guitar-nylon', 'harmonium', 'harp', 'organ', 'saxophone', 'trombone', 'trumpet', 'tuba', 'violin', 'xylophone'],
     baseUrl: "tonejs-instruments/samples/",
     minify: true,
 });
 
-console.log(instrument);
 
 Tone.Buffer.on('load', function(){
     // instruments.release = .3;

@@ -3,8 +3,8 @@ let progressionKeyInput = document.querySelector('.progression-builder #key-inpu
     compatibleScaleSelect = document.querySelector('#compatible-scales'),
     progressionItemDeleteButtons = document.querySelectorAll('.progression-builder .delete-button'),
     progressionAddButton = document.querySelector('.progression-builder .add-button'),
-    playButton = document.querySelector('.play-button');
-
+    playButton = document.querySelector('.play-button'),
+    pauseButton = document.querySelector('.pause-button');
     
 const fullScaleNames = {
     'aeolian'           :'Aeolian',
