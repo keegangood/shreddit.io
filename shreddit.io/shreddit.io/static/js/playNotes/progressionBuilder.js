@@ -197,7 +197,7 @@ const compileChordScaleObject = () => {
 
 const compileProgression = objects => {
 
-    console.log(objects);
+    // console.log(objects);
     
     let progression = {},
         chord,
@@ -224,7 +224,7 @@ const compileProgression = objects => {
 
     progression['rhythm'] = [];
 
-    console.log('progression: ', progression);
+    // console.log('progression: ', progression);
     
 }
 

@@ -149,6 +149,8 @@ let instrument = SampleLibrary.load({
 
 
 Tone.Buffer.on('load', function(){
+    console.log('loaded');
+    
     // instruments.release = .3;
     instrument.toMaster();
     // instrument.triggerAttackRelease(["A2","C#3","E3"], '2n', 1);

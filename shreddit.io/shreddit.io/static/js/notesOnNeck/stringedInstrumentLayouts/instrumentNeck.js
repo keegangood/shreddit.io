@@ -178,11 +178,11 @@ class InstrumentNeck {
             }
         }
 
-        console.log(`${this.compatibleScales.length} compatible scales found for ${this.curKey.scientific().toString().slice(0,-1)}${this.chordName}`);
+        // console.log(`${this.compatibleScales.length} compatible scales found for ${this.curKey.scientific().toString().slice(0,-1)}${this.chordName}`);
         
-        for(let x in this.compatibleScales){
-            console.log(`key: ${this.compatibleScales[x].key}, scale: ${this.compatibleScales[x].name}`);
-        }
+        // for(let x in this.compatibleScales){
+            // console.log(`key: ${this.compatibleScales[x].key}, scale: ${this.compatibleScales[x].name}`);
+        // }
     }
 
     placeNoteMarkers(){

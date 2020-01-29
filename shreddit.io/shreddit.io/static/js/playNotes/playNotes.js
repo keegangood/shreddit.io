@@ -1,18 +1,23 @@
 
 
-const playNotes = () => {
 
+
+console.log(Tone.Buffer);
+
+
+
+const playNotes = () => {
     let instrument = SampleLibrary.load({
         instruments: 'piano', //['piano', 'bass-electric', 'bassoon', 'cello', 'clarinet', 'contrabass', 'flute', 'french-horn', 'guitar-acoustic', 'guitar-electric','guitar-nylon', 'harmonium', 'harp', 'organ', 'saxophone', 'trombone', 'trumpet', 'tuba', 'violin', 'xylophone'],
-        baseUrl: "tonejs-instruments/samples/",
+        baseUrl: "http://localhost:8000/static/js/playNotes/tonejs-instruments/samples/",
         minify: true,
     });
-
-    Tone.Buffer.on('load', () => {
-        console.log('called');
-        
+    
+    Tone.Buffer.on('load', function(){
+        console.log("called");
         instrument.toMaster();
-        instrument.triggerAttackRelease(['C','E','G','B'], '8n');
+        instrument.triggerAttackRelease(['C4','E4','G4','B4'], '8n');
+    
     })
 }
 
@@ -21,6 +26,7 @@ playButton.addEventListener('click', () => {
 
     compileProgression(pairs);
     playNotes();
+    Tone.Transport.start();
 })
 
 
