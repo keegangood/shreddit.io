@@ -9,7 +9,8 @@ let instrumentInput = document.querySelector('#instrument-input'),
     exploreModeInput = document.querySelector('#explore-mode-input'),
     tuningInput = document.querySelector('#tuning-input'),
     scalesAndChordsSection = document.querySelector('.scale-selects'),
-    progressionBuilderSection = document.querySelector('.progression-builder');
+    progressionBuilderSection = document.querySelector('.progression-builder'),
+    progressionInfo = document.querySelector('.progression-info');
 
 let instrumentNames,
     instrumentName,
@@ -86,17 +87,24 @@ const updateNoteMarkers = () => {
         neck.markedNotes = neck.scale.simple();
 
     } else if(neck.scaleOrChord == 'chord'){
+        // console.log(neck);
+
         chordName = chordQualityInput.value;
         neck.scale = neck.curKey.chord(chordName).voicing();//.toString().split(',');
         neck.markedNotes = neck.curKey.chord(chordName).simple();
+
         neck.chordName = chordName;
         neck.findCompatibleScales();
+
+
     }
 
     neck.removeNoteMarkers();
     neck.placeNoteMarkers();
 
 }
+
+
 // Update instrument neck 
 // when input selection changes
 const updateInstrument = () => {
@@ -156,8 +164,10 @@ const updateNoteLegend = () => {
         intervals,
         displayType = noteLegendType.value;
 
-    while(noteLegend.hasChildNodes()){
-        noteLegend.removeChild(noteLegend.lastChild);
+    if(noteLegend.hasChildNodes()){
+        while(noteLegend.hasChildNodes()){
+            noteLegend.removeChild(noteLegend.lastChild);
+        }
     }
 
     if(neck.scaleOrChord == 'scale'){
@@ -168,32 +178,40 @@ const updateNoteLegend = () => {
         intervals = neck.scale.toString().split(',');
     }
 
-    for(i in notes){
 
-        noteLegendMarker = document.createElement('div');
-        noteLegendMarker.classList.add('note-legend-marker');
+    // console.log('scaleOrChord: ',neck.scaleOrChord);
+    // console.log('markedNotes: ', neck.markedNotes);
+    
 
-        noteName = notes[i];
-        interval = intervals[i];
+    if(notes){
+        for(i in notes){
 
-        noteLegendMarker.dataset.noteName = noteName;
-        noteLegendMarker.dataset.interval = interval;
+            noteLegendMarker = document.createElement('div');
+            noteLegendMarker.classList.add('note-legend-marker');
 
-        noteLegendMarker.style.backgroundColor = 
-            'var(--' + teoria.interval(interval).simple() + '-color)';
+            noteName = notes[i];
+            interval = intervals[i];
 
-        if(displayType == 'intervals'){
-            noteLegendMarker.innerText = interval;
-        } else {
-            noteLegendMarker.innerText = noteName[0].toUpperCase() + noteName.substring(1, noteName.length);
+            noteLegendMarker.dataset.noteName = noteName;
+            noteLegendMarker.dataset.interval = interval;
+
+            noteLegendMarker.style.backgroundColor = 
+                'var(--' + teoria.interval(interval).simple() + '-color)';
+
+            if(displayType == 'intervals'){
+                noteLegendMarker.innerText = interval;
+            } else {
+                noteLegendMarker.innerText = noteName[0].toUpperCase() + noteName.substring(1, noteName.length);
+            }
+            noteLegend.append(noteLegendMarker);
         }
-        noteLegend.append(noteLegendMarker);
     }
 }
 
+
 const updateScaleOrChordInfo = () => {
     keyDisplay.innerText = keyInput.value;
-    
+
     if(neck.scaleOrChord == 'scale'){
         scaleNameDisplay.innerText = scaleInput.options[scaleInput.selectedIndex].innerText;
     } else if(neck.scaleOrChord == 'chord'){
@@ -211,16 +229,34 @@ updateNoteLegend();
 const changeExploreMode = () => {
     exploreMode = exploreModeInput.value;
 
+    // console.log("exploreMode: ", exploreMode);
+
+
     if(exploreMode == 'progression-builder'){
         scalesAndChordsSection.classList.add('hide');
         progressionBuilderSection.classList.remove('hide');
-        neck.scale = '';
-        neck.markedNotes = '';
+        progressionInfo.classList.remove('hide');
+        neck.scale                 = '';
+        neck.markedNotes           = '';
+        keyDisplay.innerText       = '';
+        scaleNameDisplay.innerText = '';
+
         neck.removeNoteMarkers();
         removeChildren(noteLegend);
-        keyDisplay.innerText = '';
-        scaleNameDisplay.innerText = '';
-    } else {
+
+    } else if(exploreMode == 'scales-and-chords') {
+
+        progressionInfo.classList.add('hide');
+        
+        neck.curKey       = teoria.note(keyInput.value);
+        neck.scale        = neck.curKey.scale(scaleInput.value);
+        neck.markedNotes  = neck.scale.simple();
+        
+        keyDisplay.innerText       = keyInput.options[keyInput.selectedIndex].innerText;
+        scaleNameDisplay.innerText = scaleInput.options[scaleInput.selectedIndex].innerText;
+
+        neck.placeNoteMarkers();
+
         scalesAndChordsSection.classList.remove('hide');
         progressionBuilderSection.classList.add('hide');
     }
@@ -237,7 +273,6 @@ instrumentInput.addEventListener('change', function(){
     updateTunings(newInstrument);
     updateInstrument();
     updateNoteLegend();
-    
 });
 
 
@@ -248,10 +283,14 @@ tuningInput.addEventListener('change', function(){
 
 
 scaleInput.addEventListener('change', () => {
+    console.log(neck);
+
     neck.scaleOrChord = 'scale';
     updateNoteMarkers();
     updateNoteLegend();
     updateScaleOrChordInfo();
+    console.log(neck);
+
 });
 
 
@@ -259,20 +298,28 @@ keyInput.addEventListener('change', () => {
     updateNoteMarkers();
     updateNoteLegend();
     updateScaleOrChordInfo();
-
 });
 
 chordQualityInput.addEventListener('change', () => {
+    console.log(neck);
+
     neck.scaleOrChord = 'chord';
     updateNoteMarkers();
     updateNoteLegend();
     updateScaleOrChordInfo();
-    updateCompatibleScales();
+    
+    if(exploreMode == 'progression-builder'){
+        updateCompatibleScales();
+    }
+    console.log(neck);
+
 });
 
 
 noteLegendType.addEventListener('change', () => {
     updateNoteLegend();
+    // console.log(neck);
+
 });
 
 exploreModeInput.addEventListener('change', () => {
