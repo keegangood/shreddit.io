@@ -122,7 +122,11 @@ progressionAddButton.addEventListener('click', () => {
 playButton.addEventListener('click', () => {
     let pairs = compileChordScaleObject();
 
-    compileProgression(pairs);
+    let progression = compileProgression(pairs);
+
+    console.log(`progression: ${progression}`);
+    
+    playNotes(progression);
 })
 
 updateCompatibleScales();
@@ -161,12 +165,17 @@ const compileChordScaleObject = () => {
         progressionItem,
         chordKey,
         chordQuality,
+        chordNotes,
         scaleKey,
         scaleName,
         chordScaleObject = {},
         chordScaleObjects = [];
 
+        console.log(progressionItems.length);
+
+
     for(let i=0; i<progressionItems.length; i++){
+
         chordScaleObject = {}
         progressionItem = progressionItems[i];
 
@@ -175,11 +184,16 @@ const compileChordScaleObject = () => {
         scaleKey = progressionItem.dataset.scaleKey;
         scaleName = progressionItem.dataset.scaleName;
 
+        chordNotes = teoria.note(chordKey).chord(chordQuality).notes();
+        for(let i in chordNotes){
+            console.log(`note: ${chordNotes[i]}`);
+        }
+
         chordScaleObject['chord'] = 
             {
                 'key':     chordKey, 
                 'quality': chordQuality,
-                'notes':   teoria.note(chordKey).chord(chordQuality).simple(),
+                'notes':   teoria.note(chordKey).chord(chordQuality).notes(),
             };
         chordScaleObject['scale'] = 
             {
@@ -211,6 +225,9 @@ const compileProgression = objects => {
         obj = objects[i];
 
         chord = obj.chord.notes;
+        for(let j in chord){
+            chord[j] = chord[j].scientific();
+        }
 
         chordLoop.push(
             {
@@ -224,7 +241,7 @@ const compileProgression = objects => {
 
     progression['rhythm'] = [];
 
-    // console.log('progression: ', progression);
+    return progression
     
 }
 
