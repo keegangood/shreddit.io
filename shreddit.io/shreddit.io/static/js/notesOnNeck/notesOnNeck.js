@@ -283,13 +283,13 @@ tuningInput.addEventListener('change', function(){
 
 
 scaleInput.addEventListener('change', () => {
-    console.log(neck);
+    // console.log(neck);
 
     neck.scaleOrChord = 'scale';
     updateNoteMarkers();
     updateNoteLegend();
     updateScaleOrChordInfo();
-    console.log(neck);
+    // console.log(neck);
 
 });
 
@@ -301,7 +301,7 @@ keyInput.addEventListener('change', () => {
 });
 
 chordQualityInput.addEventListener('change', () => {
-    console.log(neck);
+    // console.log(neck);
 
     neck.scaleOrChord = 'chord';
     updateNoteMarkers();
@@ -311,7 +311,7 @@ chordQualityInput.addEventListener('change', () => {
     if(exploreMode == 'progression-builder'){
         updateCompatibleScales();
     }
-    console.log(neck);
+    // console.log(neck);
 
 });
 

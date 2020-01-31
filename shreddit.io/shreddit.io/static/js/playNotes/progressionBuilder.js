@@ -124,7 +124,7 @@ playButton.addEventListener('click', () => {
 
     let progression = compileProgression(pairs);
 
-    console.log(`progression: ${progression}`);
+    // console.log(`progression: ${progression}`);
     
     playNotes(progression);
 })
@@ -171,7 +171,7 @@ const compileChordScaleObject = () => {
         chordScaleObject = {},
         chordScaleObjects = [];
 
-        console.log(progressionItems.length);
+        // console.log(progressionItems.length);
 
 
     for(let i=0; i<progressionItems.length; i++){
@@ -185,9 +185,9 @@ const compileChordScaleObject = () => {
         scaleName = progressionItem.dataset.scaleName;
 
         chordNotes = teoria.note(chordKey).chord(chordQuality).notes();
-        for(let i in chordNotes){
-            console.log(`note: ${chordNotes[i]}`);
-        }
+        // for(let i in chordNotes){
+        //     console.log(`note: ${chordNotes[i]}`);
+        // }
 
         chordScaleObject['chord'] = 
             {
@@ -216,6 +216,8 @@ const compileProgression = objects => {
     let progression = {},
         chord,
         chordLoop,
+        chordKey,
+        chordQuality,
         obj;
 
     progression['chordScaleObjects'] = objects;
@@ -224,16 +226,26 @@ const compileProgression = objects => {
     for(let i=0; i<objects.length;i++){
         obj = objects[i];
 
+        chordKey     = obj.chord.key;
+        chordQuality = obj.chord.quality;
+        
         chord = obj.chord.notes;
         for(let j in chord){
             chord[j] = chord[j].scientific();
         }
 
+        scaleKey  = obj.scale.key;
+        scaleName = obj.scale.name;
+
         chordLoop.push(
             {
-                'time':     `${i*2}`,
-                'chord':    chord,
-                'velocity': 0.1,
+                'time'        : `${i*2}`,
+                'chord'       :  chord,
+                'chordKey'    :  chordKey,
+                'chordQuality':  chordQuality,
+                'scaleKey'    :  scaleKey,
+                'scaleName'   :  scaleName,
+                'velocity'    :  0.1,
             }
         ) 
     }

@@ -1,7 +1,23 @@
 
 
 
+const updateDisplay = data => {
+    console.log(data);
+    
+    
 
+    let chordKey = data.chordKey,
+        chord    = data.chordQuality,
+        scaleKey = teoria.note(data.scaleKey),
+        scale    = scaleKey.scale(data.scaleName);
+
+        neck.scaleOrChord = 'scale';
+        neck.scale =         scale;
+        neck.markedNotes =   scale.simple();
+
+        neck.removeNoteMarkers();
+        neck.placeNoteMarkers();
+}
 
 
 
@@ -16,17 +32,21 @@ const playNotes = (progressionObject) => {
 
     Tone.Buffer.on('load', (data=progressionObject) => {
         
-        console.log(`data: `, data);
+        // console.log(`data: `, data);
 
         instrument.toMaster();
 
         // instrument.triggerAttack(data.chordLoop[0].chord, '2n');
         chordLoop = data.chordLoop;
 
-        const chordPart = new Tone.Part(function(time, event){
+        const chordPart = new Tone.Part(function(time, event, progObject=data){
             instrument.triggerAttackRelease(event.chord, '1m', time, event.velocity);
             instrument.humanize = true;
-            console.log(event);
+
+            Tone.Draw.schedule(function(data=event){
+                updateDisplay(data);
+            }, time)
+
         }, chordLoop).start(1);
     
         chordPart.loop = true;
