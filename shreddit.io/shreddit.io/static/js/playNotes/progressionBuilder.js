@@ -254,7 +254,6 @@ const compileProgression = objects => {
     progression['rhythm'] = [];
 
     return progression
-    
 }
 
 

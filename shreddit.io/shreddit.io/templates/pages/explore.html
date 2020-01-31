@@ -338,6 +338,15 @@
                         <div class="current-progression">
                             <div class="row progression-labels">
                                 <h2>Current Progression:</h2>
+                                {% if user.is_authenticated %}
+                                    <form action="{% url 'save-progression' %}" method="POST"></form>
+                                        
+                                        <div class="save-button blue-grey darken-2 blue-grey-text text-lighten-3">Save</div>
+
+                                {% else %}
+                                    <p><a href="{% url 'login' %}">Login</a><br/>to save</p>
+                                
+                                {% endif %}
                                 <div class="col s5 chord-label">
                                     <h4>Chord:</h4>
                                 </div>
@@ -353,7 +362,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="save-progression"></div>
             </div>
         </div>
 
