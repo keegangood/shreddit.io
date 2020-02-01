@@ -1,11 +1,15 @@
+// axios.defaults.xsrfCookieName = 'csrftoken';
+// axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+
 let progressionKeyInput = document.querySelector('.progression-builder #key-input'),
     progressionChordQuality = document.querySelector('.progression-builder #chord-quality'),
     compatibleScaleSelect = document.querySelector('#compatible-scales'),
     progressionItemDeleteButtons = document.querySelectorAll('.progression-builder .delete-button'),
     progressionAddButton = document.querySelector('.progression-builder .add-button'),
     playButton = document.querySelector('.play-button'),
-    pauseButton = document.querySelector('.pause-button');
-    
+    pauseButton = document.querySelector('.pause-button'),
+    saveButton = document.querySelector('.save-button');
+
 const fullScaleNames = {
     'aeolian'           :'Aeolian',
     'blues'             :'Blues',
@@ -107,27 +111,17 @@ progressionChordQuality.addEventListener('change', () => {
     updateCompatibleScales();
 });
 
-// delete buttons for progression items X
-for(let i=0; i<progressionItemDeleteButtons.length; i++){
-    progressionItemDeleteButtons[i].addEventListener('click', target => {
-        target.target.parentElement.parentElement.remove();
-    });
-}
+// // delete buttons for progression items X
+// for(let i=0; i<progressionItemDeleteButtons.length; i++){
+//     progressionItemDeleteButtons[i].addEventListener('click', target => {
+//         target.target.parentElement.parentElement.remove();
+//     });
+// }
 
 // button to add new items to progression
 progressionAddButton.addEventListener('click', () => {
     addProgressionItem();
 });
-
-playButton.addEventListener('click', () => {
-    let pairs = compileChordScaleObject();
-
-    let progression = compileProgression(pairs);
-
-    // console.log(`progression: ${progression}`);
-    
-    playNotes(progression);
-})
 
 updateCompatibleScales();
 
@@ -256,34 +250,46 @@ const compileProgression = objects => {
     return progression
 }
 
+const saveProgression = (progression, url) => {
 
-// progression = {
-//     'chordScalePairs':[
-//         {
-//             'chord': {
-//                 'key':'C',
-//                 'quality':'Cmaj7',
-//             },
-//             'scale': {
-//                 'key':'C',
-//                 'name':'ionian',
-//             }
-//         },
-//         {
-//             'chord': {
-//                 'key':'A',
-//                 'quality':'m6',
-//             },
-//             'scale': {
-//                 'key':'A',
-//                 'name':'Aeolian',
-//             }
-//         },
-//     ], // end chordScalePairs
-//     'chordLoop': [],
-//     'rhythm': {
-//         'kickLoop':[],
-//         'snareLoop':[],
-//         'hatLoop':[],
-//     },
-// }
+    
+    console.log(document);
+    
+}
+
+playButton.addEventListener('click', () => {
+    let pairs = compileChordScaleObject();
+    let progression = compileProgression(pairs);
+    
+    playNotes(progression);
+})
+
+saveButton.addEventListener('click', () => {
+    let pairs = compileChordScaleObject();
+    let progression = compileProgression(pairs);
+
+    url = '../save_progression/';
+
+    console.log(document.cookie);
+    
+
+    axios({
+        method: 'POST',
+        url: url,
+        data: {
+            progression: progression,
+        },
+        xsrfHeaderName: 'X-CSRFToken',
+    }).then(result => {
+        console.log(result.config.data);
+    }).catch(error => {
+        console.error(error);
+        
+    })
+
+    // console.log(document.cookie);
+    // console.log(url);
+    
+    // saveProgression(progression, url);
+    
+})

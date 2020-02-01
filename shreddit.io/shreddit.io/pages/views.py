@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib import messages
 from chord_progressions.models import ChordProgression
+# from django.contrib.
 
 
 def home(request):
@@ -12,4 +13,5 @@ def explore(request):
 
 def save_progression(request):
     if(request.method == 'POST'):
-        pass
+        messages.info(request, 'Progression saved!')
+        return redirect('pages-home')

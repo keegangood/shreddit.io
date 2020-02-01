@@ -1,16 +1,16 @@
 
-let instrumentInput = document.querySelector('#instrument-input'),
-    scaleInput = document.querySelector('#scale-formula-input'),
-    keyInput = document.querySelector('#key-input'),
-    chordQualityInput = document.querySelector('#chord-quality'),
-    noteLegendType = document.querySelector('#note-legend-type'),
-    scaleNameDisplay = document.querySelector('.scale-name'),
-    keyDisplay = document.querySelector('.scale-key'),
-    exploreModeInput = document.querySelector('#explore-mode-input'),
-    tuningInput = document.querySelector('#tuning-input'),
-    scalesAndChordsSection = document.querySelector('.scale-selects'),
+let instrumentInput           = document.querySelector('#instrument-input'),
+    scaleInput                = document.querySelector('#scale-formula-input'),
+    keyInput                  = document.querySelector('#key-input'),
+    chordQualityInput         = document.querySelector('#chord-quality'),
+    noteLegendType            = document.querySelector('#note-legend-type'),
+    scaleNameDisplay          = document.querySelector('.scale-name'),
+    keyDisplay                = document.querySelector('.scale-key'),
+    exploreModeInput          = document.querySelector('#explore-mode-input'),
+    tuningInput               = document.querySelector('#tuning-input'),
+    scalesAndChordsSection    = document.querySelector('.scale-selects'),
     progressionBuilderSection = document.querySelector('.progression-builder'),
-    progressionInfo = document.querySelector('.progression-info');
+    progressionInfo           = document.querySelector('.progression-info');
 
 let instrumentNames,
     instrumentName,

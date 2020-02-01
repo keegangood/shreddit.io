@@ -134,3 +134,5 @@ LOGOUT_REDIRECT_URL = 'pages-home'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+CSRF_COOKIE_NAME = "XSRF-TOKEN" 
