@@ -6,11 +6,13 @@ body {
     color: #19252b;
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 2rem;
+
 }
 
 .main-content {
-    min-height: 100vh;
     left: 0;
+    margin: 0;
+    min-height: 100vh;
     overflow-x: hidden;
     position: relative;
     top: 0;
@@ -28,7 +30,6 @@ h1,h2 {
     padding: 3rem;
     text-shadow: 0 0 10px #203138;
     transition: color .5s ease;
-
 }
 
 h4 {

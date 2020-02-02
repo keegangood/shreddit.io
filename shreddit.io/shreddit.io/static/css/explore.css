@@ -24,8 +24,9 @@
 }
 
 .note-legend-horizontal {
+    align-items: center;
     display: flex;
-    justify-content: center;
+    flex-direction: row;
 }
 
 .note-legend-marker {
@@ -206,4 +207,11 @@
     height: 100%;
     justify-content: center;
     text-align: center;
+}
+
+@media only screen and (min-width: 768px){
+    .note-legend-markers {
+        display: flex;
+        flex-direction: row;
+    }
 }

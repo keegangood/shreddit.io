@@ -84,21 +84,25 @@
 
 /* larger screens */
 @media only screen and (min-width: 768px){
+    .instrument-row {
+        display: flex;
+        justify-content: center;
+    }
+    
     #instrument-container {
         align-items: center;
         display: flex;
         flex-direction: column;
         height: 50vh;
-        margin: 25px;
-        max-height: 400px;
-        max-width: 100%;
-        width: 75%;
+        /* margin: 25px; */
+        max-width: 90%;
+        width: 80%;
     }
 
     .string {
         background-color: #eaeaea;
         display: flex;
-        height: 10vh;
+        height: 7vh;
         width: 90%;
     }
     

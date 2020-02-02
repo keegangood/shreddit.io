@@ -1,0 +1,35 @@
+<div class="row nav blue-grey darken-2">
+    <div class="col l2">
+        <h1>Shreddit</h1>
+    </div>
+    <div class="col l2 offset-l6 nav-links">
+        <h4 class="nav-link">
+            <a href="{% url 'pages-home' %}">Home</a>
+        </h4>
+        <h4 class="nav-link">
+            <a href="{% url 'pages-explore' %}">Explore</a>
+        </h4>
+    </div>
+    <div class="col l2 profile-links">
+        {% if user.is_authenticated %}
+            <div class="username-display nav-link">
+                <a href="{% url 'profile' %}">
+                    {{ user.username }}
+                </a>
+            </div>
+            <div class="avatar">
+                <a href="{% url 'profile' %}">
+                    <img src="{{ user.profile.avatar.url }}" 
+                        alt="{{ user.username }}\'s avatar">
+                </a>
+            </div>
+        {% else %}
+            <div class="nav-link">
+                <a href="{% url 'login' %}">Login</a>
+            </div>
+            <div class="nav-link">
+                <a href="{% url 'signup' %}">Sign up</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
