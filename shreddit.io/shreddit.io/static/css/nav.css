@@ -12,8 +12,36 @@
 
 .nav {
     align-items: center;
+    box-shadow: 0 10px 10px #263238;
     display: flex;
     padding: 5px;
+}
+
+/* Settings toggle icon*/
+.nav .settings-icon {
+    align-items: center;
+    border: 2px solid #263238;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #263238;
+    display: flex;
+    height: 5vh;
+    justify-content: center;
+    margin: 1rem 0;
+    max-height: 5vw;
+    max-width: 5vh;
+    transition: all 1s ease;
+    width: 5vw;
+
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.nav .settings-icon div {
+    transition: 1s transform ease;
+}
+
+.nav .settings-icon-active div{
+    transform: rotate(180deg);
 }
 
 .nav-links {

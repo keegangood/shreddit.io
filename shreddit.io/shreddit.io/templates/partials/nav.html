@@ -2,7 +2,16 @@
     <div class="col l2">
         <h1>Shreddit</h1>
     </div>
-    <div class="col l2 offset-l6 nav-links">
+
+    <div class="col l1">
+        {% if request.path == '/explore/' %}
+        <div class="settings-icon blue-grey darken-3 blue-grey-text text-lighten-2">
+            <div>&#x26ED;</div>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="col l2 offset-l5 nav-links">
         <h4 class="nav-link">
             <a href="{% url 'pages-home' %}">Home</a>
         </h4>

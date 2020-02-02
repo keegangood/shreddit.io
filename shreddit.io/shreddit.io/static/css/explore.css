@@ -23,7 +23,7 @@
     padding-bottom: 5vh;
 }
 
-.note-legend-horizontal {
+.note-legend-horiztal .note-markers {
     align-items: center;
     display: flex;
     flex-direction: row;
@@ -210,8 +210,14 @@
 }
 
 @media only screen and (min-width: 768px){
+    #scales-and-chords-content {
+        padding-top: 10vh;
+    }
+    
     .note-legend-markers {
         display: flex;
         flex-direction: row;
     }
+
+
 }
