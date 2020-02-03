@@ -1,16 +1,28 @@
 
-let instrumentInput           = document.querySelector('#instrument-input'),
-    scaleInput                = document.querySelector('#scale-formula-input'),
-    keyInput                  = document.querySelector('#key-input'),
-    chordQualityInput         = document.querySelector('#chord-quality'),
-    noteLegendType            = document.querySelector('#note-legend-type'),
-    scaleNameDisplay          = document.querySelector('.scale-name'),
-    keyDisplay                = document.querySelector('.scale-key'),
-    exploreModeInput          = document.querySelector('#explore-mode-input'),
-    tuningInput               = document.querySelector('#tuning-input'),
-    scalesAndChordsSection    = document.querySelector('.scale-selects'),
-    progressionBuilderSection = document.querySelector('.progression-builder'),
-    progressionInfo           = document.querySelector('.progression-info');
+let instrumentInput
+            = document.querySelector('#instrument-input'),
+    scaleInput                 
+            = document.querySelector('#scale-formula-input'),
+    keyInput                   
+            = document.querySelector('#key-input'),
+    chordQualityInput          
+            = document.querySelector('#chord-quality'),
+    noteLegendType             
+            = document.querySelector('#note-legend-type'),
+    scaleNameDisplay           
+            = document.querySelector('.scale-name'),
+    keyDisplay                 
+            = document.querySelector('.scale-key'),
+    exploreModeInput
+            = document.querySelector('#explore-mode-input'),
+    tuningInput
+            = document.querySelector('#tuning-input'),
+    scalesAndChordsSection     
+            = document.querySelector('.scale-selects'),
+    progressionBuilderSection  
+            = document.querySelector('.progression-builder'),
+    progressionInfo            
+            = document.querySelector('.progression-info');
 
 let instrumentNames,
     instrumentName,
@@ -50,6 +62,9 @@ let instrumentNames,
     // update input options to
     // selected instrument's tunings
     const updateTunings = (newInstrument) => {
+
+        console.log(newInstrument);
+        
 
         while(tuningInput.hasChildNodes()){
             tuningInput.removeChild(tuningInput.lastChild);
@@ -130,11 +145,13 @@ updateInstrument();
 
 // update neck and change note legend orientation
 // when screen size changes
-let windowWidthChange = mediaQuery => {
+let windowWidthChange = mediaQuery => {    
+
     if(mediaQuery.matches){
         neck.orientation = 'horizontal';
         noteLegend = document.querySelector('.note-legend-horizontal .note-legend-markers')
-        updateInstrument();
+        updateInstrument(); 
+        
     } else {
         neck.orientation = 'vertical';
         noteLegend = document.querySelector('.note-legend-vertical .note-legend-markers')
@@ -147,12 +164,6 @@ const mediaQuery = window.matchMedia("(min-width: 768px)");
 mediaQuery.addListener(windowWidthChange);
 windowWidthChange(mediaQuery);
 
-// remove all children nodes
-const removeChildren = parent => {
-    while(parent.hasChildNodes()){
-        parent.removeChild(parent.lastChild);
-    }
-}
 
 // clear old legend markers 
 // and generate new ones
@@ -226,11 +237,19 @@ updateScaleOrChordInfo();
 
 updateNoteLegend();
 
+
+// remove all children nodes
+const removeChildren = parent => {
+    while(parent.hasChildNodes()){
+        parent.removeChild(parent.lastChild);
+    }
+}
 const changeExploreMode = () => {
     exploreMode = exploreModeInput.value;
 
     // console.log("exploreMode: ", exploreMode);
-
+    // console.log(exploreModeInput);
+    
 
     if(exploreMode == 'progression-builder'){
         scalesAndChordsSection.classList.add('hide');
@@ -324,6 +343,8 @@ noteLegendType.addEventListener('change', () => {
 
 exploreModeInput.addEventListener('change', () => {
     changeExploreMode();
+    // console.log("hello world");
+    
 });
 
 

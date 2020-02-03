@@ -1,4 +1,8 @@
 .nav {
+    align-items: center;
+    box-shadow: 0 10px 10px #263238;
+    display: flex;
+    padding: 5px;
     position: fixed;
     top: 0;
     width: 100vw;
@@ -11,10 +15,7 @@
 }
 
 .nav {
-    align-items: center;
-    box-shadow: 0 10px 10px #263238;
-    display: flex;
-    padding: 5px;
+
 }
 
 /* Settings toggle icon*/
@@ -86,3 +87,44 @@
     width: 100%;
 }
 
+/* Settings dropdown */
+.nav-settings {
+    align-items: center;
+    box-shadow: 0 10px 10px #203138;
+    display: flex;
+    flex-direction: column;
+    left: 17vw;
+    padding: 15px 0;
+    position: absolute;
+    top: 8vh;
+    transition: top 1s ease-in-out;
+    width: 55vw;
+    z-index: 1;
+}
+
+.nav-settings .row {
+    display: flex;
+    width: 80%;
+}
+.nav-settings .instrument-inputs {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%; 
+}
+
+.nav-settings .nav-divider{
+    align-items: center;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    height: 3px;
+    margin: 30px 0;
+    width: 100%;
+}
+
+.nav-settings .nav-divider span {
+    font-size: 5rem;
+    margin: 0 3px;
+}

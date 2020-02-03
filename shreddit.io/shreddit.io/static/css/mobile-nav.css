@@ -214,12 +214,12 @@
 .settings-menu-content {
     opacity: 1;
     position: relative;
-    top: -20vh;
+    top: -30vh;
     transition: transform .1s ease, opacity 2s ease;
     transition-delay: .1s;
 }
 
-.instrument-inputs {
+.settings-menu-content .instrument-inputs {
     align-items: center;
     display: flex;
     flex-direction: column;

@@ -36,6 +36,7 @@ const fullScaleNames = {
 
 
 
+
 // DOM Manipulations
 const updateCompatibleScales = () => {
 

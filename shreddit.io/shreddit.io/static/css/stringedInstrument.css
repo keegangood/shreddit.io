@@ -85,8 +85,6 @@
 /* larger screens */
 @media only screen and (min-width: 768px){
     .instrument-row {
-        display: flex;
-        justify-content: center;
     }
     
     #instrument-container {
@@ -94,16 +92,15 @@
         display: flex;
         flex-direction: column;
         height: 50vh;
-        /* margin: 25px; */
         max-width: 90%;
-        width: 80%;
+        width: 85%;
     }
 
     .string {
         background-color: #eaeaea;
         display: flex;
         height: 7vh;
-        width: 90%;
+        width: 100%;
     }
     
     .invisible-string {

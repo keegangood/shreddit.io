@@ -45,11 +45,7 @@ settingsIcon.addEventListener('click', () => {
     menu.classList.toggle('mobile-menu-active');
 });
 
-if(messageCloseX){
-    messageCloseX.addEventListener('click', () => {
-        messageCloseX.parentElement.remove();
-    });
-}
+
 
 document.addEventListener('DOMContentLoaded', function() {
     
