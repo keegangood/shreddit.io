@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import  UserSignupForm, UserUpdateForm, ProfileUpdateForm
 from chord_progressions.models import ChordProgression
 from django.contrib.auth.models import User
+import json
 
 def signup(request):
     if request.method == 'POST':
@@ -39,7 +40,7 @@ def profile(request):
         #ChordProgression.objects.get()
         #ChordProgression.objects.get(creator=request.user)
 
-        print(f'PROGRESSIONS*** {request.user}')
+        print(f'progressions*** {progressions}')
 
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)
@@ -47,7 +48,7 @@ def profile(request):
     context = {
         'u_form':u_form,
         'p_form':p_form,
-        'progressions':progressions,
+        'progressions': progressions,
     }
     return render(request, 'users/profile.html', context)
 

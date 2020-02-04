@@ -14,12 +14,19 @@ def explore(request):
 
 def save_progression(request):
     if(request.method == 'POST'):
-        print(f'request.POST: {request.POST}')
-
-        context = {
-            'progression' : json.dumps(request.POST['progression']),
-            'chord_names' : request.POST['chord-names'],
-        }
+        if(request.POST['progression']):
+            ChordProgression.objects.create(
+                creator     = request.user,
+                progression = request.POST['progression'],
+                chord_names = request.POST['chord-names']
+            )
+        return redirect('pages-explore')
         
+        # print(f"request.POST: {request.POST['progression']}")
 
-        return render(request, 'pages/home.html', context)
+        # context = {
+        #     'progression' : json.dumps(request.POST['progression']),
+        #     'chord_names' : request.POST['chord-names'],
+        # }
+
+        # return render(request, 'pages/home.html', context)
