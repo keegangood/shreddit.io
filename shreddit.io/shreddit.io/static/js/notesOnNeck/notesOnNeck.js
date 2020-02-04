@@ -43,7 +43,6 @@ let instrumentNames,
     instrumentNames = neck.getInstrumentTunings('all');
     tunings = neck.getInstrumentTunings('guitar');
 
-
     for(let i in instrumentNames){
         instrumentName = instrumentNames[i]; 
 

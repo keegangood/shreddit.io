@@ -1,5 +1,3 @@
-// axios.defaults.xsrfCookieName = 'csrftoken';
-// axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 
 let progressionKeyInput = document.querySelector('.progression-builder #key-input'),
     progressionChordQuality = document.querySelector('.progression-builder #chord-quality'),
@@ -8,7 +6,12 @@ let progressionKeyInput = document.querySelector('.progression-builder #key-inpu
     progressionAddButton = document.querySelector('.progression-builder .add-button'),
     playButton = document.querySelector('.play-button'),
     pauseButton = document.querySelector('.pause-button'),
-    saveButton = document.querySelector('.save-button');
+    saveButton = document.querySelector('.save-button'),
+    currentProgressionData,
+    currentProgressionField = document.querySelector('#current-progression'),
+    chordNameData,
+    chordNamesField = document.querySelector('#chord-names');
+    
 
 const fullScaleNames = {
     'aeolian'           :'Aeolian',
@@ -122,6 +125,15 @@ progressionChordQuality.addEventListener('change', () => {
 // button to add new items to progression
 progressionAddButton.addEventListener('click', () => {
     addProgressionItem();
+
+    let pairs = compileChordScaleObject();
+
+    currentProgressionData = compileProgression(pairs);
+    chordNamesData = currentProgressionData['chordNames'].join(', ')
+    
+    chordNamesField.value         = chordNamesData;
+    currentProgressionField.value = JSON.stringify(currentProgressionData);
+    
 });
 
 updateCompatibleScales();
@@ -217,13 +229,16 @@ const compileProgression = objects => {
 
     progression['chordScaleObjects'] = objects;
 
-    chordLoop = [];
+    chordNames = [];
+    chordLoop  = [];
     for(let i=0; i<objects.length;i++){
         obj = objects[i];
 
         chordKey     = obj.chord.key;
         chordQuality = obj.chord.quality;
         
+        chordNames.push(`${chordKey}${chordQuality}`);
+
         chord = obj.chord.notes;
         for(let j in chord){
             chord[j] = chord[j].scientific();
@@ -234,63 +249,28 @@ const compileProgression = objects => {
 
         chordLoop.push(
             {
-                'time'        : `${i*2}`,
                 'chord'       :  chord,
                 'chordKey'    :  chordKey,
                 'chordQuality':  chordQuality,
                 'scaleKey'    :  scaleKey,
                 'scaleName'   :  scaleName,
+                'time'        : `${i*2}`,
                 'velocity'    :  0.1,
             }
         ) 
     }
-    progression['chordLoop'] = chordLoop;
+    
+    progression['chordNames'] = chordNames;
+
+    progression['chordLoop']  = chordLoop;
 
     progression['rhythm'] = [];
 
     return progression
 }
 
-const saveProgression = (progression, url) => {
-
-    
-    console.log(document);
-    
-}
-
 playButton.addEventListener('click', () => {
-    let pairs = compileChordScaleObject();
-    let progression = compileProgression(pairs);
-    
-    playNotes(progression);
+    playNotes(currentProgressionData);
 })
 
-saveButton.addEventListener('click', () => {
-    let pairs = compileChordScaleObject();
-    let progression = compileProgression(pairs);
 
-    url = '../save_progression/';
-
-    console.log(document.cookie);
-    
-
-    axios({
-        method: 'POST',
-        url: url,
-        data: {
-            progression: progression,
-        },
-        xsrfHeaderName: 'X-CSRFToken',
-    }).then(result => {
-        console.log(result.config.data);
-    }).catch(error => {
-        console.error(error);
-        
-    })
-
-    // console.log(document.cookie);
-    // console.log(url);
-    
-    // saveProgression(progression, url);
-    
-})

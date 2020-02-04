@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from chord_progressions.models import ChordProgression
-# from django.contrib.
+import json
+from django.http import HttpResponse
 
 
 def home(request):
@@ -13,5 +14,12 @@ def explore(request):
 
 def save_progression(request):
     if(request.method == 'POST'):
-        messages.info(request, 'Progression saved!')
-        return redirect('pages-home')
+        print(f'request.POST: {request.POST}')
+
+        context = {
+            'progression' : json.dumps(request.POST['progression']),
+            'chord_names' : request.POST['chord-names'],
+        }
+        
+
+        return render(request, 'pages/home.html', context)

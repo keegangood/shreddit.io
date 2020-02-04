@@ -218,9 +218,17 @@
                                 <h2>Current Progression:</h2>
                                 <div class="row">
                                     {% if user.is_authenticated %}
-                                        {% csrf_token %}
-                                        <button class="save-button blue-grey darken-2 blue-grey-text text-lighten-3">Save</button>
-                                        <!-- Trigger Axios POST request -->
+                                        <!-- <form action="{% url 'save-progression'%}" method="POST">
+                                            <button class="save-button blue-grey darken-2 blue-grey-text text-lighten-3">Save</button>
+                                        </form> -->
+
+                                    {% csrf_token %}
+                                        <form action="{% url 'save-progression' %}" method="POST">
+                                            {% csrf_token %}
+                                            <input id="current-progression" type="text" name="progression" class="">
+                                            <input id="chord-names"         type="text" name="chord-names" class="">
+                                            <input type="submit" class="save-button blue-grey darken-2 blue-grey-text text-lighten-3">Save</div>
+                                        </form>
                                     {% else %}
                                         <p><a href="{% url 'login' %}">Login</a><br/>to save</p>
                                     

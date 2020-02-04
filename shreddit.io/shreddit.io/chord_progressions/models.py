@@ -9,7 +9,6 @@ class ChordProgression(models.Model):
     created_at      = models.DateTimeField(auto_now_add=True)
     edited_at       = models.DateTimeField(null=True, blank=True)
     progression     = models.CharField(max_length=10000)
-    scales          = models.CharField(max_length=10000)
     chord_names     = models.CharField(max_length=10000)
 
     def __str__(self):
