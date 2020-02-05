@@ -43,7 +43,27 @@
             <h1>Saved Progressions</h1>
 
             {% for progression in progressions %}
-                <p>{{ progression }}</p>
+                <div class="row center">
+                    <div class="col s12 saved-progression-container">
+                        <div class="card">
+                            <div class="card-content blue-grey lighten-2">
+                                    <div class="title activator blue-grey lighten-3 text-darken-4">
+                                        <span>{{ progression|truncatechars:20 }}</span>
+                                        <i class="material-icons right">more_vert</i>
+                                    </div>
+                            </div>
+                            <div class="card-reveal blue-grey lighten-2">
+                                <div class="card-links">
+                                    <div class="card-link blue-grey darken-1">Explore</div>
+                                    <div class="card-link blue-grey darken-1">Edit</div>
+                                    <div class="card-link blue-grey darken-1">Delete</div>
+                                    <span class="card-title"><i class="material-icons right close blue-grey-text text-darken-4">close</i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
             {% empty %}
                 <p>No progressions yet</p>
             {% endfor %}

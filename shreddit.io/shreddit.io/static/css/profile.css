@@ -38,3 +38,26 @@
     height: 100%;
     width: 100%;
 }
+
+.card .title {
+    padding: 15px;
+    font-size: 2.5rem;
+}
+
+.card .card-links {
+    align-items: center;
+    display: flex;
+
+}
+
+
+
+.card .card-link {
+    margin: 2px;
+    padding: 15px;
+}
+
+.card .close {
+    margin: 0;
+    padding-left: 10px;
+}
