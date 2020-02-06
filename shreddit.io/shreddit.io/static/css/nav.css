@@ -25,16 +25,16 @@
     border-radius: 5px;
     box-shadow: 0 0 5px #263238;
     display: flex;
+    font-size: 2.8rem;
+    font-weight: bold;
     height: 5vh;
     justify-content: center;
     margin: 1rem 0;
     max-height: 5vw;
     max-width: 5vh;
+    padding: 15px;
     transition: all 1s ease;
     width: 5vw;
-
-    font-size: 3rem;
-    font-weight: bold;
 }
 
 .nav .settings-icon div {
