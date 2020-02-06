@@ -6,7 +6,7 @@
     position: absolute;
     text-align: center;
     width: 100vw;
-    z-index: 2;
+    z-index: 1;
 }
 
 .username-display h1 {
@@ -49,8 +49,6 @@
     display: flex;
 
 }
-
-
 
 .card .card-link {
     margin: 2px;

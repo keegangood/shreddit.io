@@ -129,11 +129,11 @@ progressionAddButton.addEventListener('click', () => {
     let pairs = compileChordScaleObject();
 
     currentProgressionData = compileProgression(pairs);
-    chordNamesData = currentProgressionData['chordNames'].join(', ')
-    
+    chordNamesData = currentProgressionData['chordNames'].join(' ')
+
     chordNamesField.value         = chordNamesData;
     currentProgressionField.value = JSON.stringify(currentProgressionData);
-    
+
 });
 
 updateCompatibleScales();
@@ -259,7 +259,7 @@ const compileProgression = objects => {
             }
         ) 
     }
-    
+
     progression['chordNames'] = chordNames;
 
     progression['chordLoop']  = chordLoop;
