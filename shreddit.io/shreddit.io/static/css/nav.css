@@ -56,13 +56,13 @@
     padding: 0 5px;
 }
 
-.nav-link a {
-    color: #90a4ae;
-    transition: color .3s ease-in-out;
+.nav-link a { 
+    color: #eceff1;
+    transition: color .2s ease-in-out;
 }
 
 .nav-link a:hover {
-    color: #263238;
+    color: #37474f;
 }
 
 .profile-links {

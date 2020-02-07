@@ -3,6 +3,7 @@
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    margin-top: 15vh;
     text-align: center;
     width: 100vw;
 }
@@ -23,7 +24,6 @@
 
 #profile-content .avatar{
     height: 50vh;
-    margin: 5vw;
     max-height: 50vw;
     max-width: 50vh;
     width: 50vw;
@@ -45,15 +45,20 @@
 .card .card-links {
     align-items: center;
     display: flex;
-
+    justify-content: center;
 }
 
 .card .card-link {
     margin: 2px;
-    padding: 15px;
+    padding: 10px;
 }
 
 .card .close {
     margin: 0;
-    padding-left: 10px;
+    padding-right: 15%;
+    padding-top: 5px;
+}
+
+.chord-progressions {
+    width: 100%;
 }

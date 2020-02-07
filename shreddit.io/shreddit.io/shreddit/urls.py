@@ -29,7 +29,7 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('profile/', user_views.profile, name='profile'),
     path('', include('pages.urls')),
-    path('chord-progression/', include('chord_progressions.urls')),
+    path('chord-progressions/', include('chord_progressions.urls')),
 ]
 
 if settings.DEBUG:

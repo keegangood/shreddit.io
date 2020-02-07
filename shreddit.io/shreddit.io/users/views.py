@@ -34,11 +34,7 @@ def profile(request):
             messages.success(request, f'Your account has been updated!')
             return redirect('profile')
     else:
-        # user = User.objects.get(pk=request.user.id)
         progressions = ChordProgression.objects.filter(creator=request.user)
-        #request.user
-        #ChordProgression.objects.get()
-        #ChordProgression.objects.get(creator=request.user)
 
         print(f'progressions*** {progressions}')
 
