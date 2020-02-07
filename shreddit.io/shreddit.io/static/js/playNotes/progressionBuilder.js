@@ -91,12 +91,17 @@ const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
                          'blue-grey-text',
                          'text-darken-4');
 
+    scaleName = scaleName.split(' ');
+    scaleName = scaleName.splice(0,scaleName.length).join('').toLowerCase();
+    
+    console.log(`scaleName: ${scaleName}`);
+
     newRow.innerHTML = template;
 
-    newRow.dataset.chordKey = progressionKeyInput.value.toLowerCase();
+    newRow.dataset.chordKey = chordKey.toLowerCase();
     newRow.dataset.chordQuality = chordQuality;
-    newRow.dataset.scaleKey = scaleKey;
-    newRow.dataset.scaleName = compatibleScaleSelect.options[compatibleScaleSelect.selectedIndex].value.split(' ')[1];
+    newRow.dataset.scaleKey = scaleKey.toLowerCase();
+    newRow.dataset.scaleName = scaleName;
     
     newDelete = newRow.lastChild.firstChild;
     newDelete.addEventListener('click', () => {
@@ -106,37 +111,7 @@ const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
     progressionContainer.append(newRow);
 }
 
-const displayLoadedProgression = () => {
-    
-    try {
-        let progression     = JSON.parse(loadedProgression.dataset.loadedProgression),
-            chordsAndScales = progression.chordScaleObjects,
-            chordKey, chordQuality, scaleKey, scaleName;
 
-        console.log(progression);
-        
-        for(let i=0; i<chordsAndScales.length; i++) {
-            chordKey     = chordsAndScales[i]['chord']['key'];
-            chordQuality = chordsAndScales[i]['chord']['quality'];
-            scaleKey     = chordsAndScales[i]['scale']['key'];
-            
-            scaleName    = chordsAndScales[i]['scale']['name'].title();
-
-            console.log(`chord: ${chordKey}${chordQuality}`);
-            console.log(`scale: ${scaleKey} ${scaleName}`);
-            
-            
-        }
-
-    } catch (error){
-        console.error(error, "No progression loaded.")
-        return 
-    }
-
-
-}
-
-displayLoadedProgression();
 
 progressionKeyInput.addEventListener('change', () => {
     updateCompatibleScales();
@@ -151,45 +126,6 @@ progressionChordQuality.addEventListener('change', () => {
 //         target.target.parentElement.parentElement.remove();
 //     });
 // }
-
-// button to add new items to progression
-progressionAddButton.addEventListener('click', () => {
-    let scaleKey     = compatibleScaleSelect.options[compatibleScaleSelect.selectedIndex].value.split(' ')[0],
-        scaleName    = compatibleScaleSelect.options[compatibleScaleSelect.selectedIndex].innerText,
-        chordKey     = progressionKeyInput.value,
-        chordQuality = progressionChordQuality.value;
-
-    addProgressionItem(scaleKey, scaleName, chordKey, chordQuality);
-
-    let pairs = compileChordScaleObject();
-
-    currentProgressionData = compileProgression(pairs);
-    chordNamesData = currentProgressionData['chordNames'].join(' ')
-
-    chordNamesField.value         = chordNamesData;
-    currentProgressionField.value = JSON.stringify(currentProgressionData);
-
-});
-
-updateCompatibleScales();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -247,6 +183,7 @@ const compileChordScaleObject = () => {
         chordScaleObjects.push(chordScaleObject);
     }
 
+
     return chordScaleObjects
     
 }
@@ -303,6 +240,79 @@ const compileProgression = objects => {
 
     return progression
 }
+
+
+// button to add new items to progression
+progressionAddButton.addEventListener('click', () => {
+    let scaleKey     = compatibleScaleSelect.options[compatibleScaleSelect.selectedIndex].value.split(' ')[0],
+        scaleName    = compatibleScaleSelect.options[compatibleScaleSelect.selectedIndex].innerText,
+        chordKey     = progressionKeyInput.value,
+        chordQuality = progressionChordQuality.value;
+
+    addProgressionItem(scaleKey, scaleName, chordKey, chordQuality);
+
+    let pairs = compileChordScaleObject();
+
+    currentProgressionData = compileProgression(pairs);
+
+    chordNamesData = currentProgressionData['chordNames'].join(' ')
+
+    chordNamesField.value         = chordNamesData;
+    currentProgressionField.value = JSON.stringify(currentProgressionData);
+
+});
+
+updateCompatibleScales();
+
+
+const displayLoadedProgression = () => {
+    
+    try {
+        let progression     = JSON.parse(loadedProgression.dataset.loadedProgression),
+            chordsAndScales = progression.chordScaleObjects,
+            chordKey, chordQuality, scaleKey, scaleName;
+
+        console.log(progression);
+        
+        for(let i=0; i<chordsAndScales.length; i++) {
+            chordKey     = chordsAndScales[i]['chord']['key'][0]
+            chordKey     = chordKey.toUpperCase() + chordKey.slice(1);
+
+            chordQuality = chordsAndScales[i]['chord']['quality'];
+
+            scaleKey     = chordsAndScales[i]['scale']['key'];
+            scaleKey     = scaleKey[0].toUpperCase() + scaleKey.slice(1);
+
+            scaleName    = fullScaleNames[chordsAndScales[i]['scale']['name']];
+            
+            
+            console.log(`chord: ${chordKey}${chordQuality}`);
+            console.log(`scale: ${scaleKey} ${scaleName}`);
+            
+            addProgressionItem(scaleKey, scaleName, chordKey, chordQuality);
+
+            let pairs = compileChordScaleObject();
+
+            currentProgressionData = compileProgression(pairs);
+
+            console.log(`currentProgressionData: ${currentProgressionData}`)
+
+            chordNamesData = currentProgressionData['chordNames'].join(' ')
+
+            chordNamesField.value         = chordNamesData;
+            currentProgressionField.value = JSON.stringify(currentProgressionData);
+
+        }
+
+    } catch (error){
+        console.error(error, "No progression loaded.")
+        return 
+    }
+
+
+}
+displayLoadedProgression();
+
 
 playButton.addEventListener('click', () => {
     playNotes(currentProgressionData);

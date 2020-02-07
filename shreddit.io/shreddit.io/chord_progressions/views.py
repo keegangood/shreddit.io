@@ -19,11 +19,12 @@ def save_progression(request):
             )
 
             context = {
-                'progression': progression,
-                'chord_names': chord_names
+                'loaded_progression': progression,
+                'chord_names': chord_names,
+                'path': request.path_info.split('/')[1]
             }
 
-        return render(request, 'pages/explore.html', context)
+        return redirect('pages-explore', id=progression.id)
 
 def explore_progression(request, id, return_url):
     if id:
@@ -34,9 +35,10 @@ def explore_progression(request, id, return_url):
 
             context = {
                 'progression'        : progression,
-                'chord_scale_objects': progression.chordScaleObjects
+                'chord_scale_objects': progression.chordScaleObjects,
+                'path': request.path_info.split('/')[1]
             }
-            
+
             return render(request, 'pages/explore.html', context)
 
         except ObjectDoesNotExist:

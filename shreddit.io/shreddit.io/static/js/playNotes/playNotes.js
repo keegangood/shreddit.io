@@ -1,11 +1,7 @@
 
-
-
 const updateDisplay = data => {
     console.log(data);
     
-    
-
     let chordKey = data.chordKey,
         chord    = data.chordQuality,
         scaleKey = teoria.note(data.scaleKey),
@@ -22,10 +18,10 @@ const updateDisplay = data => {
 
 
 const playNotes = (progressionObject) => {
-    // console.log(`progression: ${progressionObject}`);
+    console.log(`progression: ${progressionObject}`);
 
     let instrument = SampleLibrary.load({
-        instruments: 'cello', //['piano', 'bass-electric', 'bassoon', 'cello', 'clarinet', 'contrabass', 'flute', 'french-horn', 'guitar-acoustic', 'guitar-electric','guitar-nylon', 'harmonium', 'harp', 'organ', 'saxophone', 'trombone', 'trumpet', 'tuba', 'violin', 'xylophone'],
+        instruments: 'guitar-acoustic', //['piano', 'bass-electric', 'bassoon', 'cello', 'clarinet', 'contrabass', 'flute', 'french-horn', 'guitar-acoustic', 'guitar-electric','guitar-nylon', 'harmonium', 'harp', 'organ', 'saxophone', 'trombone', 'trumpet', 'tuba', 'violin', 'xylophone'],
         baseUrl: "http://localhost:8000/static/js/playNotes/tonejs-instruments/samples/",
         minify: true,
     });
@@ -56,6 +52,7 @@ const playNotes = (progressionObject) => {
 }
 
 playButton.addEventListener('click', () => {
+
     let pairs = compileChordScaleObject();
     let progression = compileProgression(pairs);
 
