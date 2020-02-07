@@ -25,20 +25,38 @@ def save_progression(request):
 
         return render(request, 'pages/explore.html', context)
 
+def explore_progression(request, id, return_url):
+    if id:
+        try:
+            progression = ChordProgression.objects.get(id=id)
+
+            print(f'id: {progression.id}')
+
+            context = {
+                'progression'        : progression,
+                'chord_scale_objects': progression.chordScaleObjects
+            }
+            
+            return render(request, 'pages/explore.html', context)
+
+        except ObjectDoesNotExist:
+            messages.error(request, 'That chord progression does not exist. Try again.')
+            
+            return redirect(request.path)
+    else:
+        return render(request, 'pages/explore.html')
+
+
 def delete_progression(request, id):
     try:
         progression = ChordProgression.objects.get(id=id)
 
-        print(f'progression to delete: {progression}')
-
-        print(f"request.path: {request.META.get('HTTP_REFERER')}")
         progression.delete()
         messages.info(request, 'The progression was deleted successfully!')
         
         return redirect('profile')
 
     except ObjectDoesNotExist:
-        print('Chord progression doesn\'t exist! Try again!')
         messages.info(request, 'That chord progression does not exist. Try again.')
 
         return redirect(request.path)

@@ -7,7 +7,7 @@
         <span class="burger-set-item blue-grey darken-4 bottom-bun"></span>
     </div>
 
-    {% if request.path == '/explore/' %}
+    {% if current_path == 'explore' %}
     <div class="settings-icon mobile-nav-icon blue-grey darken-2 blue-grey-text text-darken-4">
         <div>&#x26ED;</div>
     </div>
@@ -49,7 +49,7 @@
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a href="{% url 'pages-explore' %}" class="hover-text blue-grey-text text-darken-4">
+                            <a href="{% url 'pages-explore' id=0 %}" class="hover-text blue-grey-text text-darken-4">
                                 Explore
                             </a>
                         </div>

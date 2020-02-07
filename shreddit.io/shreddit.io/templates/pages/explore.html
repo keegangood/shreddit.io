@@ -211,6 +211,15 @@
                     </div>
                 </div>
                 
+                <!-- If context is sent from view, add hidden div with its value -->
+                {% if loaded_progression %}
+                    <div class="loaded-progression" 
+                         data-loaded-progression="{{ loaded_progression }}"
+                         data-chord-scale-objects = "{{ chord_scale_objects }}">
+                         {{ chord_scale_objects }}
+                    </div>
+                {% endif %}
+
                 <div class="row">
                     <div class="col s12">
                         <div class="current-progression">
@@ -222,7 +231,7 @@
 
                                         <form action="{% url 'save-progression' %}" method="POST">
                                             {% csrf_token %}
-                                            
+
                                             <input id="current-progression" type="text" name="progression" class="hide" value="{{ progression.id }}">
                                             <input id="chord-names"         type="text" name="chord-names" class="hide" value="{{ chord_names }}">
                                             <button class="save-button blue-grey darken-2 blue-grey-text text-lighten-3">Save</button>

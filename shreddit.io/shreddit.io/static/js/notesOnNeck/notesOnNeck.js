@@ -24,6 +24,7 @@ let instrumentInput
     progressionInfo            
             = document.querySelector('.progression-info');
 
+
 let instrumentNames,
     instrumentName,
     tunings,
@@ -101,7 +102,6 @@ const updateNoteMarkers = () => {
         neck.markedNotes = neck.scale.simple();
 
     } else if(neck.scaleOrChord == 'chord'){
-        // console.log(neck);
 
         chordName = chordQualityInput.value;
         neck.scale = neck.curKey.chord(chordName).voicing();//.toString().split(',');
@@ -187,11 +187,6 @@ const updateNoteLegend = () => {
         notes = neck.markedNotes;
         intervals = neck.scale.toString().split(',');
     }
-
-
-    // console.log('scaleOrChord: ',neck.scaleOrChord);
-    // console.log('markedNotes: ', neck.markedNotes);
-    
 
     if(notes){
         for(i in notes){
