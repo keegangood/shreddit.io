@@ -107,10 +107,23 @@ const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
 }
 
 const displayLoadedProgression = () => {
-    let progression = JSON.parse(loadedProgression.dataset.loadedProgression)
     
-    console.log(progression);
-    
+    try {
+        let progression     = JSON.parse(loadedProgression.dataset.loadedProgression),
+            chordsAndScales = progression.chordScaleObjects;
+        console.log(progression);
+        
+        for(let i=0; i<chordsAndScales.length; i++) {
+            console.log(chordsAndScales[i]);
+            
+        }
+
+    } catch (error){
+        console.error("No progression loaded.")
+        return 
+    }
+
+
 }
 
 displayLoadedProgression();

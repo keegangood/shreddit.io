@@ -12,17 +12,22 @@ def home(request):
     return render(request, 'pages/home.html')
 
 def explore(request, id):
-
     if id != 0:
         try:
             progression = ChordProgression.objects.get(id=id)
-            print(f'loaded progression: {progression.progression}')
-        
-            context = {
-                'loaded_progression' : progression.progression,
-                'chord_scale_objects': progression,
-                'current_path'       : request.path_info.split('/')[1]
-            }
+            
+            if request.user == progression.creator:
+
+                context = {
+                    'loaded_progression' : progression.progression,
+                    'chord_scale_objects': progression,
+                    'current_path'       : request.path_info.split('/')[1]
+                }
+            else:
+                messages.error(request, "You can only edit progressions you've created. Try again.")
+                context = {
+                    'current_path'       : request.path_info.split('/')[1]
+                }
 
         except ObjectDoesNotExist:
             print(f"loaded progression: {request.path_info.split('/')}")
