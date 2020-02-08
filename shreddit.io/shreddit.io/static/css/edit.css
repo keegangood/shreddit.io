@@ -1,0 +1,29 @@
+.edit-content {
+    display: flex;
+    justify-content: center;
+    padding-top: 15vh;
+    min-height: 100vh;
+    width: 100vw;
+}
+
+.edit-content h4 {
+    margin: 5px;
+}
+
+.edit-content .row {
+    margin: 10px 0;
+    width: 100%;
+}
+
+.edit-content .chord-scale-objects {
+    padding: 5vw;
+    width: 90vw;
+}
+
+.edit-content .chord-scale-container {
+    padding: 5vw;
+}
+
+.edit-content select {
+    height: 8vh;
+}

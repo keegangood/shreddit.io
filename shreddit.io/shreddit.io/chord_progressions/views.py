@@ -3,7 +3,7 @@ from . import views
 from .models import ChordProgression
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
-
+import json
 
 def save_progression(request):
     if request.method == 'POST' :
@@ -30,12 +30,16 @@ def edit(request, id):
     if request.method == 'GET':
         context = {}
         try:
-            progression = ChordProgression.objects.get(id=id)
+            obj = ChordProgression.objects.get(id=id)
 
             # print(f'progression: {progression.progression.chordScaleObjects}')
+            progression = json.loads(obj.progression)
+            print(type(progression))
 
             context = {
                 'progression'        : progression,
+                'id'                 : id,
+                'chord_scale_objects': progression['chordScaleObjects'],
                 'path'               : request.path_info.split('/')[1]
             }
 

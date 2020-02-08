@@ -1,10 +1,55 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% if progression %}
-        <div class="progression" 
-             data-loaded-progression="{{ progression }}">
-             {{ progression }}
+{% load static %}
+
+<div class="edit-content">
+    <div class="chord-scale-objects blue-grey lighten-2">
+        {% for obj in chord_scale_objects %}
+            <div class="chord-scale-container blue-grey lighten-1">
+                <div class="row chord-info">
+                    <div class="col s4 l5 offset-l1">
+                        <h4>Key:</h4>
+                        {% include 'partials/selectMenus/key-input.html' %}
+                    </div>
+                    <div class="col s8 l5">
+                        <h4>Quality:</h4>
+                        {% include 'partials/selectMenus/chord-quality.html' %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s4 l5 offset-l1">
+                        <h4>Key:</h4>
+                        {% include 'partials/selectMenus/key-input.html' %}
+                    </div>
+                    <div class="col s8 l5">
+                        <h4>Scale:</h4>
+                        {% include 'partials/selectMenus/scale-formula-input.html' %}
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p>Progression is empty.</p>
+        {% endfor %}
+    </div>
+</div>
+
+        <!-- <div class="progression-to-edit" 
+             data-progression ="{{ progression }}"
+             data-id = "{{ id }}"
+             data-chord-scale-objects = "{{ chord_scale_objects }}">
+        </div> -->
+
+    <script src="{% static 'js/playNotes/edit-progression.js' %}"></script>
+
+    <div class="edit-item">
+        <div class="row chord-info">
+
         </div>
-    {% endif %}
+        <div class="row scale-info">
+
+        </div>
+    </div>
+
+
 {% endblock %}
