@@ -91,10 +91,15 @@ const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
                          'blue-grey-text',
                          'text-darken-4');
 
+    // console.log(`scaleName: ${scaleName}`);
     scaleName = scaleName.split(' ');
-    scaleName = scaleName.splice(0,scaleName.length).join('').toLowerCase();
-    
-    console.log(`scaleName: ${scaleName}`);
+    if(scaleName.length > 1){
+        scaleName[0] = '';
+    }
+    scaleName = scaleName.join('');
+    scaleName = scaleName.toLowerCase();
+    // console.log(`scaleName: ${scaleName}`);
+
 
     newRow.innerHTML = template;
 
@@ -120,12 +125,7 @@ progressionKeyInput.addEventListener('change', () => {
 progressionChordQuality.addEventListener('change', () => {
     updateCompatibleScales();
 });
-// // delete buttons for progression items X
-// for(let i=0; i<progressionItemDeleteButtons.length; i++){
-//     progressionItemDeleteButtons[i].addEventListener('click', target => {
-//         target.target.parentElement.parentElement.remove();
-//     });
-// }
+
 
 
 

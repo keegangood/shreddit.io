@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if progression %}
+        <div class="progression" 
+             data-loaded-progression="{{ progression }}">
+             {{ progression }}
+        </div>
+    {% endif %}
+{% endblock %}

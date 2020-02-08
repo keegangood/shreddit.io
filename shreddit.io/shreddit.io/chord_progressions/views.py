@@ -6,8 +6,8 @@ from django.contrib import messages
 
 
 def save_progression(request):
-    if(request.method == 'POST'):
-        if(request.POST['progression']):
+    if request.method == 'POST' :
+        if request.POST['progression'] :
             chord_names = request.POST['chord-names'].split(' ')
             chord_names = [name.capitalize() for name in chord_names]
             chord_names = ' '.join(chord_names)
@@ -26,27 +26,28 @@ def save_progression(request):
 
         return redirect('pages-explore', id=progression.id)
 
-def explore_progression(request, id, return_url):
-    if id:
+def edit(request, id):
+    if request.method == 'GET':
+        context = {}
         try:
             progression = ChordProgression.objects.get(id=id)
 
-            print(f'id: {progression.id}')
+            # print(f'progression: {progression.progression.chordScaleObjects}')
 
             context = {
                 'progression'        : progression,
-                'chord_scale_objects': progression.chordScaleObjects,
-                'path': request.path_info.split('/')[1]
+                'path'               : request.path_info.split('/')[1]
             }
-
-            return render(request, 'pages/explore.html', context)
 
         except ObjectDoesNotExist:
             messages.error(request, 'That chord progression does not exist. Try again.')
             
-            return redirect(request.path)
-    else:
-        return render(request, 'pages/explore.html')
+            return redirect('profile')
+
+        return render(request, 'chord-progressions/edit.html', context)
+
+    if request.method == 'POST':
+        pass
 
 
 def delete_progression(request, id):
