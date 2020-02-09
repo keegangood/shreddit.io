@@ -80,26 +80,95 @@ const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
         newDelete,
         chordName = `${chordKey}${chordQuality}`;
 
-    let template = `<div class="col s5 chord-name">${chordName}</div>
-                    <div class="col s5 offset-s1 scale-name">${scaleName}</div>
-                    <div class="col s1 delete-button"><span>&#10006;</span></div>`
+    console.log(`Original scale name: ${scaleName}`);
+    
+    let template = `<div class="row center">
+    <div class="col s12 l6 offset-l3 saved-progression-container">
+        <div class="card">
+            <div class="card-content blue-grey lighten-2">
+                <div class="title activator blue-grey lighten-3 text-darken-4">
+                <i class="material-icons right">more_vert</i>
+                    <div class="row">
+                        <div class="col s8">
+                            <span class="chord-label">Chord:
+                                    <span class="chord-name">${chordName}</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <span class="scale-label">Scale:
+                                <span class="scale-name">&nbsp;${scaleName}</span>
+                            </span>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-reveal blue-grey lighten-2">
+                <div class="row card-links">
+                    <div class="col l3">
+                        <div class="card-link blue-grey darken-1 nav-link">
+                            <a href="#">Explore</a>
+                        </div>
+                    </div>
+                    <div class="col l3">
+                        <div class="card-link blue-grey darken-1 nav-link">
+                            <a href="#">Edit</a>
+                        </div>
+                    </div>
+                    <div class="col l3">
+                        <div class="card-link blue-grey darken-1 nav-link">
+                            <a href="#">Delete</a>
+                        </div>
+                    </div>
+                    <div class="col l1">
+                        <span class="card-title"><i class="material-icons right close blue-grey-text text-darken-4">close</i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>`
+
+    // let template = `<div class="col s1 l1"></div>
+    //                 <div class="col s5 l5 chord-name">${chordName}</div>
+    //                 <div class="col s5 l5 scale-name">${scaleName}</div>
+    //                 <div class="col s1 l1 delete-button"><span>&#10006;</span></div>`
 
     newRow.classList.add('row',
                          'progression-item',
                          'blue-grey',
-                         'lighten-1',
+                         'lighten-4',
                          'blue-grey-text',
                          'text-darken-4');
 
-    // console.log(`scaleName: ${scaleName}`);
+                
+    console.log(`scaleName1: ${scaleName}`);
+    console.log(`scaleName1: ${typeof(scaleName)}`);
     scaleName = scaleName.split(' ');
-    if(scaleName.length > 1){
-        scaleName[0] = '';
-    }
-    scaleName = scaleName.join('');
-    scaleName = scaleName.toLowerCase();
-    // console.log(`scaleName: ${scaleName}`);
+    console.log(`scaleName2: ${scaleName}`);
+    console.log(`scaleName2: ${typeof(scaleName)}`);
 
+
+    console.log(scaleName.length);
+    
+    if(scaleName.length > 2){
+        scaleName = scaleName[1] + scaleName[2]
+    } else if(scaleName.length > 1) {
+        scaleName = scaleName[1]
+    }
+    scaleName = scaleName.toLowerCase();
+    console.log(`scaleName3: ${scaleName}`);
+    console.log(`scaleName3: ${typeof(scaleName)}`);
+    // scaleName = scaleName.join('');
+
+    // console.log(`scaleKey: ${typeof(scaleKey)}`);
+    
+    console.log(`chordKey: ${chordKey.toLowerCase()}`);
+    console.log(`chordQuality: ${chordQuality}`);
+    console.log(`scaleKey: ${scaleKey.toLowerCase()}`);
+    console.log(`scaleName: ${scaleName}`);
 
     newRow.innerHTML = template;
 
@@ -281,13 +350,13 @@ const displayLoadedProgression = () => {
             chordQuality = chordsAndScales[i]['chord']['quality'];
 
             scaleKey     = chordsAndScales[i]['scale']['key'];
-            scaleKey     = scaleKey[0].toUpperCase() + scaleKey.slice(1);
+            scaleKey     = scaleKey[0].toUpperCase();
 
-            scaleName    = fullScaleNames[chordsAndScales[i]['scale']['name']];
+            scaleName    = `${scaleKey} ${fullScaleNames[chordsAndScales[i]['scale']['name']]}`;
             
             
-            console.log(`chord: ${chordKey}${chordQuality}`);
-            console.log(`scale: ${scaleKey} ${scaleName}`);
+            // console.log(`chord: ${chordKey}${chordQuality}`);
+            // console.log(`scale: ${scaleKey} ${scaleName}`);
             
             addProgressionItem(scaleKey, scaleName, chordKey, chordQuality);
 

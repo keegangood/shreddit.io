@@ -23,9 +23,15 @@ def save_progression(request):
                 'chord_names': chord_names,
                 'path': request.path_info.split('/')[1]
             }
+            
+            return redirect('pages-explore', id=progression.id)
+        else:
+            return redirect('pages-explore', id=0)
 
-        return redirect('pages-explore', id=progression.id)
+    else:
+        return redirect('pages-expolore', id=0)
 
+        
 def edit(request, id):
     if request.method == 'GET':
         context = {}

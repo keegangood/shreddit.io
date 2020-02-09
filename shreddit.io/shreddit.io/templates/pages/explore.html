@@ -167,7 +167,7 @@
         </div>
         
         <!-- scale/chord section vs progression builder section -->
-        <div class="row center">
+        <div class="row">
 
             <!-- scale/chord selects -->
             <div class="scale-selects col s8 offset-s2 input-field">
@@ -185,7 +185,7 @@
             </div>
 
             <!-- progression builder -->
-            <div class="progression-builder col s10 offset-s1">
+            <div class="progression-builder col s12 blue-grey lighten-1">
                 <div class="row choose-chord">
                     <h4>Choose a chord: </h4>
                     <div class="col s6">
@@ -199,7 +199,7 @@
                     <div class="col s12">
                         <div class="choose-scale">
                             <h4>Choose a scale:</h4>
-                            <select name="compatible-scales" id="compatible-scales" class="browser-default blue-grey-text text-darken-4 blue-grey lighten-1">
+                            <select name="compatible-scales" id="compatible-scales" class="browser-default blue-grey-text text-darken-4 blue-grey">
                                 <!-- add options with JS -->
                             </select>
                         </div>
@@ -216,45 +216,35 @@
                     <div class="loaded-progression" 
                          data-loaded-progression="{{ loaded_progression }}"
                          data-chord-scale-objects = "{{ chord_scale_objects }}">
-                         {{ chord_scale_objects }}
                     </div>
                 {% endif %}
 
                 <div class="row">
-                    <div class="col s12">
-                        <div class="current-progression">
-                            <div class="row progression-labels">
-                                <h2>Current Progression:</h2>
-                                <div class="row">
-                                    {% if user.is_authenticated %}
-                                        {% csrf_token %}
-
-                                        <form action="{% url 'save-progression' %}" method="POST">
-                                            {% csrf_token %}
-
-                                            <input id="current-progression" type="text" name="progression" class="hide" value="{{ progression.id }}">
-                                            <input id="chord-names"         type="text" name="chord-names" class="hide" value="{{ chord_names }}">
-                                            <button class="save-button blue-grey darken-2 blue-grey-text text-lighten-3">Save</button>
-                                        </form>
-                                    {% else %}
-                                        <p><a href="{% url 'login' %}">Login</a><br/>to save progressions</p>
-                                    {% endif %}
-                                </div>
-                                <div class="col s5 chord-label">
-                                    <h4>Chord:</h4>
-                                </div>
-                                <div class="col s5 offset-s1 scale-label">
-                                    <h4>Scale:</h4>
-                                </div>
+                    <div class="col s12 l8 offset-l2">
+                        <h2>Current Progression:</h2>
+                        <div class="current-progression blue-grey lighten-2">
+                            <div class="row">
+                                {% if user.is_authenticated %}
+                                {% csrf_token %}
+                                
+                                <form action="{% url 'save-progression' %}" method="POST">
+                                    {% csrf_token %}
+                                    
+                                    <input id="current-progression" type="text" name="progression" class="hide" value="{{ progression.id }}">
+                                    <input id="chord-names"         type="text" name="chord-names" class="hide" value="{{ chord_names }}">
+                                    <button class="save-button blue-grey darken-2 blue-grey-text text-lighten-3">Save</button>
+                                </form>
+                                {% else %}
+                                <p><a href="{% url 'login' %}">Login</a><br/>to save progressions</p>
+                                {% endif %}
                             </div>
-                            
-                            <!-- progression-items are added here -->
 
-                                <!-- <div class="row progression-item">
-                                    <div class="col s5 offset-s1 chord-name">Am6</div>
-                                    <div class="col s5 scale-name">A Aeolian</div>
-                                    <div class="col s1 delete-button"><span>&#10006;</span></div>
-                                </div> -->
+                            <!-- progression-items are added here -->
+                            <!-- <div class="row progression-item">
+                                <div class="col s5 offset-s1 chord-name">Am6</div>
+                                <div class="col s5 scale-name">A Aeolian</div>
+                                <div class="col s1 delete-button"><span>&#10006;</span></div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
