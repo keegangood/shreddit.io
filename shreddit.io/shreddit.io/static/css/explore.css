@@ -180,9 +180,33 @@
     padding: 10px 0;
 }
 
+.progression-builder select {
+    padding: 1px;
+}
 
+.progression-builder .choose-chord .col {
+    padding: 0;
+    text-align: left;
+}
 
-.progression-builder .progression-item .card-reveal {
+.progression-builder .choose-chord {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.progression-builder .choose-scale {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 90%;
+}
+
+.progression-builder .save-form {
+    display: flex;
+    justify-content: center;
 }
 
 

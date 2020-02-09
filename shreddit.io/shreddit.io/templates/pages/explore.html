@@ -188,29 +188,28 @@
             <div class="progression-builder col s12 blue-grey lighten-1">
                 <div class="row choose-chord">
                     <h4>Choose a chord: </h4>
-                    <div class="col s6">
-                        {% include 'partials/selectMenus/key-input.html' %}
-                    </div>
-                    <div class="col s6">
-                        {% include 'partials/selectMenus/chord-quality.html' %}
+                    <div class="row">
+                        <div class="col s4">
+                            {% include 'partials/selectMenus/key-input.html' %}
+                        </div>
+                        <div class="col s8">
+                            {% include 'partials/selectMenus/chord-quality.html' %}
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col s12">
-                        <div class="choose-scale">
+                <div class="row choose-scale">
+                    <div class="col s10 offset-s2 center">
                             <h4>Choose a scale:</h4>
                             <select name="compatible-scales" id="compatible-scales" class="browser-default blue-grey-text text-darken-4 blue-grey">
                                 <!-- add options with JS -->
                             </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s6 offset-s3">
-                            <div class="add-button blue-grey darken-2 blue-grey-text text-lighten-3">Add</div>
-                        </div>
                     </div>
                 </div>
-                
+                <div class="row">
+                    <div class="col s6 offset-s3">
+                        <div class="add-button blue-grey darken-2 blue-grey-text text-lighten-3 center">Add</div>
+                    </div>
+                </div>
                 <!-- If context is sent from view, add hidden div with its value -->
                 {% if loaded_progression %}
                     <div class="loaded-progression" 
@@ -220,10 +219,10 @@
                 {% endif %}
 
                 <div class="row">
-                    <div class="col s12 l8 offset-l2">
+                    <div class="col s12 l8 offset-l2 center">
                         <h2>Current Progression:</h2>
-                        <div class="current-progression blue-grey lighten-2">
-                            <div class="row">
+                        <div class="current-progression ">
+                            <div class="row save-form">
                                 {% if user.is_authenticated %}
                                 {% csrf_token %}
                                 

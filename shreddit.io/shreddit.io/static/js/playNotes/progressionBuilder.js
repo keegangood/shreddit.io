@@ -131,11 +131,6 @@ const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
     </div>
 </div>`
 
-    // let template = `<div class="col s1 l1"></div>
-    //                 <div class="col s5 l5 chord-name">${chordName}</div>
-    //                 <div class="col s5 l5 scale-name">${scaleName}</div>
-    //                 <div class="col s1 l1 delete-button"><span>&#10006;</span></div>`
-
     newRow.classList.add('row',
                          'progression-item',
                          'blue-grey',
