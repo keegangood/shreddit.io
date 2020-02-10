@@ -18,7 +18,7 @@ const updateDisplay = data => {
 
 
 const playNotes = (progressionObject) => {
-    console.log(`progression: ${progressionObject}`);
+    // console.log(`progression: ${progressionObject}`);
 
     let instrument = SampleLibrary.load({
         instruments: 'guitar-acoustic', //['piano', 'bass-electric', 'bassoon', 'cello', 'clarinet', 'contrabass', 'flute', 'french-horn', 'guitar-acoustic', 'guitar-electric','guitar-nylon', 'harmonium', 'harp', 'organ', 'saxophone', 'trombone', 'trumpet', 'tuba', 'violin', 'xylophone'],
@@ -27,8 +27,9 @@ const playNotes = (progressionObject) => {
     });
 
     Tone.Buffer.on('load', (data=progressionObject) => {
+        // console.log("called");
         
-        // console.log(`data: `, data);
+        console.log(`data: `, data);
 
         instrument.toMaster();
 
@@ -51,7 +52,11 @@ const playNotes = (progressionObject) => {
     })
 }
 
+console.log("hello world");
+
+
 playButton.addEventListener('click', () => {
+    console.log("play button clicked");
 
     let pairs = compileChordScaleObject();
     let progression = compileProgression(pairs);

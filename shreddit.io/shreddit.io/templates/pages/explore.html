@@ -229,21 +229,27 @@
                                 <form action="{% url 'save-progression' %}" method="POST">
                                     {% csrf_token %}
                                     
-                                    <input id="current-progression" type="text" name="progression" class="hide" value="{{ progression.id }}">
+                                    <input id="current-progression" type="text" name="progression" class="" value="{{ progression.id }}">
                                     <input id="chord-names"         type="text" name="chord-names" class="hide" value="{{ chord_names }}">
+                                    <input id="current-path"        type="text" name="path"        class="hide" value="{{path}}">
                                     <button class="save-button blue-grey darken-2 blue-grey-text text-lighten-3">Save</button>
                                 </form>
                                 {% else %}
                                 <p><a href="{% url 'login' %}">Login</a><br/>to save progressions</p>
                                 {% endif %}
                             </div>
-
-                            <!-- progression-items are added here -->
-                            <!-- <div class="row progression-item">
-                                <div class="col s5 offset-s1 chord-name">Am6</div>
-                                <div class="col s5 scale-name">A Aeolian</div>
-                                <div class="col s1 delete-button"><span>&#10006;</span></div>
-                            </div> -->
+                            <ul id="progression-items">
+                                <!-- progression-items are added here -->
+                                <!--<li class="progression-item">
+                                        <div class="row progression-item">
+                                            <div class="col s1 handle">
+                                            <div class="col s5 chord-name">Am6</div>
+                                            <div class="col s5 scale-name">A Aeolian</div>
+                                            <div class="col s1 delete-button"><span>&#10006;</span>
+                                        </div>
+                                    </li>
+                                </div> -->
+                            </ul>
                         </div>
                     </div>
                 </div>

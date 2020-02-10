@@ -24,7 +24,7 @@ def save_progression(request):
                 'path': request.path_info.split('/')[1]
             }
             
-            return redirect(f'http://localhost:8000/explore/{progression.id}')
+            return redirect('pages-explore', id=progression.id)
         else:
             return redirect('pages-explore', id=0)
 
