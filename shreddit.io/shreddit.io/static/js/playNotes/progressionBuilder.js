@@ -14,10 +14,30 @@ let progressionKeyInput          = document.querySelector('.progression-builder 
     chordNameData;
 
 
-
 let progressionList = Sortable.create(document.querySelector('#progression-items'), {
     animation: 130,
 
+    onEnd: () => {
+        console.log(document.querySelector('#progression-items'));
+        console.log(currentProgressionData);
+        currentProgressionField.value = '';
+        chordNamesField.value = '';
+
+        let pairs = compileChordScaleObject();
+        
+
+        currentProgressionData = compileProgression(pairs);
+
+        chordNamesData = currentProgressionData['chordNames'].join(' ')
+
+        chordNamesField.value         = chordNamesData;
+
+        currentProgressionField.value = JSON.stringify(currentProgressionData);
+
+        console.log(currentProgressionData);
+        
+        
+    },
 });
 
 
@@ -137,8 +157,7 @@ const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
                 </div>
             </div>
         </div>
-    </div>
-</li>`
+    </div>`
 
     newRow.classList.add('row',
                          'blue-grey',
@@ -147,14 +166,14 @@ const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
                          'text-darken-4');
 
     
-    console.log(`scaleName1: ${scaleName}`);
-    console.log(`scaleName1: ${typeof(scaleName)}`);
+    // console.log(`scaleName1: ${scaleName}`);
+    // console.log(`scaleName1: ${typeof(scaleName)}`);
     scaleName = scaleName.split(' ');
-    console.log(`scaleName2: ${scaleName}`);
-    console.log(`scaleName2: ${typeof(scaleName)}`);
+    // console.log(`scaleName2: ${scaleName}`);
+    // console.log(`scaleName2: ${typeof(scaleName)}`);
 
 
-    console.log(scaleName.length);
+    // console.log(scaleName.length);
     
     if(scaleName.length > 2){
         scaleName = scaleName[1] + scaleName[2]
@@ -162,16 +181,16 @@ const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
         scaleName = scaleName[1]
     }
     scaleName = scaleName.toLowerCase();
-    console.log(`scaleName3: ${scaleName}`);
-    console.log(`scaleName3: ${typeof(scaleName)}`);
+    // console.log(`scaleName3: ${scaleName}`);
+    // console.log(`scaleName3: ${typeof(scaleName)}`);
     // scaleName = scaleName.join('');
 
     // console.log(`scaleKey: ${typeof(scaleKey)}`);
     
-    console.log(`chordKey: ${chordKey.toLowerCase()}`);
-    console.log(`chordQuality: ${chordQuality}`);
-    console.log(`scaleKey: ${scaleKey.toLowerCase()}`);
-    console.log(`scaleName: ${scaleName}`);
+    // console.log(`chordKey: ${chordKey.toLowerCase()}`);
+    // console.log(`chordQuality: ${chordQuality}`);
+    // console.log(`scaleKey: ${scaleKey.toLowerCase()}`);
+    // console.log(`scaleName: ${scaleName}`);
 
     newRow.innerHTML = template;
 
@@ -222,7 +241,7 @@ const compileChordScaleObject = () => {
         chordScaleObject = {},
         chordScaleObjects = [];
 
-        // console.log(progressionItems.length);
+        console.log(progressionItems.length);
 
 
     for(let i=0; i<progressionItems.length; i++){

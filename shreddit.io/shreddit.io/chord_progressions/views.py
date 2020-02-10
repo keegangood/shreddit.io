@@ -24,6 +24,8 @@ def save_progression(request):
                 'path': request.path_info.split('/')[1]
             }
             
+            messages.success(request, 'Progression saved!')
+
             return redirect('pages-explore', id=progression.id)
         else:
             return redirect('pages-explore', id=0)

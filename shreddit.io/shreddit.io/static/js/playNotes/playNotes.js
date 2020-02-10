@@ -1,7 +1,6 @@
 
 const updateDisplay = data => {
-    console.log(data);
-    
+    console.log(`${data.chordKey}${data.chordQuality}`);
     let chordKey = data.chordKey,
         chord    = data.chordQuality,
         scaleKey = teoria.note(data.scaleKey),
@@ -18,7 +17,7 @@ const updateDisplay = data => {
 
 
 const playNotes = (progressionObject) => {
-    // console.log(`progression: ${progressionObject}`);
+    console.log(progressionObject);
 
     let instrument = SampleLibrary.load({
         instruments: 'guitar-acoustic', //['piano', 'bass-electric', 'bassoon', 'cello', 'clarinet', 'contrabass', 'flute', 'french-horn', 'guitar-acoustic', 'guitar-electric','guitar-nylon', 'harmonium', 'harp', 'organ', 'saxophone', 'trombone', 'trumpet', 'tuba', 'violin', 'xylophone'],
@@ -29,8 +28,6 @@ const playNotes = (progressionObject) => {
     Tone.Buffer.on('load', (data=progressionObject) => {
         // console.log("called");
         
-        console.log(`data: `, data);
-
         instrument.toMaster();
 
         // instrument.triggerAttack(data.chordLoop[0].chord, '2n');
@@ -42,6 +39,8 @@ const playNotes = (progressionObject) => {
 
             Tone.Draw.schedule(function(data=event){
                 updateDisplay(data);
+                console.log(`time: ${time}`);
+                
             }, time)
 
         }, chordLoop).start(1);
