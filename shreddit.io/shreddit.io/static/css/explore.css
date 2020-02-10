@@ -160,6 +160,15 @@
     padding: 10px;
 }
 
+.progression-builder .card-link {
+    padding: 10px 0;
+}
+
+.progression-builder .card-link a{
+    height: 100%;
+    width: 100%;
+}
+
 .progression-builder .chord-label {
     font-size: 1.5rem;
 }

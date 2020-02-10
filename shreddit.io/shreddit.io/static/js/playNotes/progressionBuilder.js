@@ -113,29 +113,24 @@ const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
                             <span class="scale-label">Scale:
                                 <span class="scale-name">&nbsp;${scaleName}</span>
                             </span>
-                            
                         </div>
                     </div>
                 </div>
             </div>
             <div class="card-reveal blue-grey lighten-2">
                 <div class="row card-links">
-                    <div class="col l3">
-                        <div class="card-link blue-grey darken-1 nav-link">
-                            <a href="#">Explore</a>
+                    <div class="col l3 s1"></div>
+                    <div class="col l3 s4">
+                        <div class="card-link blue-grey darken-1 nav-link center-align">
+                            <a href="#" id="edit-chord-scale">Edit</a>
                         </div>
                     </div>
-                    <div class="col l3">
-                        <div class="card-link blue-grey darken-1 nav-link">
-                            <a href="#">Edit</a>
+                    <div class="col l3 s4">
+                        <div class="card-link blue-grey darken-1 nav-link center-align">
+                            <a href="#progression-items" id="delete">Delete</a>
                         </div>
                     </div>
-                    <div class="col l3">
-                        <div class="card-link blue-grey darken-1 nav-link">
-                            <a href="#">Delete</a>
-                        </div>
-                    </div>
-                    <div class="col l1">
+                    <div class="col l1 s2">
                         <span class="card-title"><i class="material-icons right close blue-grey-text text-darken-4">close</i></span>
                     </div>
                 </div>
@@ -149,32 +144,14 @@ const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
                          'blue-grey-text',
                          'text-darken-4');
 
-    
-    // console.log(`scaleName1: ${scaleName}`);
-    // console.log(`scaleName1: ${typeof(scaleName)}`);
     scaleName = scaleName.split(' ');
-    // console.log(`scaleName2: ${scaleName}`);
-    // console.log(`scaleName2: ${typeof(scaleName)}`);
 
-
-    // console.log(scaleName.length);
-    
     if(scaleName.length > 2){
         scaleName = scaleName[1] + scaleName[2]
     } else if(scaleName.length > 1) {
         scaleName = scaleName[1]
     }
     scaleName = scaleName.toLowerCase();
-    // console.log(`scaleName3: ${scaleName}`);
-    // console.log(`scaleName3: ${typeof(scaleName)}`);
-    // scaleName = scaleName.join('');
-
-    // console.log(`scaleKey: ${typeof(scaleKey)}`);
-    
-    // console.log(`chordKey: ${chordKey.toLowerCase()}`);
-    // console.log(`chordQuality: ${chordQuality}`);
-    // console.log(`scaleKey: ${scaleKey.toLowerCase()}`);
-    // console.log(`scaleName: ${scaleName}`);
 
     newRow.innerHTML = template;
 
@@ -188,11 +165,15 @@ const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
     newItem.dataset.scaleName = scaleName;
     
 
+    newDelete = newItem.querySelector('#delete');
+    
+    newDelete.addEventListener('click', (e) => {
+        newItem.remove();
 
-    // newDelete = newRow.lastChild.firstChild;
-    // newDelete.addEventListener('click', () => {
-    //     newDelete.parentElement.parentElement.remove();
-    // });
+        updateProgression();
+        console.log(currentProgressionData);
+        
+    });
 
     progressionContainer.append(newItem);
 }
@@ -326,12 +307,18 @@ const updateProgression = () => {
 
     let pairs = compileChordScaleObject();
 
+    console.log(pairs);
+    
+
     currentProgressionData = compileProgression(pairs);
 
     chordNamesData = currentProgressionData['chordNames'].join(' ')
 
     chordNamesField.value         = chordNamesData;
     currentProgressionField.value = JSON.stringify(currentProgressionData);
+
+    console.log(currentProgressionData);
+    
 }
 
 // button to add new items to progression
@@ -399,10 +386,5 @@ const displayLoadedProgression = () => {
 displayLoadedProgression();
 
 
-// playButton.addEventListener('click', () => {
-//     // console.log("hello world!");
-    
-//     // 
-// })
 
 

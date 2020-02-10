@@ -33,8 +33,6 @@ const displayMessages = () => {
                     displayMessages.remove();
                 }, 300)
             })
-
-
         }
         
         
