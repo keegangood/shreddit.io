@@ -1,24 +1,39 @@
 from django.shortcuts import render, redirect
-from . import views
-from .models import ChordProgression
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
+from django.utils import timezone
+
+from .models import ChordProgression
+from . import views
 import json
 
 def save_progression(request):
-
-    new = request.POST['progression']
-    old = request.POST['loaded-progression']
-    print(old)
-    print()
-    print()
-    print()
-    print(new)
-
-    print(new == old)
-    print(request.POST['save-or-update'])
     if request.method == 'POST' :
-        if request.POST['progression'] :
+        new_progression    = request.POST['progression']
+        old_progression    = request.POST['loaded-progression']
+
+        if request.POST['loaded-progression-id']:
+            old_progression_id = int(request.POST['loaded-progression-id'])
+            print(type(old_progression_id))
+
+        print(f'new == old? : {old_progression == new_progression}')
+        print(request.POST['save-or-update'])
+
+        if request.POST['save-or-update'] == 'update':
+            if old_progression == new_progression:
+                messages.info(request, "There were no changes to save.")
+                return redirect('pages-explore', id=old_progression_id)
+            else:
+                progression = ChordProgression.objects.get(id=old_progression_id)
+                progression.progression = new_progression
+                edited_at = timezone.now
+                
+                progression.save()
+
+                messages.success(request, "Progression updated successfully.")
+                return redirect('pages-explore', id=progression.id)
+
+        elif request.POST['save-or-update'] == 'save':
             chord_names = request.POST['chord-names'].split(' ')
             chord_names = [name.capitalize() for name in chord_names]
             chord_names = ' '.join(chord_names)
@@ -34,7 +49,7 @@ def save_progression(request):
                 'chord_names': chord_names,
                 'path': request.path_info.split('/')[1]
             }
-            
+            print('called')
             messages.success(request, 'Progression saved!')
 
             return redirect('pages-explore', id=progression.id)
@@ -45,32 +60,33 @@ def save_progression(request):
         return redirect('pages-expolore', id=0)
 
         
-def edit(request, id):
-    if request.method == 'GET':
-        context = {}
-        try:
-            obj = ChordProgression.objects.get(id=id)
+def update(request):
+    pass
+    # if request.method == 'GET':
+    #     context = {}
+    #     try:
+    #         obj = ChordProgression.objects.get(id=id)
 
-            # print(f'progression: {progression.progression.chordScaleObjects}')
-            progression = json.loads(obj.progression)
-            print(type(progression))
+    #         # print(f'progression: {progression.progression.chordScaleObjects}')
+    #         progression = json.loads(obj.progression)
+    #         print(type(progression))
 
-            context = {
-                'progression'        : progression,
-                'id'                 : id,
-                'chord_scale_objects': progression['chordScaleObjects'],
-                'path'               : request.path_info.split('/')[1]
-            }
+    #         context = {
+    #             'progression'        : progression,
+    #             'id'                 : id,
+    #             'chord_scale_objects': progression['chordScaleObjects'],
+    #             'path'               : request.path_info.split('/')[1]
+    #         }
 
-        except ObjectDoesNotExist:
-            messages.error(request, 'That chord progression does not exist. Try again.')
+    #     except ObjectDoesNotExist:
+    #         messages.error(request, 'That chord progression does not exist. Try again.')
             
-            return redirect('profile')
+    #         return redirect('profile')
 
-        return render(request, 'chord-progressions/edit.html', context)
+    #     return render(request, 'chord-progressions/edit.html', context)
 
-    if request.method == 'POST':
-        pass
+    # if request.method == 'POST':
+    #     pass
 
 
 def delete_progression(request, id):

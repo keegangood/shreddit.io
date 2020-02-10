@@ -19,9 +19,10 @@ def explore(request, id):
             if request.user == progression.creator:
 
                 context = {
-                    'loaded_progression' : progression.progression,
-                    'chord_scale_objects': progression,
-                    'path'               : request.path_info.split('/')[1]
+                    'loaded_progression_id': id,
+                    'loaded_progression'   : progression.progression,
+                    'chord_scale_objects'  : progression,
+                    'path'                 : request.path_info.split('/')[1]
                 }
 
                 messages.success(request, 'Progression loaded!')
@@ -47,7 +48,7 @@ def explore(request, id):
 
 
         context = {
-                'current_path': request.path_info.split('/')[1]
+                'path': request.path_info.split('/')[1]
         }
     
     return render(request, 'pages/explore.html', context)

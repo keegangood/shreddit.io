@@ -24,9 +24,17 @@ const displayMessages = () => {
 
             closeX = closeXs[i];
             
-            closeX.addEventListener('click', (e, message=messages[i]) => {
+            closeX.addEventListener('click', e => {
                 message = e.target.parentElement.parentElement.parentElement;
+                message.style.top = '-15px';
+                message.classList.remove('message-show');
+
+                setTimeout(() => {
+                    displayMessages.remove();
+                }, 300)
             })
+
+
         }
         
         
@@ -38,7 +46,11 @@ const displayMessages = () => {
                 msgs[i].classList.remove('message-show');
             }
             
-        }, 2000)
+        }, 2500)
+
+        setTimeout(() => {
+            messageDisplay.remove()
+        }, 2800)
     }
 }
 
