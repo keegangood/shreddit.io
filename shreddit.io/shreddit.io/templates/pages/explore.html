@@ -228,11 +228,17 @@
                                 
                                 <form action="{% url 'save-progression' %}" method="POST">
                                     {% csrf_token %}
+                                    <input id="loaded-progression"  type="text" name="loaded-progression" class=""     value="{{ loaded_progression }}">
+                                    <input id="current-progression" type="text" name="progression"        class=""     value="{{ progression.id }}">
+                                    <input id="chord-names"         type="text" name="chord-names"        class=""     value="{{ chord_names }}">
+                                    <input id="current-path"        type="text" name="path"               class="hide" value="{{ path }}">
                                     
-                                    <input id="current-progression" type="text" name="progression" class="" value="{{ progression.id }}">
-                                    <input id="chord-names"         type="text" name="chord-names" class="" value="{{ chord_names }}">
-                                    <input id="current-path"        type="text" name="path"        class="hide" value="{{path}}">
-                                    <button class="save-button blue-grey darken-2 blue-grey-text text-lighten-3">Save</button>
+                                    {% if loaded_progression %}
+                                        <button class="update-button blue-grey darken-2 blue-grey-text text-lighten-3" value="update" name="save-or-update">Update</button>
+                                    {% endif %}
+
+                                    <button class="save-button blue-grey darken-2 blue-grey-text text-lighten-3" value="save" name="save-or-update">Save</button>
+                                
                                 </form>
                                 {% else %}
                                 <p><a href="{% url 'login' %}">Login</a><br/>to save progressions</p>

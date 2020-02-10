@@ -6,6 +6,17 @@ from django.contrib import messages
 import json
 
 def save_progression(request):
+
+    new = request.POST['progression']
+    old = request.POST['loaded-progression']
+    print(old)
+    print()
+    print()
+    print()
+    print(new)
+
+    print(new == old)
+    print(request.POST['save-or-update'])
     if request.method == 'POST' :
         if request.POST['progression'] :
             chord_names = request.POST['chord-names'].split(' ')

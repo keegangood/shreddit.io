@@ -1,14 +1,13 @@
-let burger = document.querySelector('.hamburger'),
-    settingsIcon,
-    topBun = document.querySelector('.top-bun'),
-    meat = document.querySelector('.meat'),
-    bottomBun = document.querySelector('.bottom-bun'),
-    cover = document.querySelector('.content-cover'),
-    menu = document.querySelector('.mobile-nav-menu');
-    navMenuContent = document.querySelector('.mobile-nav-content'),
+let burger              = document.querySelector('.hamburger'),
+    topBun              = document.querySelector('.top-bun'),
+    meat                = document.querySelector('.meat'),
+    bottomBun           = document.querySelector('.bottom-bun'),
+    cover               = document.querySelector('.content-cover'),
+    menu                = document.querySelector('.mobile-nav-menu'),
+    navMenuContent      = document.querySelector('.mobile-nav-content'),
     settingsMenuContent = document.querySelector('.settings-menu-content'),
-    mainContent = document.querySelector('.main-content'),
-    messageCloseX = document.querySelector('#message-close-x');
+    mainContent         = document.querySelector('.main-content'),
+    settingsIcon;
 
     if(document.querySelector('.settings-menu-content')){
         settingsIcon = document.querySelector('.settings-icon');

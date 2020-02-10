@@ -7,6 +7,7 @@ let progressionKeyInput          = document.querySelector('.progression-builder 
     playButton                   = document.querySelector('.play-button'),
     pauseButton                  = document.querySelector('.pause-button'),
     saveButton                   = document.querySelector('.save-button'),
+    loadedProgressionField       = document.querySelector('#loaded-progression'),
     currentProgressionField      = document.querySelector('#current-progression'),
     chordNamesField              = document.querySelector('#chord-names'),
     loadedProgression            = document.querySelector('.loaded-progression'),
@@ -18,27 +19,10 @@ let progressionList = Sortable.create(document.querySelector('#progression-items
     animation: 130,
 
     onEnd: () => {
-        console.log(document.querySelector('#progression-items'));
-        console.log(currentProgressionData);
-        currentProgressionField.value = '';
-        chordNamesField.value = '';
-
-        let pairs = compileChordScaleObject();
-        
-
-        currentProgressionData = compileProgression(pairs);
-
-        chordNamesData = currentProgressionData['chordNames'].join(' ')
-
-        chordNamesField.value         = chordNamesData;
-
-        currentProgressionField.value = JSON.stringify(currentProgressionData);
-
-        console.log(currentProgressionData);
-        
-        
+        updateProgression();
     },
 });
+
 
 
 const fullScaleNames = {
@@ -203,6 +187,8 @@ const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
     newItem.dataset.scaleKey = scaleKey.toLowerCase();
     newItem.dataset.scaleName = scaleName;
     
+
+
     // newDelete = newRow.lastChild.firstChild;
     // newDelete.addEventListener('click', () => {
     //     newDelete.parentElement.parentElement.remove();
@@ -334,6 +320,19 @@ const compileProgression = objects => {
     return progression
 }
 
+const updateProgression = () => {
+    chordNamesField.value = '';
+    currentProgressionField.value = '';
+
+    let pairs = compileChordScaleObject();
+
+    currentProgressionData = compileProgression(pairs);
+
+    chordNamesData = currentProgressionData['chordNames'].join(' ')
+
+    chordNamesField.value         = chordNamesData;
+    currentProgressionField.value = JSON.stringify(currentProgressionData);
+}
 
 // button to add new items to progression
 progressionAddButton.addEventListener('click', () => {
@@ -344,15 +343,7 @@ progressionAddButton.addEventListener('click', () => {
 
     addProgressionItem(scaleKey, scaleName, chordKey, chordQuality);
 
-    let pairs = compileChordScaleObject();
-
-    currentProgressionData = compileProgression(pairs);
-
-    chordNamesData = currentProgressionData['chordNames'].join(' ')
-
-    chordNamesField.value         = chordNamesData;
-    currentProgressionField.value = JSON.stringify(currentProgressionData);
-
+    updateProgression();
 });
 
 updateCompatibleScales();
@@ -393,6 +384,7 @@ const displayLoadedProgression = () => {
             chordNamesData = currentProgressionData['chordNames'].join(' ')
 
             chordNamesField.value         = chordNamesData;
+            
             currentProgressionField.value = JSON.stringify(currentProgressionData);
 
         }
