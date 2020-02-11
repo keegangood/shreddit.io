@@ -1,0 +1,84 @@
+<div class="col s12 l6 offset-l3 saved-progression-container">
+    <div class="card">
+        <div class="card-content blue-grey lighten-2">
+            <div class="title activator blue-grey lighten-3 text-darken-4">
+            <i class="material-icons right">more_vert</i>
+                <div class="row">
+                    <div class="col s8">
+                    <span class="chord-label">Chord:
+                            <span class="chord-name">${chordName}</span>
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <span class="scale-label">Scale:
+                        <span class="scale-name">&nbsp;${scaleName}</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-reveal blue-grey lighten-2">
+        <div class="row card-links">
+            <div class="col l3 s1"></div>
+            <div class="col l3 s4">
+                <div class="card-link blue-grey darken-1 nav-link center-align">
+                    <a href="javascript:;" id="edit-progression-item">Edit</a>
+                </div>
+            </div>
+            <div class="col l3 s4">
+                <div class="card-link blue-grey darken-1 nav-link center-align">
+                    <a href="javascript:;" id="delete">Delete</a>
+                </div>
+            </div>
+            <div class="col l1 s2">
+                <span class="card-title"><i class="material-icons right close blue-grey-text text-darken-4">close</i></span>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="edit-panel" class="">
+    <div class="row choose-chord" id="choose-chord">
+        <h4>Choose a chord: </h4>
+        <div class="row">
+            <div class="col s4">
+                <select name="key" id="key-input" class="browser-default blue-grey-text text-darken-4 blue-grey">
+                    <option value="C" selected>C</option>
+                    <option value="C#">C#</option>
+                    <option value="Db">Db</option>
+                    <option value="D">D</option>
+                    <option value="D#">D#</option>
+                    <option value="Eb">Eb</option>
+                    <option value="E">E</option>
+                    <option value="F">F</option>
+                    <option value="F#">F#</option>
+                    <option value="Gb">Gb</option>
+                    <option value="G">G</option>
+                    <option value="G#">G#</option>
+                    <option value="Ab">Ab</option>
+                    <option value="A">A</option>
+                    <option value="A#">A#</option>
+                    <option value="Bb">Bb</option>
+                    <option value="B">B</option>
+                </select>
+            </div>
+            <div class="col s8">
+                {% include 'partials/selectMenus/chord-quality.html' %}
+            </div>
+        </div>
+    </div>
+    <div class="row choose-scale">
+        <div class="col s10 offset-s2 center">
+                <h4>Choose a scale:</h4>
+                <select name="compatible-scales" id="compatible-scales" class="browser-default blue-grey-text text-darken-4 blue-grey">
+                    <!-- add options with JS -->
+                </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s6 offset-s3">
+            <div class="add-button blue-grey darken-2 blue-grey-text text-lighten-3 center">Add</div>
+        </div>
+    </div>
+</div>

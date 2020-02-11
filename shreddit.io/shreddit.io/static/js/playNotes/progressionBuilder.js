@@ -86,57 +86,134 @@ const updateCompatibleScales = () => {
 }
 
 const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
-    let newProgressionItem   = document.createElement('li');
+    let newProgressionItem   = document.createElement('li'),
         newRow               = document.createElement('div'),
         progressionContainer = document.querySelector('#progression-items'),
-        newDelete            = '',
-        newEdit              = '',
+        newDelete,
+        newEdit,
+        newClose,
+        template,
         chordName            = `${chordKey}${chordQuality}`;
 
     console.log(`Original scale name: ${scaleName}`);
     
-    let template = `
-        <div class="col s12 l6 offset-l3 saved-progression-container">
-            <div class="card">
-                <div class="card-content blue-grey lighten-2">
-                    <div class="title activator blue-grey lighten-3 text-darken-4">
-                    <i class="material-icons right">more_vert</i>
-                        <div class="row">
-                            <div class="col s8">
-                            <span class="chord-label">Chord:
-                                    <span class="chord-name">${chordName}</span>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s12">
-                            <span class="scale-label">Scale:
-                                <span class="scale-name">&nbsp;${scaleName}</span>
-                            </span>
-                        </div>
-                    </div>
+    template = `<div class="col s12 l6 offset-l3 saved-progression-container">
+    <div class="card">
+        <div class="card-content blue-grey lighten-2">
+            <div class="title activator blue-grey lighten-3 text-darken-4">
+            <i class="material-icons right">more_vert</i>
+                <div class="row">
+                    <div class="col s8">
+                    <span class="chord-label">Chord:
+                            <span class="chord-name">${chordName}</span>
+                    </span>
                 </div>
             </div>
-            <div class="card-reveal blue-grey lighten-2">
-                <div class="row card-links">
-                    <div class="col l3 s1"></div>
-                    <div class="col l3 s4">
-                        <div class="card-link blue-grey darken-1 nav-link center-align">
-                            <a href="javascript:;" id="edit-progression-item">Edit</a>
-                        </div>
-                    </div>
-                    <div class="col l3 s4">
-                        <div class="card-link blue-grey darken-1 nav-link center-align">
-                            <a href="javascript:;" id="delete">Delete</a>
-                        </div>
-                    </div>
-                    <div class="col l1 s2">
-                        <span class="card-title"><i class="material-icons right close blue-grey-text text-darken-4">close</i></span>
-                    </div>
+            <div class="row">
+                <div class="col s12">
+                    <span class="scale-label">Scale:
+                        <span class="scale-name">&nbsp;${scaleName}</span>
+                    </span>
                 </div>
             </div>
         </div>
-    </div>`
+    </div>
+    <div class="card-reveal blue-grey lighten-2">
+        <div class="row card-links">
+            <div class="col l3 s1"></div>
+            <div class="col l3 s4">
+                <div id="edit-progression-item" class="card-link blue-grey darken-1 nav-link center-align">
+                    <a href="javascript:;">Edit</a>
+                </div>
+            </div>
+            <div class="col l3 s4">
+                <div class="card-link blue-grey darken-1 nav-link center-align">
+                    <a href="javascript:;" id="delete">Delete</a>
+                </div>
+            </div>
+            <div class="col l1 s2">
+                <span class="card-title"><i class="material-icons right close blue-grey-text text-darken-4">close</i></span>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="edit-panel" class="blue-grey darken-1">
+    <div class="row choose-chord" id="choose-chord">
+        <h4>Choose a chord: </h4>
+        <div class="row">
+            <div class="col s4">
+                <select name="key" id="key-input" class="browser-default blue-grey-text text-darken-4 blue-grey">
+                    <option value="C" selected>C</option>
+                    <option value="C#">C#</option>
+                    <option value="Db">Db</option>
+                    <option value="D">D</option>
+                    <option value="D#">D#</option>
+                    <option value="Eb">Eb</option>
+                    <option value="E">E</option>
+                    <option value="F">F</option>
+                    <option value="F#">F#</option>
+                    <option value="Gb">Gb</option>
+                    <option value="G">G</option>
+                    <option value="G#">G#</option>
+                    <option value="Ab">Ab</option>
+                    <option value="A">A</option>
+                    <option value="A#">A#</option>
+                    <option value="Bb">Bb</option>
+                    <option value="B">B</option>
+                </select>
+            </div>
+            <div class="col s8">
+                <select name="chord-quality" id="chord-quality" class="browser-default blue-grey-text text-darken-4 blue-grey">
+                    <option value="" selected>Major</option>
+                    <option value="m">Minor</option>
+                    <option value="6">6</option>
+                    <option value="m6">m6</option>
+                    <option value="6/9">6/9</option>
+                    <option value="maj7">maj7</option>
+                    <option value="7">7</option>
+                    <option value="7b5">7b5</option>
+                    <option value="7#5">7#5</option>
+                    <option value="m7">m7</option>
+                    <option value="m(maj7)">m(maj7)</option>
+                    <option value="m7b5">m7b5</option>
+                    <option value="aug7">aug7</option>
+                    <option value="9">9</option>
+                    <option value="9b5">9b5</option>
+                    <option value="9#5">9#5</option>
+                    <option value="maj9">maj9</option>
+                    <option value="m9">m9</option>
+                    <option value="m11">m11</option>
+                    <option value="13">13</option>
+                    <option value="maj13">maj13</option>
+                    <option value="m13">m13</option>
+                    <option value="sus4">sus4</option>
+                    <option value="sus2">sus2</option>
+                    <option value="7sus4">7sus4</option>
+                    <option value="7sus2">7sus2</option>
+                    <option value="9sus4">9sus4</option>
+                    <option value="9sus2">9sus2</option>
+                    <option value="aug">aug</option>
+                    <option value="dim">dim</option>
+                    <option value="dim7">dim7</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row choose-scale">
+        <div class="col s10 offset-s2 center">
+                <h4>Choose a scale:</h4>
+                <select name="compatible-scales" id="compatible-scales" class="browser-default blue-grey-text text-darken-4 blue-grey">
+                    <!-- add options with JS -->
+                </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s6 offset-s3">
+            <div class="add-button blue-grey darken-2 blue-grey-text text-lighten-3 center">Add</div>
+        </div>
+    </div>
+</div>`
 
     newRow.classList.add('row',
                          'blue-grey',
@@ -165,15 +242,18 @@ const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
     newProgressionItem.dataset.scaleName = scaleName;
     
     newEdit = newProgressionItem.querySelector('#edit-progression-item');
-
     newEdit.addEventListener('click', (event) => {
         let editButton = event.target;
-        
+
         updateEditDisplay(editButton, newProgressionItem);
     })
 
+    newClose = newProgressionItem.querySelector('.close');
+    newClose.addEventListener('click', e => {
+        updateEditDisplay(e.target, newProgressionItem)
+    })
+
     newDelete = newProgressionItem.querySelector('#delete');
-    
     newDelete.addEventListener('click', () => {
         newProgressionItem.remove();
 
