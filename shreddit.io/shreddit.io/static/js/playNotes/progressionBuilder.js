@@ -24,7 +24,6 @@ let progressionList = Sortable.create(document.querySelector('#progression-items
 });
 
 
-
 const fullScaleNames = {
     'aeolian'           :'Aeolian',
     'blues'             :'Blues',
