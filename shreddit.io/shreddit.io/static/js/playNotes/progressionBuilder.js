@@ -52,7 +52,9 @@ const fullScaleNames = {
 
 
 // DOM Manipulations
-const updateCompatibleScales = () => {
+const updateCompatibleScales = (selectMenu) => {
+
+    let compatibleScaleSelect = selectMenu;
 
     removeChildren(compatibleScaleSelect);
 
@@ -210,7 +212,7 @@ const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
     </div>
     <div class="row">
         <div class="col s6 offset-s3">
-            <div class="add-button blue-grey darken-2 blue-grey-text text-lighten-3 center">Add</div>
+            <div class="add-button blue-grey darken-2 blue-grey-text text-lighten-3 center">Update</div>
         </div>
     </div>
 </div>`
@@ -267,11 +269,11 @@ const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
 
 
 progressionKeyInput.addEventListener('change', () => {
-    updateCompatibleScales();
+    updateCompatibleScales(compatibleScaleSelect);
 });
 
 progressionChordQuality.addEventListener('change', () => {
-    updateCompatibleScales();
+    updateCompatibleScales(compatibleScaleSelect);
 });
 
 
@@ -412,7 +414,7 @@ progressionAddButton.addEventListener('click', () => {
     updateProgression();
 });
 
-updateCompatibleScales();
+updateCompatibleScales(compatibleScaleSelect);
 
 
 const displayLoadedProgression = () => {

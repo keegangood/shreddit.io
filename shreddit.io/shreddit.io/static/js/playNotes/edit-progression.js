@@ -39,7 +39,7 @@ const updateEditDisplay = (button, progressionItem) => {
 
     console.log(button.nodeName);
     
-    if(button.nodeName == 'DIV') {
+    if(button.nodeName == 'DIV' || button.nodeName == 'A') {
         editButton = button;
         if(editButton.innerText == 'Edit'){
             
@@ -75,17 +75,29 @@ const updateEditDisplay = (button, progressionItem) => {
 
 const editProgressionItem = item => {
 
-    // console.log(progressionKeyInput);
-    // console.log(progressionChordQuality);
-    // console.log(compatibleScaleSelect);
     let currentChordKey,
-        currentChordName,
-        currentScale;
+        currentChordQuality,
+        currentScaleKey,
+        currentScaleName,
+        chordKeySelect = item.querySelector('#key-input'),
+        chordQualitySelect = item.querySelector('#chord-quality');
 
-    currentChordKey  = item.querySelector('.chord-name');
-    currentChordName = item.querySelector('.chord-name');
-    currentScale     = item.querySelector('.scale-name');
+    currentChordKey     = item.dataset.chordKey;
+    currentChordQuality = item.dataset.chordQuality;
+    currentScaleKey     = item.dataset.scaleKey;
+    currentScaleName    = item.dataset.scaleName;
     
+    if(currentChordKey.length > 1){
+        currentChordKey = currentChordKey[0].toUpperCase() + currentChordKey[1]
+    } else {
+        currentChordKey = currentChordKey.toUpperCase();
+    }
+    chordKeySelect.value = currentChordKey;
+    chordQualitySelect.value = currentChordQuality;
+    console.log(`chordKey: ${currentChordKey}`);
+    console.log(`chordName: ${currentChordQuality}`);
+    console.log(`currentScaleKey: ${currentScaleKey}`);
+    console.log(`currentScalName: ${currentScaleName}`);
 
 }
 
