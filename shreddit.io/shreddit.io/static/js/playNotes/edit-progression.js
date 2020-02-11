@@ -1,25 +1,67 @@
-// const buildEditInterFace = () => {
-//     let progression       = document.querySelector('.progression-to-edit'),
-//         chordScaleObjs    = progression.dataset.chordScaleObjects,
-//         editTemplate;
+const updateEditDisplay = (button, progressionItem) => {
 
-//     for(let i=0; i<chordsAndScales.length; i++) {
-//         chordKey     = chordsAndScales[i]['chord']['key'][0]
-//         chordKey     = chordKey.toUpperCase() + chordKey.slice(1);
+    let editStatus = document.querySelector('#edit-status');
+    console.log(editStatus);
 
-//         chordQuality = chordsAndScales[i]['chord']['quality'];
+    if(button.innerText == 'Edit'){
+        editProgressionItem(progressionItem);
 
-//         scaleKey     = chordsAndScales[i]['scale']['key'];
-//         scaleKey     = scaleKey[0].toUpperCase() + scaleKey.slice(1);
+        editStatus.classList.add('show');
 
-//         scaleName    = fullScaleNames[chordsAndScales[i]['scale']['name']];
+        button.innerText = 'Editing...';
+
+        button.classList.remove('blue-grey-text');
+        button.classList.remove('text-lighten-5');
+
+        button.classList.add('red-text');
+        button.classList.add('text-darken-1');
+    } else if(button.innerText == 'Editing...'){
+        button.innerText = 'Edit';
+
+        button.classList.remove('red-text');
+        button.classList.remove('text-darken-1');
+
+        button.classList.add('blue-grey-text');
+        button.classList.add('text-lighten-5');
+
+    }
+    
+}
+
+const editProgressionItem = item => {
+    item.querySelector('#edit-progression-item').innerText = 'Editing...';
+
+    // console.log(progressionKeyInput);
+    // console.log(progressionChordQuality);
+    // console.log(compatibleScaleSelect);
+    let currentChordKey,
+        currentChordName,
+        currentScale;
+
+    currentChordKey  = item.querySelector('.chord-name');
+    currentChordName = item.querySelector('.chord-name');
+    currentScale     = item.querySelector('.scale-name');
+
+    console.log(item.querySelector('.close'));
+    
+    item.querySelector('.close').addEventListener('click', (e, i=item) => {
+        let button = item.querySelector('#edit-progression-item');
+        console.log(e.target);
+        console.log(item);
+
+        button.innerText = 'Edit';
         
+        button.classList.remove('red-text');
+        button.classList.remove('text-darken-1');
 
-//     }
-// }
+        button.classList.add('blue-grey-text');
+        button.classList.add('text-lighten-5');
+    })
 
-// const addEditItem = () => {
-//     let editItem = document.createElement('div')
-// }
+    // item.querySelector('.close').dispatchEvent(new Event('click'));
 
-// buildEditInterFace();
+
+    console.log(`current chord: `);
+    
+}
+

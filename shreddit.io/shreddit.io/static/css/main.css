@@ -6,7 +6,7 @@ body {
     color: #19252b;
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 2rem;
-
+ 
 }
 
 .main-content {
@@ -59,3 +59,5 @@ select:active option {
 .hide {
     z-index: -1;
 }
+
+

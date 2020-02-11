@@ -1,7 +1,7 @@
 
 let progressionKeyInput          = document.querySelector('.progression-builder #key-input'),
     progressionChordQuality      = document.querySelector('.progression-builder #chord-quality'),
-    compatibleScaleSelect        = document.querySelector('#compatible-scales'),
+    compatibleScaleSelect        = document.querySelector('.progression-builder #compatible-scales'),
     progressionItemDeleteButtons = document.querySelectorAll('.progression-builder .delete-button'),
     progressionAddButton         = document.querySelector('.progression-builder .add-button'),
     playButton                   = document.querySelector('.play-button'),
@@ -87,11 +87,12 @@ const updateCompatibleScales = () => {
 }
 
 const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
-    let newItem = document.createElement('li');
-        newRow = document.createElement('div'),
+    let newProgressionItem   = document.createElement('li');
+        newRow               = document.createElement('div'),
         progressionContainer = document.querySelector('#progression-items'),
-        newDelete = '',
-        chordName = `${chordKey}${chordQuality}`;
+        newDelete            = '',
+        newEdit              = '',
+        chordName            = `${chordKey}${chordQuality}`;
 
     console.log(`Original scale name: ${scaleName}`);
     
@@ -122,12 +123,12 @@ const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
                     <div class="col l3 s1"></div>
                     <div class="col l3 s4">
                         <div class="card-link blue-grey darken-1 nav-link center-align">
-                            <a href="#" id="edit-chord-scale">Edit</a>
+                            <a href="#" id="edit-progression-item">Edit</a>
                         </div>
                     </div>
                     <div class="col l3 s4">
                         <div class="card-link blue-grey darken-1 nav-link center-align">
-                            <a href="#progression-items" id="delete">Delete</a>
+                            <a href="#" id="delete">Delete</a>
                         </div>
                     </div>
                     <div class="col l1 s2">
@@ -155,27 +156,33 @@ const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
 
     newRow.innerHTML = template;
 
-    newItem.append(newRow);
+    newProgressionItem.append(newRow);
 
-    newItem.classList.add('progression-item')
+    newProgressionItem.classList.add('progression-item')
 
-    newItem.dataset.chordKey = chordKey.toLowerCase();
-    newItem.dataset.chordQuality = chordQuality;
-    newItem.dataset.scaleKey = scaleKey.toLowerCase();
-    newItem.dataset.scaleName = scaleName;
+    newProgressionItem.dataset.chordKey = chordKey.toLowerCase();
+    newProgressionItem.dataset.chordQuality = chordQuality;
+    newProgressionItem.dataset.scaleKey = scaleKey.toLowerCase();
+    newProgressionItem.dataset.scaleName = scaleName;
     
+    newEdit = newProgressionItem.querySelector('#edit-progression-item');
 
-    newDelete = newItem.querySelector('#delete');
+    newEdit.addEventListener('click', (event) => {
+        let editButton = event.target;
+        
+        updateEditDisplay(editButton, newProgressionItem);
+    })
+
+    newDelete = newProgressionItem.querySelector('#delete');
     
-    newDelete.addEventListener('click', (e) => {
-        newItem.remove();
+    newDelete.addEventListener('click', () => {
+        newProgressionItem.remove();
 
         updateProgression();
         console.log(currentProgressionData);
-        
     });
 
-    progressionContainer.append(newItem);
+    progressionContainer.append(newProgressionItem);
 }
 
 
@@ -208,9 +215,6 @@ const compileChordScaleObject = () => {
         chordScaleObject = {},
         chordScaleObjects = [];
 
-        console.log(progressionItems.length);
-
-
     for(let i=0; i<progressionItems.length; i++){
 
         chordScaleObject = {}
@@ -223,9 +227,6 @@ const compileChordScaleObject = () => {
 
 
         chordNotes = teoria.note(chordKey).chord(chordQuality).notes();
-        // for(let i in chordNotes){
-        //     console.log(`note: ${chordNotes[i]}`);
-        // }
 
         chordScaleObject["chord"] = 
             {
@@ -249,8 +250,6 @@ const compileChordScaleObject = () => {
 }
 
 const compileProgression = objects => {
-
-    // console.log(objects);
     
     let progression = {},
         chord,
@@ -305,10 +304,7 @@ const updateProgression = () => {
     chordNamesField.value = '';
     currentProgressionField.value = '';
 
-    let pairs = compileChordScaleObject();
-
-    console.log(pairs);
-    
+    let pairs = compileChordScaleObject();    
 
     currentProgressionData = compileProgression(pairs);
 
@@ -316,8 +312,6 @@ const updateProgression = () => {
 
     chordNamesField.value         = chordNamesData;
     currentProgressionField.value = JSON.stringify(currentProgressionData);
-
-    console.log(currentProgressionData);
     
 }
 
@@ -373,7 +367,7 @@ const displayLoadedProgression = () => {
             chordNamesField.value         = chordNamesData;
             
             currentProgressionField.value = JSON.stringify(currentProgressionData);
-
+            loadedProgressionField.value  = JSON.stringify(currentProgressionField);
         }
 
     } catch (error){
