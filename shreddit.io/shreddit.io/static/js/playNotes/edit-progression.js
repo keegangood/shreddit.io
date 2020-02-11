@@ -1,15 +1,10 @@
 const updateEditDisplay = (button, progressionItem) => {
 
-    let editStatus = document.querySelector('#edit-status');
-    console.log(editStatus);
-
     if(button.innerText == 'Edit'){
         editProgressionItem(progressionItem);
 
-        editStatus.classList.add('show');
-
         button.innerText = 'Editing...';
-
+        
         button.classList.remove('blue-grey-text');
         button.classList.remove('text-lighten-5');
 

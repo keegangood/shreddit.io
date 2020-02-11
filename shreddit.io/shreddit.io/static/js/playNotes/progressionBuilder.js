@@ -123,12 +123,12 @@ const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
                     <div class="col l3 s1"></div>
                     <div class="col l3 s4">
                         <div class="card-link blue-grey darken-1 nav-link center-align">
-                            <a href="#" id="edit-progression-item">Edit</a>
+                            <a href="javascript:;" id="edit-progression-item">Edit</a>
                         </div>
                     </div>
                     <div class="col l3 s4">
                         <div class="card-link blue-grey darken-1 nav-link center-align">
-                            <a href="#" id="delete">Delete</a>
+                            <a href="javascript:;" id="delete">Delete</a>
                         </div>
                     </div>
                     <div class="col l1 s2">
@@ -301,10 +301,14 @@ const compileProgression = objects => {
 }
 
 const updateProgression = () => {
+
+    console.log(currentProgressionData);
+    
+
     chordNamesField.value = '';
     currentProgressionField.value = '';
 
-    let pairs = compileChordScaleObject();    
+    let pairs = compileChordScaleObject();
 
     currentProgressionData = compileProgression(pairs);
 
@@ -313,6 +317,8 @@ const updateProgression = () => {
     chordNamesField.value         = chordNamesData;
     currentProgressionField.value = JSON.stringify(currentProgressionData);
     
+    console.log(currentProgressionData);
+
 }
 
 // button to add new items to progression
