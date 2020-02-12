@@ -28,10 +28,6 @@ const displayMessages = () => {
                 message = e.target.parentElement.parentElement.parentElement;
                 message.style.top = '-15px';
                 message.classList.remove('message-show');
-
-                setTimeout(() => {
-                    displayMessages.remove();
-                }, 300)
             })
         }
         
@@ -48,7 +44,7 @@ const displayMessages = () => {
 
         setTimeout(() => {
             messageDisplay.remove()
-        }, 2800)
+        }, 3500)
     }
 }
 
