@@ -149,23 +149,29 @@ const loadDefaultProgressionInfo = progressionItem => {
 const updateProgressionItem = progressionItem => {
     console.log(progressionItem);
     
-    let selectedScale     = progressionItem.querySelector('#edit-panel #compatible-scales'),
-        selectedScaleName = selectedScale.options[selectedScale.selectedIndex].value;
-    
-    console.log(selectedScale.options[selectedScale.selectedIndex]);
-    
-
-    let updatedChordKey     = progressionItem.querySelector('#key-input').value,
+    let selectedScale       = progressionItem.querySelector('#edit-panel #compatible-scales'),
+        selectedScaleName   = selectedScale.options[selectedScale.selectedIndex].value;
+        updatedChordKey     = progressionItem.querySelector('#key-input').value,
         updatedChordQuality = progressionItem.querySelector('#chord-quality').value,
-        updatedScaleKey     = selectedScale.split(' ')[0],
-        updatedScaleName    = selectedScale.split(' ')[1];
+        updatedScaleKey     = selectedScaleName.split(' ')[0],
+        updatedScaleName    = selectedScaleName.split(' ')[1],
+        scaleNameDisplay    = progressionItem.querySelector('.scale-name'),
+        chordNameDisplay    = progressionItem.querySelector('.chord-name');
 
-        console.log(`updatedChordKey:     ${updatedChordKey}`);
-        console.log(`updatedChordQuality: ${updatedChordQuality}`);
-        console.log(`updatedScaleKey:     ${updatedScaleKey}`);
-        console.log(`updatedScaleName:    ${updatedScaleName}`);    
+    console.log(`updatedChordKey:     ${updatedChordKey}`);
+    console.log(`updatedChordQuality: ${updatedChordQuality}`);
+    console.log(`updatedScaleKey:     ${updatedScaleKey}`);
+    console.log(`updatedScaleName:    ${updatedScaleName}`);    
         
-        // progressionItem.dataset.chordKey = updatedChordKey
     
 
+    progressionItem.dataset.chordKey     = updatedChordKey[0].toLowerCase() + updatedChordKey.substring(1, updatedChordKey.length);
+    progressionItem.dataset.chordQuality = updatedChordQuality;
+    progressionItem.dataset.scaleKey     = updatedScaleKey;
+    progressionItem.dataset.scaleName    = updatedScaleName;
+
+    chordNameDisplay.innerText = `${updatedChordKey}${updatedChordQuality}`;
+    scaleNameDisplay.innerText = `${updatedScaleKey[0].toUpperCase() + updatedScaleKey.substring(1, updatedScaleKey.length)} ${fullScaleNames[updatedScaleName]} `;
+
+    updateProgression();
 }
