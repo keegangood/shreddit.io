@@ -79,25 +79,45 @@ const editProgressionItem = item => {
         currentChordQuality,
         currentScaleKey,
         currentScaleName,
+        currentScaleKeyAndName,
         chordKeySelect = item.querySelector('#key-input'),
-        chordQualitySelect = item.querySelector('#chord-quality');
+        chordQualitySelect = item.querySelector('#chord-quality'),
+        compatibleScales,
+        compatibleScaleSelect = item.querySelector('#compatible-scales'),
+        i;
 
-    currentChordKey     = item.dataset.chordKey;
-    currentChordQuality = item.dataset.chordQuality;
-    currentScaleKey     = item.dataset.scaleKey;
-    currentScaleName    = item.dataset.scaleName;
+        currentChordKey        = item.dataset.chordKey;
+        currentChordQuality    = item.dataset.chordQuality;
+        currentScaleKey        = item.dataset.scaleKey;
+        currentScaleName       = item.dataset.scaleName;
+        currentScaleKeyAndName = `${currentScaleKey} ${currentScaleName}`;
+
+    neck.curKey = teoria.note(currentChordKey)
+    neck.scale = neck.curKey.chord(chordName).voicing();
+    
+    neck.findCompatibleScales();
+    
+    updateCompatibleScales(compatibleScaleSelect, chordKeySelect, chordQualitySelect);
+
+    for(i=0; i<compatibleScaleSelect.options.length; i++){
+
+        if(compatibleScaleSelect.options[i].value == currentScaleKeyAndName){
+            compatibleScaleSelect.value = currentScaleKeyAndName;
+        }
+    }
     
     if(currentChordKey.length > 1){
         currentChordKey = currentChordKey[0].toUpperCase() + currentChordKey[1]
     } else {
         currentChordKey = currentChordKey.toUpperCase();
     }
+    
     chordKeySelect.value = currentChordKey;
     chordQualitySelect.value = currentChordQuality;
-    console.log(`chordKey: ${currentChordKey}`);
-    console.log(`chordName: ${currentChordQuality}`);
-    console.log(`currentScaleKey: ${currentScaleKey}`);
-    console.log(`currentScalName: ${currentScaleName}`);
+    // console.log(`chordKey: ${currentChordKey}`);
+    // console.log(`chordName: ${currentChordQuality}`);
+    // console.log(`currentScaleKey: ${currentScaleKey}`);
+    // console.log(`currentScalName: ${currentScaleName}`);
 
 }
 

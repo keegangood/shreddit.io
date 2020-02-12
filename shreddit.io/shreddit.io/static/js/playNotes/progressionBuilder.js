@@ -52,9 +52,16 @@ const fullScaleNames = {
 
 
 // DOM Manipulations
-const updateCompatibleScales = (selectMenu) => {
-
+const updateCompatibleScales = (selectMenu, keyInput, chordQualityInput) => {
+    console.log(`selectMenu: ${selectMenu}` );
+    console.log(`keyInput: ${keyInput}`);
+    console.log(`chordQualityInput: ${chordQualityInput}`);
+    
+    
     let compatibleScaleSelect = selectMenu;
+
+    console.log(compatibleScaleSelect);
+    
 
     removeChildren(compatibleScaleSelect);
 
@@ -65,9 +72,9 @@ const updateCompatibleScales = (selectMenu) => {
         option,
         scaleName;
 
-    key = progressionKeyInput.value;
+    key = keyInput.value;
     neck.curKey = teoria.note(key);
-    chordName = progressionChordQuality.value;
+    chordName = chordQualityInput.value;
 
     neck.scale = neck.curKey.chord(chordName).voicing();//.toString().split(',');
     neck.markedNotes = neck.curKey.chord(chordName).simple();
@@ -94,6 +101,9 @@ const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
         newDelete,
         newEdit,
         newClose,
+        newKeyInput,
+        newChordQualityInput,
+        newCompatibleScalesSelect,
         template,
         chordName            = `${chordKey}${chordQuality}`;
 
@@ -212,7 +222,7 @@ const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
     </div>
     <div class="row">
         <div class="col s6 offset-s3">
-            <div class="add-button blue-grey darken-2 blue-grey-text text-lighten-3 center">Update</div>
+            <div class="update-button blue-grey darken-2 blue-grey-text text-lighten-3 center">Update</div>
         </div>
     </div>
 </div>`
@@ -254,26 +264,45 @@ const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
     newClose.addEventListener('click', e => {
         updateEditDisplay(e.target, newProgressionItem)
     })
+    
+    newKeyInput = newProgressionItem.querySelector('#key-input');
+    newKeyInput.addEventListener('change', () => {
+        newCompatibleScalesSelect = newProgressionItem.querySelector('#compatible-scales')
+        
+        console.log('hello');
+     
+        console.log(newCompatibleScalesSelect);
+        console.log(newKeyInput.value);
+        console.log(newChordQualityInput.value);
+        
+        updateCompatibleScales(newCompatibleScalesSelect, newKeyInput, newChordQualityInput)
+    })
+
+    newChordQualityInput = newProgressionItem.querySelector('#chord-quality')
+    newChordQualityInput.addEventListener('change', () => {
+        newCompatibleScalesSelect = newProgressionItem.querySelector('#compatible-scales')
+
+        updateCompatibleScales(newCompatibleScalesSelect, newKeyInput, newChordQualityInput)
+    })
 
     newDelete = newProgressionItem.querySelector('#delete');
     newDelete.addEventListener('click', () => {
         newProgressionItem.remove();
 
         updateProgression();
-        console.log(currentProgressionData);
+        // console.log(currentProgressionData);
     });
 
     progressionContainer.append(newProgressionItem);
 }
 
 
-
 progressionKeyInput.addEventListener('change', () => {
-    updateCompatibleScales(compatibleScaleSelect);
+    updateCompatibleScales(compatibleScaleSelect, progressionKeyInput, progressionChordQuality);
 });
 
 progressionChordQuality.addEventListener('change', () => {
-    updateCompatibleScales(compatibleScaleSelect);
+    updateCompatibleScales(compatibleScaleSelect, progressionKeyInput, progressionChordQuality);
 });
 
 
@@ -414,7 +443,7 @@ progressionAddButton.addEventListener('click', () => {
     updateProgression();
 });
 
-updateCompatibleScales(compatibleScaleSelect);
+updateCompatibleScales(compatibleScaleSelect, progressionKeyInput, progressionChordQuality);
 
 
 const displayLoadedProgression = () => {
