@@ -51,14 +51,14 @@ const fullScaleNames = {
 
 // DOM Manipulations
 const updateCompatibleScales = (selectMenu, keyInput, chordQualityInput, selectedItem='') => {
-    // console.log(`selectMenu: ${selectMenu}` );
-    // console.log(`keyInput: ${keyInput}`);
-    // console.log(`chordQualityInput: ${chordQualityInput}`);
+    console.log(`selectMenu: ${selectMenu}` );
+    console.log(`keyInput: ${keyInput}`);
+    console.log(`chordQualityInput: ${chordQualityInput}`);
     
     
     let compatibleScaleSelect = selectMenu;
 
-    // console.log(compatibleScaleSelect);
+    console.log(compatibleScaleSelect);
 
     removeChildren(compatibleScaleSelect);
 
@@ -283,9 +283,6 @@ const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
     newChordQualityInput = newProgressionItem.querySelector('#chord-quality')
     newChordQualityInput.addEventListener('change', () => {
 
-        console.log(newKeyInput);
-        console.log(newCompatibleScalesSelect);
-        console.log(newChordQualityInput);
 
         newCompatibleScalesSelect = newProgressionItem.querySelector('#compatible-scales')
         updateCompatibleScales(newCompatibleScalesSelect, newKeyInput, newChordQualityInput)
@@ -305,7 +302,7 @@ const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
 
     newCompatibleScalesSelect = newCompatibleScalesSelect = newProgressionItem.querySelector('#compatible-scales');
     newCompatibleScalesSelect.addEventListener('change', () => {
-        updateProgressionItem(newProgressionItem);
+        // updateProgressionItem(newProgressionItem);
     })
 
     progressionContainer.append(newProgressionItem);
