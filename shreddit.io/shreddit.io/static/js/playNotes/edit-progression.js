@@ -37,7 +37,7 @@ const updateEditDisplay = (button, progressionItem) => {
     let editPanel = progressionItem.querySelector('#edit-panel'),
         editButton;
 
-    console.log(button.nodeName);
+    // console.log(button.nodeName);
     
     if(button.nodeName == 'DIV' || button.nodeName == 'A') {
         editButton = button;
@@ -49,7 +49,7 @@ const updateEditDisplay = (button, progressionItem) => {
 
             editProgressionItem(progressionItem);
             
-            console.log(progressionItem.dataset);
+            // console.log(progressionItem.dataset);
             
     
         } else if(editButton.innerText == 'Editing...'){
@@ -92,9 +92,9 @@ const editProgressionItem = item => {
         compatibleScaleSelect = item.querySelector('#edit-panel #compatible-scales'),
         i;
 
-        console.log(chordKeySelect);
-        console.log(chordQualitySelect);
-        console.log(compatibleScaleSelect);
+        // console.log(chordKeySelect);
+        // console.log(chordQualitySelect);
+        // console.log(compatibleScaleSelect);
         
         currentChordKey        = item.dataset.chordKey;
         currentChordQuality    = item.dataset.chordQuality;
@@ -133,7 +133,7 @@ const loadDefaultProgressionInfo = progressionItem => {
         chordKey;
 
         chordKey = progressionItem.dataset.chordKey;
-        console.log(chordKey.length);
+        // console.log(chordKey.length);
         
         if(chordKey.length > 1){
             keySelect.value = chordKey[0].toUpperCase() + chordKey.substring(1, chordKey.length);
@@ -147,7 +147,7 @@ const loadDefaultProgressionInfo = progressionItem => {
 }
 
 const updateProgressionItem = progressionItem => {
-    console.log(progressionItem);
+    // console.log(progressionItem);
     
     let selectedScale       = progressionItem.querySelector('#edit-panel #compatible-scales'),
         selectedScaleName   = selectedScale.options[selectedScale.selectedIndex].value;
@@ -158,10 +158,10 @@ const updateProgressionItem = progressionItem => {
         scaleNameDisplay    = progressionItem.querySelector('.scale-name'),
         chordNameDisplay    = progressionItem.querySelector('.chord-name');
 
-    console.log(`updatedChordKey:     ${updatedChordKey}`);
-    console.log(`updatedChordQuality: ${updatedChordQuality}`);
-    console.log(`updatedScaleKey:     ${updatedScaleKey}`);
-    console.log(`updatedScaleName:    ${updatedScaleName}`);    
+    // console.log(`updatedChordKey:     ${updatedChordKey}`);
+    // console.log(`updatedChordQuality: ${updatedChordQuality}`);
+    // console.log(`updatedScaleKey:     ${updatedScaleKey}`);
+    // console.log(`updatedScaleName:    ${updatedScaleName}`);    
         
     
 

@@ -16,8 +16,8 @@ def save_progression(request):
             old_progression_id = int(request.POST['loaded-progression-id'])
             print(type(old_progression_id))
 
-        print(f'new == old? : {old_progression == new_progression}')
-        print(request.POST['save-or-update'])
+        # print(f'new == old? : {old_progression == new_progression}')
+        # print(request.POST['save-or-update'])
 
         if request.POST['save-or-update'] == 'update':
             if old_progression == new_progression:
@@ -56,7 +56,6 @@ def save_progression(request):
                     'chord_names': chord_names,
                     'path': request.path_info.split('/')[1]
                 }
-                print('called')
                 messages.success(request, 'Progression saved!')
 
                 return redirect('pages-explore', id=progression.id)

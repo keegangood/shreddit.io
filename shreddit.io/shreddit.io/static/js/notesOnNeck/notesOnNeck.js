@@ -63,7 +63,7 @@ let instrumentNames,
     // selected instrument's tunings
     const updateTunings = (newInstrument) => {
 
-        console.log(newInstrument);
+        // console.log(newInstrument);
         
 
         while(tuningInput.hasChildNodes()){
@@ -150,16 +150,19 @@ let windowWidthChange = mediaQuery => {
         neck.orientation = 'horizontal';
         noteLegend = document.querySelector('.note-legend-horizontal .note-legend-markers')
         updateInstrument(); 
-        
+
+
     } else {
         neck.orientation = 'vertical';
         noteLegend = document.querySelector('.note-legend-vertical .note-legend-markers')
         updateInstrument();
+
+
     }
 }
 
 // listen for screen width changes
-const mediaQuery = window.matchMedia("(min-width: 768px)");
+const mediaQuery = window.matchMedia("(min-width: 400px)");
 mediaQuery.addListener(windowWidthChange);
 windowWidthChange(mediaQuery);
 

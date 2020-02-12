@@ -51,14 +51,14 @@ const fullScaleNames = {
 
 // DOM Manipulations
 const updateCompatibleScales = (selectMenu, keyInput, chordQualityInput, selectedItem='') => {
-    console.log(`selectMenu: ${selectMenu}` );
-    console.log(`keyInput: ${keyInput}`);
-    console.log(`chordQualityInput: ${chordQualityInput}`);
+    // console.log(`selectMenu: ${selectMenu}` );
+    // console.log(`keyInput: ${keyInput}`);
+    // console.log(`chordQualityInput: ${chordQualityInput}`);
     
     
     let compatibleScaleSelect = selectMenu;
 
-    console.log(compatibleScaleSelect);
+    // console.log(compatibleScaleSelect);
 
     removeChildren(compatibleScaleSelect);
 
@@ -71,7 +71,7 @@ const updateCompatibleScales = (selectMenu, keyInput, chordQualityInput, selecte
 
     key = keyInput.value;
 
-    console.log(`key: ${key}`);
+    // console.log(`key: ${key}`);
     
 
     neck.curKey = teoria.note(key);
@@ -113,7 +113,7 @@ const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
         template,
         chordName            = `${chordKey}${chordQuality}`;
 
-    console.log(`Original scale name: ${scaleName}`);
+    // console.log(`Original scale name: ${scaleName}`);
     
     template = `<div class="col s12 l6 offset-l3 saved-progression-container">
     <div class="card">
@@ -424,7 +424,7 @@ const compileProgression = objects => {
 
 const updateProgression = () => {
 
-    console.log(currentProgressionData);
+    // console.log(currentProgressionData);
     
 
     chordNamesField.value = '';
@@ -438,7 +438,7 @@ const updateProgression = () => {
 
     chordNamesField.value         = chordNamesData;
     currentProgressionField.value = JSON.stringify(currentProgressionData);
-    console.log(currentProgressionData);
+    // console.log(currentProgressionData);
 
 }
 
@@ -464,7 +464,7 @@ const displayLoadedProgression = () => {
             chordsAndScales = progression.chordScaleObjects,
             chordKey, chordQuality, scaleKey, scaleName;
 
-        console.log(progression);
+        // console.log(progression);
         
         for(let i=0; i<chordsAndScales.length; i++) {
             chordKey     = chordsAndScales[i]['chord']['key'][0]
@@ -487,7 +487,7 @@ const displayLoadedProgression = () => {
 
             currentProgressionData = compileProgression(pairs);
 
-            console.log(`currentProgressionData: ${currentProgressionData}`)
+            // console.log(`currentProgressionData: ${currentProgressionData}`)
 
             chordNamesData = currentProgressionData['chordNames'].join(' ')
 

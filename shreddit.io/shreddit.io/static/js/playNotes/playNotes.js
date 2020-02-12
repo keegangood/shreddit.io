@@ -1,6 +1,6 @@
 
 const updateDisplay = data => {
-    console.log(`${data.chordKey}${data.chordQuality}`);
+    // console.log(`${data.chordKey}${data.chordQuality}`);
     let chordKey = data.chordKey,
         chord    = data.chordQuality,
         scaleKey = teoria.note(data.scaleKey),
@@ -39,7 +39,7 @@ const playNotes = (progressionObject) => {
 
             Tone.Draw.schedule(function(data=event){
                 updateDisplay(data);
-                console.log(`time: ${time}`);
+                // console.log(`time: ${time}`);
                 
             }, time)
 
@@ -51,11 +51,8 @@ const playNotes = (progressionObject) => {
     })
 }
 
-console.log("hello world");
-
-
 playButton.addEventListener('click', () => {
-    console.log("play button clicked");
+    // console.log("play button clicked");
 
     let pairs = compileChordScaleObject();
     let progression = compileProgression(pairs);

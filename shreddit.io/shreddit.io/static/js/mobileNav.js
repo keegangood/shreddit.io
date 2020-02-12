@@ -1,3 +1,29 @@
+let toggleActiveNav = mediaQuery => {
+    let navBars = document.querySelectorAll('.navigation'),
+        navBar;
+    
+    console.log(navBars);
+    
+
+    if(mediaQuery.matches){
+        navBar = navBars[1];
+
+    } else {
+        navbar = navBars[0];
+    }
+
+    navBar.classList.toggle('active-nav');
+
+}
+
+// listen for screen width changes
+// mediaQuery = window.matchMedia("(min-width: 768px)");
+mediaQuery.addListener(toggleActiveNav);
+let activeNav = toggleActiveNav(mediaQuery);
+
+// console.log(activeNav);
+
+
 let burger              = document.querySelector('.hamburger'),
     topBun              = document.querySelector('.top-bun'),
     meat                = document.querySelector('.meat'),
@@ -7,11 +33,10 @@ let burger              = document.querySelector('.hamburger'),
     navMenuContent      = document.querySelector('.mobile-nav-content'),
     settingsMenuContent = document.querySelector('.settings-menu-content'),
     mainContent         = document.querySelector('.main-content'),
-    settingsIcon;
+    settingsIcon = document.querySelector('.settings-icon');
 
-    if(document.querySelector('.settings-menu-content')){
-        settingsIcon = document.querySelector('.settings-icon');
-    }
+    
+
 
 burger.addEventListener('click', () => {
     mainContent.classList.toggle('no-scroll');
