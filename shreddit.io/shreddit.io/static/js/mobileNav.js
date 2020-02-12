@@ -18,8 +18,8 @@ let toggleActiveNav = mediaQuery => {
 
 // listen for screen width changes
 // mediaQuery = window.matchMedia("(min-width: 768px)");
-mediaQuery.addListener(toggleActiveNav);
-let activeNav = toggleActiveNav(mediaQuery);
+// mediaQuery.addListener(toggleActiveNav);
+// let activeNav = toggleActiveNav(mediaQuery);
 
 // console.log(activeNav);
 
@@ -34,9 +34,6 @@ let burger              = document.querySelector('.hamburger'),
     settingsMenuContent = document.querySelector('.settings-menu-content'),
     mainContent         = document.querySelector('.main-content'),
     settingsIcon = document.querySelector('.settings-icon');
-
-    
-
 
 
 burger.addEventListener('click', () => {
