@@ -23,6 +23,9 @@ def save_progression(request):
             if old_progression == new_progression:
                 messages.info(request, "There were no changes to save.")
                 return redirect('pages-explore', id=old_progression_id)
+            elif new_progression == '':
+                messages.info(request, "Progression cannot be blank.")
+                return redirect('pages-explore', id=old_progression_id)
             else:
                 progression = ChordProgression.objects.get(id=old_progression_id)
                 progression.progression = new_progression
@@ -34,25 +37,29 @@ def save_progression(request):
                 return redirect('pages-explore', id=progression.id)
 
         elif request.POST['save-or-update'] == 'save':
-            chord_names = request.POST['chord-names'].split(' ')
-            chord_names = [name.capitalize() for name in chord_names]
-            chord_names = ' '.join(chord_names)
+            if new_progression == '':
+                messages.info(request, "Progression cannot be blank.")
+                return redirect('pages-explore', id=0)
+            else:
+                chord_names = request.POST['chord-names'].split(' ')
+                chord_names = [name.capitalize() for name in chord_names]
+                chord_names = ' '.join(chord_names)
 
-            progression = ChordProgression.objects.create(
-                creator     = request.user,
-                progression = request.POST['progression'],
-                chord_names = chord_names
-            )
+                progression = ChordProgression.objects.create(
+                    creator     = request.user,
+                    progression = request.POST['progression'],
+                    chord_names = chord_names
+                )
 
-            context = {
-                'loaded_progression': progression,
-                'chord_names': chord_names,
-                'path': request.path_info.split('/')[1]
-            }
-            print('called')
-            messages.success(request, 'Progression saved!')
+                context = {
+                    'loaded_progression': progression,
+                    'chord_names': chord_names,
+                    'path': request.path_info.split('/')[1]
+                }
+                print('called')
+                messages.success(request, 'Progression saved!')
 
-            return redirect('pages-explore', id=progression.id)
+                return redirect('pages-explore', id=progression.id)
         else:
             return redirect('pages-explore', id=0)
 

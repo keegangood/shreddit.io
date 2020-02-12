@@ -24,8 +24,8 @@ def explore(request, id):
                     'chord_scale_objects'  : progression,
                     'path'                 : request.path_info.split('/')[1]
                 }
-
-                messages.success(request, 'Progression loaded!')
+                if len(messages.get_messages(request)) == 0:
+                    messages.success(request, 'Progression loaded!')
             else:
                 messages.error(request, "You can only edit progressions you've created. Try again.")
                 context = {
