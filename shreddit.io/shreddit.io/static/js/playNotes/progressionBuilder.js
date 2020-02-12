@@ -49,19 +49,16 @@ const fullScaleNames = {
 }
 
 
-
-
 // DOM Manipulations
-const updateCompatibleScales = (selectMenu, keyInput, chordQualityInput) => {
-    console.log(`selectMenu: ${selectMenu}` );
-    console.log(`keyInput: ${keyInput}`);
-    console.log(`chordQualityInput: ${chordQualityInput}`);
+const updateCompatibleScales = (selectMenu, keyInput, chordQualityInput, selectedItem='') => {
+    // console.log(`selectMenu: ${selectMenu}` );
+    // console.log(`keyInput: ${keyInput}`);
+    // console.log(`chordQualityInput: ${chordQualityInput}`);
     
     
     let compatibleScaleSelect = selectMenu;
 
-    console.log(compatibleScaleSelect);
-    
+    // console.log(compatibleScaleSelect);
 
     removeChildren(compatibleScaleSelect);
 
@@ -73,6 +70,10 @@ const updateCompatibleScales = (selectMenu, keyInput, chordQualityInput) => {
         scaleName;
 
     key = keyInput.value;
+
+    console.log(`key: ${key}`);
+    
+
     neck.curKey = teoria.note(key);
     chordName = chordQualityInput.value;
 
@@ -92,6 +93,10 @@ const updateCompatibleScales = (selectMenu, keyInput, chordQualityInput) => {
         
         compatibleScaleSelect.append(option);
     }
+
+    if(selectedItem != ''){
+        compatibleScaleSelect.value = selectedItem;
+    }
 }
 
 const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
@@ -99,8 +104,9 @@ const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
         newRow               = document.createElement('div'),
         progressionContainer = document.querySelector('#progression-items'),
         newDelete,
-        newEdit,
-        newClose,
+        newEditButton,
+        newCloseButton,
+        newUpdateButton,
         newKeyInput,
         newChordQualityInput,
         newCompatibleScalesSelect,
@@ -155,7 +161,7 @@ const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
         <div class="row">
             <div class="col s4">
                 <select name="key" id="key-input" class="browser-default blue-grey-text text-darken-4 blue-grey">
-                    <option value="C" selected>C</option>
+                    <option value="C">C</option>
                     <option value="C#">C#</option>
                     <option value="Db">Db</option>
                     <option value="D">D</option>
@@ -176,7 +182,7 @@ const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
             </div>
             <div class="col s8">
                 <select name="chord-quality" id="chord-quality" class="browser-default blue-grey-text text-darken-4 blue-grey">
-                    <option value="" selected>Major</option>
+                    <option value="">Major</option>
                     <option value="m">Minor</option>
                     <option value="6">6</option>
                     <option value="m6">m6</option>
@@ -222,7 +228,7 @@ const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
     </div>
     <div class="row">
         <div class="col s6 offset-s3">
-            <div class="update-button blue-grey darken-2 blue-grey-text text-lighten-3 center">Update</div>
+            <div id="update-button" class="update-button blue-grey darken-2 blue-grey-text text-lighten-3 center">Update</div>
         </div>
     </div>
 </div>`
@@ -253,45 +259,54 @@ const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
     newProgressionItem.dataset.scaleKey = scaleKey.toLowerCase();
     newProgressionItem.dataset.scaleName = scaleName;
     
-    newEdit = newProgressionItem.querySelector('#edit-progression-item');
-    newEdit.addEventListener('click', (event) => {
-        let editButton = event.target;
+    newEditButton = newProgressionItem.querySelector('#edit-progression-item');
+    newEditButton.addEventListener('click', (event) => {
 
+        let editButton = event.target;
+        loadDefaultProgressionInfo(newProgressionItem);
         updateEditDisplay(editButton, newProgressionItem);
     })
 
-    newClose = newProgressionItem.querySelector('.close');
-    newClose.addEventListener('click', e => {
-        updateEditDisplay(e.target, newProgressionItem)
+    newCloseButton = newProgressionItem.querySelector('.close');
+    newCloseButton.addEventListener('click', e => {
+        updateEditDisplay(e.target, newProgressionItem);
+        loadDefaultProgressionInfo(newProgressionItem);
     })
-    
+
     newKeyInput = newProgressionItem.querySelector('#key-input');
     newKeyInput.addEventListener('change', () => {
+
         newCompatibleScalesSelect = newProgressionItem.querySelector('#compatible-scales')
-        
-        console.log('hello');
-     
-        console.log(newCompatibleScalesSelect);
-        console.log(newKeyInput.value);
-        console.log(newChordQualityInput.value);
-        
         updateCompatibleScales(newCompatibleScalesSelect, newKeyInput, newChordQualityInput)
     })
 
     newChordQualityInput = newProgressionItem.querySelector('#chord-quality')
     newChordQualityInput.addEventListener('change', () => {
-        newCompatibleScalesSelect = newProgressionItem.querySelector('#compatible-scales')
 
+        console.log(newKeyInput);
+        console.log(newCompatibleScalesSelect);
+        console.log(newChordQualityInput);
+
+        newCompatibleScalesSelect = newProgressionItem.querySelector('#compatible-scales')
         updateCompatibleScales(newCompatibleScalesSelect, newKeyInput, newChordQualityInput)
     })
 
     newDelete = newProgressionItem.querySelector('#delete');
     newDelete.addEventListener('click', () => {
-        newProgressionItem.remove();
 
+        newProgressionItem.remove();
         updateProgression();
-        // console.log(currentProgressionData);
     });
+
+    newUpdateButton = newProgressionItem.querySelector('#update-button');
+    newUpdateButton.addEventListener('click', () => {
+        updateProgressionItem(newProgressionItem);
+    })
+
+    newCompatibleScalesSelect = newCompatibleScalesSelect = newProgressionItem.querySelector('#compatible-scales');
+    newCompatibleScalesSelect.addEventListener('change', () => {
+        updateProgressionItem(newProgressionItem);
+    })
 
     progressionContainer.append(newProgressionItem);
 }
@@ -426,7 +441,6 @@ const updateProgression = () => {
 
     chordNamesField.value         = chordNamesData;
     currentProgressionField.value = JSON.stringify(currentProgressionData);
-    
     console.log(currentProgressionData);
 
 }
@@ -483,7 +497,8 @@ const displayLoadedProgression = () => {
             chordNamesField.value         = chordNamesData;
             
             currentProgressionField.value = JSON.stringify(currentProgressionData);
-            loadedProgressionField.value  = JSON.stringify(currentProgressionField);
+            loadedProgressionField.value  = JSON.stringify(currentProgressionData);
+        
         }
 
     } catch (error){

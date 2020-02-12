@@ -43,11 +43,14 @@ const updateEditDisplay = (button, progressionItem) => {
         editButton = button;
         if(editButton.innerText == 'Edit'){
             
-            editProgressionItem(progressionItem);
-    
+            
             toggleEditButton(editButton, 'on')
-    
             toggleEditPanel(editPanel);
+
+            editProgressionItem(progressionItem);
+            
+            console.log(progressionItem.dataset);
+            
     
         } else if(editButton.innerText == 'Editing...'){
             editButton.innerText = 'Edit';
@@ -60,6 +63,7 @@ const updateEditDisplay = (button, progressionItem) => {
             
             toggleEditButton(editButton, 'off')
             toggleEditPanel(editPanel);
+            loadDefaultProgressionInfo(progressionItem);
     
         }
     } else if(button.nodeName == 'I'){
@@ -68,6 +72,8 @@ const updateEditDisplay = (button, progressionItem) => {
 
             toggleEditButton(editButton, 'off');
             toggleEditPanel(editPanel);
+            loadDefaultProgressionInfo(progressionItem);
+
         }
     }
     
@@ -83,9 +89,13 @@ const editProgressionItem = item => {
         chordKeySelect = item.querySelector('#key-input'),
         chordQualitySelect = item.querySelector('#chord-quality'),
         compatibleScales,
-        compatibleScaleSelect = item.querySelector('#compatible-scales'),
+        compatibleScaleSelect = item.querySelector('#edit-panel #compatible-scales'),
         i;
 
+        console.log(chordKeySelect);
+        console.log(chordQualitySelect);
+        console.log(compatibleScaleSelect);
+        
         currentChordKey        = item.dataset.chordKey;
         currentChordQuality    = item.dataset.chordQuality;
         currentScaleKey        = item.dataset.scaleKey;
@@ -95,16 +105,19 @@ const editProgressionItem = item => {
     neck.curKey = teoria.note(currentChordKey)
     neck.scale = neck.curKey.chord(chordName).voicing();
     
+
+
     neck.findCompatibleScales();
     
+    console.log('curKey:', neck.curKey);
+    console.log('scale:', neck.scale.toString());
+
+    
+
     updateCompatibleScales(compatibleScaleSelect, chordKeySelect, chordQualitySelect);
+    
+    compatibleScaleSelect.value = `${item.dataset.scaleKey} ${item.dataset.scaleName}`
 
-    for(i=0; i<compatibleScaleSelect.options.length; i++){
-
-        if(compatibleScaleSelect.options[i].value == currentScaleKeyAndName){
-            compatibleScaleSelect.value = currentScaleKeyAndName;
-        }
-    }
     
     if(currentChordKey.length > 1){
         currentChordKey = currentChordKey[0].toUpperCase() + currentChordKey[1]
@@ -114,10 +127,43 @@ const editProgressionItem = item => {
     
     chordKeySelect.value = currentChordKey;
     chordQualitySelect.value = currentChordQuality;
-    // console.log(`chordKey: ${currentChordKey}`);
-    // console.log(`chordName: ${currentChordQuality}`);
-    // console.log(`currentScaleKey: ${currentScaleKey}`);
-    // console.log(`currentScalName: ${currentScaleName}`);
+    compatibleScaleSelect.value = `${item.dataset.scaleKey} ${item.dataset.scaleName}`
 
 }
 
+const loadDefaultProgressionInfo = progressionItem => {
+    let keySelect = progressionItem.querySelector('#key-input'),
+        chordQualitySelect = progressionItem.querySelector('#chord-quality'),
+        compatibleScaleSelect = progressionItem.querySelector('#compatible-scales');
+
+        // console.log(progressionItem.dataset);
+        
+        if(progressionItem.dataset.chordKey.length > 1){
+            keySelect.value = progressionItem.dataset.chordKey[0].toUpperCase() + progressionItem.dataset.chordKey.substring(1,-1);
+        } else{
+            keySelect.value = progressionItem.dataset.chordKey.toUpperCase()
+        }
+
+        chordQualitySelect.value = progressionItem.dataset.chordQuality;
+        compatibleScaleSelect.value = `${progressionItem.dataset.scaleKey} ${progressionItem.dataset.scaleName}`
+}
+
+const updateProgressionItem = progressionItem => {
+    console.log(progressionItem);
+    
+    let selectedScale = progressionItem.querySelector('#edit-panel #compatible-scales').innerText;
+    
+    let updatedChordKey     = progressionItem.querySelector('#key-input').value,
+        updatedChordQuality = progressionItem.querySelector('#chord-quality').value,
+        updatedScaleKey     = selectedScale.split(' ')[0],
+        updatedScaleName    = selectedScale.split(' ')[1];
+
+        console.log(`newChordKey:     ${updatedChordKey}`);
+        console.log(`newChordQuality: ${updatedChordQuality}`);
+        console.log(`newScaleKey:     ${updatedScaleKey}`);
+        console.log(`newScaleName:    ${updatedScaleName}`);    
+        
+        // progressionItem.dataset.chordKey = updatedChordKey
+    
+
+}
