@@ -4,15 +4,15 @@ let toggleActiveNav = mediaQuery => {
     
     console.log(navBars);
     
-
     if(mediaQuery.matches){
         navBar = navBars[1];
+        navBar.classList.toggle('active-nav');
 
     } else {
-        navbar = navBars[0];
+        navBar = navBars[0];
+        navBar.classList.toggle('active-nav');
     }
 
-    navBar.classList.toggle('active-nav');
 
 }
 
@@ -36,6 +36,7 @@ let burger              = document.querySelector('.hamburger'),
     settingsIcon = document.querySelector('.settings-icon');
 
     
+
 
 
 burger.addEventListener('click', () => {
