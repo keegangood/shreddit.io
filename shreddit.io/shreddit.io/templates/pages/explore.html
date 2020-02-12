@@ -168,7 +168,7 @@
         </div>
         
         <!-- scale/chord section vs progression builder section -->
-        <div class="row">
+        <div class="row center">
 
             <!-- scale/chord selects -->
             <div class="scale-selects col s8 offset-s2 input-field">
@@ -187,28 +187,30 @@
 
             <!-- progression builder -->
             <div class="progression-builder col s12 blue-grey lighten-1" id="progression-builder">
-                <div class="row choose-chord" id="choose-chord">
-                    <h4>Choose a chord: </h4>
-                    <div class="row">
-                        <div class="col s4">
-                            {% include 'partials/selectMenus/key-input.html' %}
-                        </div>
-                        <div class="col s8">
-                            {% include 'partials/selectMenus/chord-quality.html' %}
+                <div class="row choose-chord" id="choose-chord center">
+                    <div class="col s10 offset-s1 l6 offset-l3 ">
+                        <h4>Choose a chord: </h4>
+                        <div class="row">
+                            <div class="col s4 l2 offset-l2">
+                                {% include 'partials/selectMenus/key-input.html' %}
+                            </div>
+                            <div class="col s8 l6">
+                                {% include 'partials/selectMenus/chord-quality.html' %}
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="row choose-scale">
-                    <div class="col s10 offset-s2 center">
-                            <h4>Choose a scale:</h4>
-                            <select name="compatible-scales" id="compatible-scales" class="browser-default blue-grey-text text-darken-4 blue-grey">
-                                <!-- add options with JS -->
-                            </select>
+                    <div class="col s10 offset-s1 l4 offset-l4 center">
+                        <h4>Choose a scale:</h4>
+                        <select name="compatible-scales" id="compatible-scales" class="browser-default blue-grey-text text-darken-4 blue-grey">
+                            <!-- add options with JS -->
+                        </select>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col s6 offset-s3">
-                        <div class="add-button blue-grey darken-2 blue-grey-text text-lighten-3 center">Add</div>
+                    <div class="col s6 offset-s3 l2 offset-l5">
+                        <div class="custom-button add-button blue-grey darken-2 blue-grey-text text-lighten-3 center">Add</div>
                     </div>
                 </div>
                 <!-- If context is sent from view, add hidden div with its value -->
@@ -236,10 +238,10 @@
                                     <input id="current-path"          type="text" name="path"                  class="hide" value="{{ path }}">
                                     
                                     {% if loaded_progression %}
-                                        <button class="update-button blue-grey darken-2 blue-grey-text text-lighten-3" value="update" name="save-or-update">Update</button>
+                                        <button class="custom-button update-button blue-grey darken-2 blue-grey-text text-lighten-3" value="update" name="save-or-update">Update</button>
                                     {% endif %}
 
-                                    <button class="save-button blue-grey darken-2 blue-grey-text text-lighten-3" value="save" name="save-or-update">Save</button>
+                                    <button class="custom-button save-button blue-grey darken-2 blue-grey-text text-lighten-3" value="save" name="save-or-update">Save</button>
                                 
                                 </form>
                                 {% else %}

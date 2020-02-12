@@ -119,7 +119,7 @@ const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
     <div class="card">
         <div class="card-content blue-grey lighten-2">
             <div class="title activator blue-grey lighten-3 text-darken-4">
-            <i class="material-icons right">more_vert</i>
+                <i class="material-icons right">more_vert</i>
                 <div class="row">
                     <div class="col s8">
                     <span class="chord-label">Chord:
@@ -128,7 +128,7 @@ const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
                 </div>
             </div>
             <div class="row">
-                <div class="col s12">
+                <div class="col s11">
                     <span class="scale-label">Scale:
                         <span class="scale-name">&nbsp;${scaleName}</span>
                     </span>
@@ -139,17 +139,17 @@ const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
     <div class="card-reveal blue-grey lighten-2">
         <div class="row card-links">
             <div class="col l3 s1"></div>
-            <div class="col l3 s4">
+            <div class="col l3 s5">
                 <div id="edit-progression-item" class="card-link blue-grey darken-1 nav-link center-align">
                     <a href="javascript:;">Edit</a>
                 </div>
             </div>
-            <div class="col l3 s4">
+            <div class="col l3 s3">
                 <div class="card-link blue-grey darken-1 nav-link center-align">
                     <a href="javascript:;" id="delete">Delete</a>
                 </div>
             </div>
-            <div class="col l1 s2">
+            <div class="col l2 s2">
                 <span class="card-title"><i class="material-icons right close blue-grey-text text-darken-4">close</i></span>
             </div>
         </div>
@@ -159,7 +159,7 @@ const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
     <div class="row choose-chord" id="choose-chord">
         <h4>Choose a chord: </h4>
         <div class="row">
-            <div class="col s4">
+            <div class="col s4 l4">
                 <select name="key" id="key-input" class="browser-default blue-grey-text text-darken-4 blue-grey">
                     <option value="C">C</option>
                     <option value="C#">C#</option>
@@ -219,7 +219,7 @@ const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
         </div>
     </div>
     <div class="row choose-scale">
-        <div class="col s10 offset-s2 center">
+        <div class="col s10 offset-s1 center">
                 <h4>Choose a scale:</h4>
                 <select name="compatible-scales" id="compatible-scales" class="browser-default blue-grey-text text-darken-4 blue-grey">
                     <!-- add options with JS -->
@@ -228,14 +228,14 @@ const addProgressionItem = (scaleKey, scaleName, chordKey, chordQuality) => {
     </div>
     <div class="row">
         <div class="col s6 offset-s3">
-            <div id="update-button" class="update-button blue-grey darken-2 blue-grey-text text-lighten-3 center">Update</div>
+            <div id="update-button" class="custom-button update-item-button blue-grey darken-2 blue-grey-text text-lighten-3 center">Update</div>
         </div>
     </div>
 </div>`
 
     newRow.classList.add('row',
                          'blue-grey',
-                         'lighten-4',
+                         'lighten-1',
                          'blue-grey-text',
                          'text-darken-4');
 

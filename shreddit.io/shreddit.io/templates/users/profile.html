@@ -22,7 +22,7 @@
         </div>
 
         <div class="row">
-            <div class="col s8 offset-s2 center">
+            <div class="col s8 offset-s2 l12 center">
                 <p><b>Update avatar</b></p>
                 <div class="update-form center">
                     <form method="POST" enctype="multipart/form-data"> 
@@ -41,46 +41,44 @@
 
         <div class="row chord-progressions">
             <div class="col s12 l12">
-                <div class="">
-                    <h1>Saved Progressions</h1>
-        
-                    {% for progression in progressions %}
-                        <div class="row center">
-                            <div class="col s12 l6 offset-l3 saved-progression-container">
-                                <div class="card">
-                                    <div class="card-content blue-grey lighten-2">
-                                        <div class="title activator blue-grey lighten-3 text-darken-4">
-                                            <span class="hide-on-large-only">{{ progression|truncatechars:20 }}</span>
-                                            <span class="hide-on-med-and-down">{{ progression|truncatechars:40 }}</span>
-                                            <i class="material-icons right">more_vert</i>
-                                        </div>
+                <h1>Saved Progressions</h1>
+    
+                {% for progression in progressions %}
+                    <div class="row center">
+                        <div class="col s12 l12 saved-progression-container">
+                            <div class="card">
+                                <div class="card-content blue-grey lighten-2">
+                                    <div class="title activator blue-grey lighten-3 text-darken-4">
+                                        <span class="hide-on-large-only">{{ progression|truncatechars:20 }}</span>
+                                        <span class="hide-on-med-and-down">{{ progression|truncatechars:40 }}</span>
+                                        <i class="material-icons right">more_vert</i>
                                     </div>
-                                    <div class="card-reveal blue-grey lighten-2">
-                                        <div class="row card-links">
-                                            <div class="col s2"></div>
-                                            <div class="col l2 s4">
-                                                <div class="card-link blue-grey darken-1 nav-link">
-                                                    <a href="{% url 'pages-explore' id=progression.id %}">Explore</a>
-                                                </div>
+                                </div>
+                                <div class="card-reveal blue-grey lighten-2">
+                                    <div class="row card-links">
+                                        <div class="col s2 l2"></div>
+                                        <div class="col s4 l4">
+                                            <div class="card-link blue-grey darken-1 nav-link">
+                                                <a href="{% url 'pages-explore' id=progression.id %}">Explore</a>
                                             </div>
-                                            <div class="col l2 s4">
-                                                <div class="card-link blue-grey darken-1 nav-link">
-                                                    <a href="{% url 'delete-progression' id=progression.id %}">Delete</a>
-                                                </div>
+                                        </div>
+                                        <div class="col s4 l4">
+                                            <div class="card-link blue-grey darken-1 nav-link">
+                                                <a href="{% url 'delete-progression' id=progression.id %}">Delete</a>
                                             </div>
-                                            <div class="col l2 s2">
-                                                <span class="card-title"><i class="material-icons right close blue-grey-text text-darken-4">close</i></span>
-                                            </div>
+                                        </div>
+                                        <div class="col s2 l2">
+                                            <span class="card-title"><i class="material-icons right close blue-grey-text text-darken-4">close</i></span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
-                    {% empty %}
-                        <p>No progressions yet</p>
-                    {% endfor %}
-                </div>
+                    </div>
+                    
+                {% empty %}
+                    <p>No progressions yet</p>
+                {% endfor %}
             </div>
         </div>
 
