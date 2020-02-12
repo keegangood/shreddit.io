@@ -1,8 +1,16 @@
-// 
+// change inputs to reflect which nav menu they're in. 
+// Then pass input menus to functions that require their
+// value to change neck settings.
+// updateTunings(), updateNoteMarkers(), updateScaleOrChordInfo(),
+// changeExploreMode(), eventListener ln 319
 
 
-let instrumentInput
-            = document.querySelector('#instrument-input'),
+let mobileInstrumentInput
+            = document.querySelector('.mobile-nav #instrument-input'),
+    mobileTuningInput
+            = document.querySelector('.mobile-nav #tuning-input'),
+    mobileExploreModeInput
+            = document.querySelector('.mobile-nav #explore-mode-input'),
     scaleInput                 
             = document.querySelector('#scale-formula-input'),
     keyInput                   
@@ -15,10 +23,6 @@ let instrumentInput
             = document.querySelector('.scale-name'),
     keyDisplay                 
             = document.querySelector('.scale-key'),
-    exploreModeInput
-            = document.querySelector('#explore-mode-input'),
-    tuningInput
-            = document.querySelector('#tuning-input'),
     scalesAndChordsSection     
             = document.querySelector('.scale-selects'),
     progressionBuilderSection  
@@ -53,7 +57,7 @@ let instrumentNames,
         option.value = instrumentName;
         option.innerText = `${instrumentName[0].toUpperCase()}${instrumentName.substring(1)}`;
 
-        instrumentInput.append(option);
+        mobileInstrumentInput.append(option);
 
         // let elems = document.querySelectorAll('select');
         // M.FormSelect.init(instrumentInput);
@@ -63,7 +67,7 @@ let instrumentNames,
 
     // update input options to
     // selected instrument's tunings
-    const updateTunings = (newInstrument) => {
+    const updateTunings = (newInstrument, tuningInput) => {
 
         // console.log(newInstrument);
         
@@ -89,11 +93,13 @@ let instrumentNames,
         }
     }
 
-    updateTunings(neck.instrument);
+    updateTunings(neck.instrument, mobileTuningInput);
 
 // grabs current input for scale name and key,
 // sends that info to the neck object
 // then removes old markers and places new ones
+
+
 const updateNoteMarkers = () => {
     key = keyInput.value;
     neck.curKey = teoria.note(key);
@@ -123,7 +129,7 @@ const updateNoteMarkers = () => {
 
 // Update instrument neck 
 // when input selection changes
-const updateInstrument = () => {
+const updateInstrument = (instrumentInput=mobileInstrumentInput, tuningInput=mobileTuningInput) => {
     let newInstrument = instrumentInput.value;
     let newTuning = tuningInput.value;
 
@@ -229,7 +235,7 @@ const updateScaleOrChordInfo = () => {
     }
 }
 
-exploreMode = exploreModeInput.value;
+exploreMode = mobileExploreModeInput.value;
 
 neck.placeNoteMarkers();
 updateScaleOrChordInfo();
@@ -243,7 +249,7 @@ const removeChildren = parent => {
         parent.removeChild(parent.lastChild);
     }
 }
-const changeExploreMode = () => {
+const changeExploreMode = (exploreModeInput=mobileExploreModeInput) => {
     exploreMode = exploreModeInput.value;
 
     // console.log("exploreMode: ", exploreMode);
@@ -285,7 +291,7 @@ changeExploreMode();
 
 
 // Event listeners
-instrumentInput.addEventListener('change', function(){
+mobileInstrumentInput.addEventListener('change', function(){
     newInstrument = instrumentInput.value;
     
     updateTunings(newInstrument);
@@ -294,7 +300,7 @@ instrumentInput.addEventListener('change', function(){
 });
 
 
-tuningInput.addEventListener('change', function(){
+mobileTuningInput.addEventListener('change', function(){
     updateInstrument();
     updateNoteLegend();
 });
@@ -340,7 +346,7 @@ noteLegendType.addEventListener('change', () => {
 
 });
 
-exploreModeInput.addEventListener('change', () => {
+mobileExploreModeInput.addEventListener('change', () => {
     changeExploreMode();
     // console.log("hello world");
     
