@@ -23,23 +23,12 @@ let toggleActiveNav = mediaQuery => {
 
 // console.log(activeNav);
 
-
-let burger              = document.querySelector('.hamburger'),
-    topBun              = document.querySelector('.top-bun'),
-    meat                = document.querySelector('.meat'),
-    bottomBun           = document.querySelector('.bottom-bun'),
-    cover               = document.querySelector('.content-cover'),
-    menu                = document.querySelector('.mobile-nav-menu'),
-    navMenuContent      = document.querySelector('.mobile-nav-content'),
-    settingsMenuContent = document.querySelector('.settings-menu-content'),
-    mainContent         = document.querySelector('.main-content'),
-    settingsIcon = document.querySelector('.settings-icon');
-
+    
 
 burger.addEventListener('click', () => {
     mainContent.classList.toggle('no-scroll');
 
-    navMenuContent.classList.toggle('content-inactive');
+    mobileNavMenuContent.classList.toggle('content-inactive');
 
     topBun.classList.toggle('top-bun-active');
     burger.classList.toggle('mobile-nav-icon-active');
@@ -47,7 +36,7 @@ burger.addEventListener('click', () => {
     bottomBun.classList.toggle('bottom-bun-active');
 
     cover.classList.toggle('content-cover-active');
-    menu.classList.toggle('mobile-menu-active');
+    mobileNavMenu.classList.toggle('mobile-menu-active');
     settingsMenuContent.classList.toggle('hidden');
 
     if(document.querySelector('.settings-menu-content')){
@@ -56,18 +45,45 @@ burger.addEventListener('click', () => {
     }
 });
 
-settingsIcon.addEventListener('click', () => {
-    settingsIcon.classList.toggle('mobile-nav-icon-active');
-    settingsIcon.classList.toggle('settings-icon-active')
-    navMenuContent.classList.toggle('hidden');
+mobileSettingsIcon.addEventListener('click', () => {
+    mobileSettingsIcon.classList.toggle('mobile-nav-icon-active');
+    mobileSettingsIcon.classList.toggle('settings-icon-active')
+    mobileNavMenuContent.classList.toggle('hidden');
 
     burger.classList.toggle('hidden');
 
     cover.classList.toggle('content-cover-active');
-    menu.classList.toggle('mobile-menu-active');
+    mobileNavMenu.classList.toggle('mobile-menu-active');
+});
+
+mobileInstrumentInput.addEventListener('change', function(e, otherNavInput=navInstrumentInput){
+    newInstrument = mobileInstrumentInput.value;
+    
+    updateTunings(newInstrument, mobileTuningInput);
+    updateTunings(newInstrument, otherNavInput);
+
+    updateInstrument(mobileInstrumentInput, mobileTuningInput);
+    updateNoteLegend();
+
+    otherNavInput.value = newInstrument;
+    
 });
 
 
+mobileTuningInput.addEventListener('change', function(e, otherTuningInput=navTuningInput){
+    updateInstrument(mobileInstrumentInput, mobileTuningInput);
+    updateInstrument(mobileInstrumentInput, otherTuningInput);
+    updateNoteLegend();
+
+    otherTuningInput.value = mobileTuningInput.value;
+});
+
+
+mobileExploreModeInput.addEventListener('change', (e, otherExploreModeInput=navExploreModeInput) => {
+    changeExploreMode(mobileExploreModeInput);
+    
+    otherExploreModeInput.value = mobileExploreModeInput.value;
+});
 
 document.addEventListener('DOMContentLoaded', function() {
     

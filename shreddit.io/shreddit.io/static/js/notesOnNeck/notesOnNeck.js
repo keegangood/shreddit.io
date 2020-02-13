@@ -4,38 +4,12 @@
 // updateTunings(), updateNoteMarkers(), updateScaleOrChordInfo(),
 // changeExploreMode(), eventListener ln 319
 
-
-let mobileInstrumentInput
-            = document.querySelector('.mobile-nav #instrument-input'),
-    mobileTuningInput
-            = document.querySelector('.mobile-nav #tuning-input'),
-    mobileExploreModeInput
-            = document.querySelector('.mobile-nav #explore-mode-input'),
-    scaleInput                 
-            = document.querySelector('#scale-formula-input'),
-    keyInput                   
-            = document.querySelector('#key-input'),
-    chordQualityInput          
-            = document.querySelector('#chord-quality'),
-    noteLegendType             
-            = document.querySelector('#note-legend-type'),
-    scaleNameDisplay           
-            = document.querySelector('.scale-name'),
-    keyDisplay                 
-            = document.querySelector('.scale-key'),
-    scalesAndChordsSection     
-            = document.querySelector('.scale-selects'),
-    progressionBuilderSection  
-            = document.querySelector('.progression-builder'),
-    progressionInfo            
-            = document.querySelector('.progression-info');
-
-
 let instrumentNames,
     instrumentName,
     tunings,
     tuning,
-    option,
+    instrumentOption,
+    mobileInstrumentOption,
     scaleName,
     key,
     chordName,
@@ -45,55 +19,69 @@ let instrumentNames,
 
 
 // window.addEventListener('load', () => {
-    let neck = new InstrumentNeck('guitar', 'standard', 0, 13);
+let neck = new InstrumentNeck('guitar', 'standard', 0, 13);
 
-    instrumentNames = neck.getInstrumentTunings('all');
-    tunings = neck.getInstrumentTunings('guitar');
+instrumentNames = neck.getInstrumentTunings('all');
+tunings = neck.getInstrumentTunings('guitar');
 
-    for(let i in instrumentNames){
-        instrumentName = instrumentNames[i]; 
+console.log('inst_names: ', instrumentNames);
+console.log('tunings: ', tunings);
+
+console.log('navInstInput: ', navInstrumentInput);
+console.log('mobileInstIn: ', mobileInstrumentInput);
+
+
+for(let i in instrumentNames){
+    instrumentName = instrumentNames[i]; 
+
+    instrumentOption = document.createElement('option');
+    instrumentOption.value = instrumentName;
+    instrumentOption.innerText = `${instrumentName[0].toUpperCase()}${instrumentName.substring(1)}`;
+    
+    navInstrumentInput.append(instrumentOption);
+
+    mobileInstrumentOption = document.createElement('option');
+    mobileInstrumentOption.value = instrumentName;
+    mobileInstrumentOption.innerText = `${instrumentName[0].toUpperCase()}${instrumentName.substring(1)}`;
+
+    mobileInstrumentInput.append(mobileInstrumentOption);
+    
+    // let elems = document.querySelectorAll('select');
+    // M.FormSelect.init(instrumentInput);
+    let elems = document.querySelectorAll('select');
+    let instances = M.FormSelect.init(elems);
+}
+
+// update input options to
+// selected instrument's tunings
+const updateTunings = (newInstrument, tuningInput) => {
+    console.log(newInstrument, tuningInput);
+
+    while(tuningInput.hasChildNodes()){
+        tuningInput.removeChild(tuningInput.lastChild);
+    }
+
+    tunings = neck.getInstrumentTunings(newInstrument);
+    console.log('newInstrument ', newInstrument);
+    
+    for(tuning in tunings){
 
         option = document.createElement('option');
-        option.value = instrumentName;
-        option.innerText = `${instrumentName[0].toUpperCase()}${instrumentName.substring(1)}`;
+        option.value = tuning;
+        option.innerText = `${tuning[0].toUpperCase()}${tuning.substring(1)}`;
 
-        mobileInstrumentInput.append(option);
-
-        // let elems = document.querySelectorAll('select');
-        // M.FormSelect.init(instrumentInput);
-        let elems = document.querySelectorAll('select');
-        let instances = M.FormSelect.init(elems);
-    }
-
-    // update input options to
-    // selected instrument's tunings
-    const updateTunings = (newInstrument, tuningInput) => {
-
-        // console.log(newInstrument);
+        tuningInput.append(option);
         
-
-        while(tuningInput.hasChildNodes()){
-            tuningInput.removeChild(tuningInput.lastChild);
-        }
-
-        tunings = neck.getInstrumentTunings(newInstrument);
-
-        for(tuning in tunings){
-
-            option = document.createElement('option');
-            option.value = tuning;
-            option.innerText = `${tuning[0].toUpperCase()}${tuning.substring(1)}`;
-
-            tuningInput.append(option);
-
-            // M.FormSelect.init(tuningInput);
-            let elems = document.querySelectorAll('select');
-            let options = {class:'browser-default'}
-            let instances = M.FormSelect.init(elems, options);
-        }
+        // M.FormSelect.init(tuningInput);
+        let elems = document.querySelectorAll('select');
+        let options = {class:'browser-default'}
+        let instances = M.FormSelect.init(elems, options);
     }
+}
 
-    updateTunings(neck.instrument, mobileTuningInput);
+updateTunings(neck.instrument, mobileTuningInput);  
+updateTunings(neck.instrument, navTuningInput);
+
 
 // grabs current input for scale name and key,
 // sends that info to the neck object
@@ -133,6 +121,7 @@ const updateInstrument = (instrumentInput=mobileInstrumentInput, tuningInput=mob
     let newInstrument = instrumentInput.value;
     let newTuning = tuningInput.value;
 
+
     for(let i in neck.strings){
         neck.strings[i].container.remove();
     }
@@ -148,7 +137,7 @@ const updateInstrument = (instrumentInput=mobileInstrumentInput, tuningInput=mob
     updateNoteMarkers();
 }
 
-updateInstrument();
+updateInstrument(mobileInstrumentInput, mobileTuningInput);
 
 // update neck and change note legend orientation
 // when screen size changes
@@ -243,18 +232,9 @@ updateScaleOrChordInfo();
 updateNoteLegend();
 
 
-// remove all children nodes
-const removeChildren = parent => {
-    while(parent.hasChildNodes()){
-        parent.removeChild(parent.lastChild);
-    }
-}
-const changeExploreMode = (exploreModeInput=mobileExploreModeInput) => {
-    exploreMode = exploreModeInput.value;
 
-    // console.log("exploreMode: ", exploreMode);
-    // console.log(exploreModeInput);
-    
+const changeExploreMode = (exploreModeInput=mobileExploreModeInput) => {
+    exploreMode = exploreModeInput.value;    
 
     if(exploreMode == 'progression-builder'){
         scalesAndChordsSection.classList.add('hide');
@@ -291,29 +271,15 @@ changeExploreMode();
 
 
 // Event listeners
-mobileInstrumentInput.addEventListener('change', function(){
-    newInstrument = instrumentInput.value;
-    
-    updateTunings(newInstrument);
-    updateInstrument();
-    updateNoteLegend();
-});
 
-
-mobileTuningInput.addEventListener('change', function(){
-    updateInstrument();
-    updateNoteLegend();
-});
 
 
 scaleInput.addEventListener('change', () => {
-    // console.log(neck);
 
     neck.scaleOrChord = 'scale';
     updateNoteMarkers();
     updateNoteLegend();
     updateScaleOrChordInfo();
-    // console.log(neck);
 
 });
 
@@ -325,7 +291,6 @@ keyInput.addEventListener('change', () => {
 });
 
 chordQualityInput.addEventListener('change', () => {
-    // console.log(neck);
 
     neck.scaleOrChord = 'chord';
     updateNoteMarkers();
@@ -335,22 +300,15 @@ chordQualityInput.addEventListener('change', () => {
     if(exploreMode == 'progression-builder'){
         updateCompatibleScales();
     }
-    // console.log(neck);
 
 });
 
 
 noteLegendType.addEventListener('change', () => {
     updateNoteLegend();
-    // console.log(neck);
 
 });
 
-mobileExploreModeInput.addEventListener('change', () => {
-    changeExploreMode();
-    // console.log("hello world");
-    
-});
 
 
 

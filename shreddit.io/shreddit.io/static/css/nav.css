@@ -87,6 +87,10 @@
     width: 100%;
 }
 
+.navbar select {
+    height: 50px;
+}
+
 /* Settings dropdown */
 .nav-settings {
     align-items: center;
@@ -94,12 +98,16 @@
     display: flex;
     flex-direction: column;
     left: 17vw;
-    padding: 15px 0;
+    padding: 30px 0;
     position: absolute;
-    top: 8vh;
+    top: calc(-100vh);
     transition: top 1s ease-in-out;
     width: 55vw;
     z-index: 1;
+}
+
+.settings-menu-active {
+    top: 50px;
 }
 
 .nav-settings .row {
@@ -128,3 +136,4 @@
     font-size: 5rem;
     margin: 0 3px;
 }
+

@@ -24,10 +24,10 @@
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
-    <link rel="stylesheet" href="{% static 'css/explore.css' %}">
     <link rel="stylesheet" href="{% static 'css/edit.css' %}">
     <link rel="stylesheet" href="{% static 'css/signup.css' %}">
     <link rel="stylesheet" href="{% static 'css/stringedInstrument.css' %}">
+    <link rel="stylesheet" href="{% static 'css/explore.css' %}">
 
     <!-- load fonts -->
     <link href="https://fonts.googleapis.com/css?family=Pacifico|Quicksand|Source+Sans+Pro&display=swap" rel="stylesheet">
@@ -76,6 +76,10 @@
     <!-- Materialize JS -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.js"></script>
     
+    <!-- JS DOM variables / Miscelaneous functions -->
+    <script src="{% static 'js/domVariables.js' %}"></script>
+    <script src="{% static 'js/misc.js' %}"></script>
+    
     <!-- JS for displaying notes on necks -->
     <script src="{% static 'js/notesOnNeck/stringedInstrumentLayouts/instrumentNeck.js' %}"></script>
     <script src="{% static 'js/notesOnNeck/stringedInstrumentLayouts/instrumentString.js' %}"></script>
@@ -83,15 +87,16 @@
     <script src="{% static 'js/notesOnNeck/noteMarker.js' %}"></script>
     <script src="{% static 'js/notesOnNeck/notesOnNeck.js' %}"></script>
     
+    <!-- navbars/messages -->
+    <script src="{% static 'js/mobileNav.js' %}"></script>
+    <script src="{% static 'js/nav.js' %}"></script>
+    <script src="{% static 'js/messages.js' %}"></script>
+    
     <!-- JS for building and playing chord progressions -->
     <script src="{% static 'js/playNotes/progressionBuilder.js' %}"></script>
     <script src="{% static 'js/playNotes/playNotes.js' %}"></script>
     <script src="{% static 'js/playNotes/edit-progression.js' %}"></script>
     
-    <!-- navbars/messages -->
-    <script src="{% static 'js/mobileNav.js' %}"></script>
-    <script src="{% static 'js/nav.js' %}"></script>
-    <script src="{% static 'js/messages.js' %}"></script>
     
 </body>
 </html>
