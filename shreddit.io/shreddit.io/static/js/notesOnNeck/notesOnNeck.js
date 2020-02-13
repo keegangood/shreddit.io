@@ -146,13 +146,10 @@ let windowWidthChange = mediaQuery => {
         noteLegend = document.querySelector('.note-legend-horizontal .note-legend-markers')
         updateInstrument(); 
 
-
     } else {
         neck.orientation = 'vertical';
         noteLegend = document.querySelector('.note-legend-vertical .note-legend-markers')
         updateInstrument();
-
-
     }
 }
 

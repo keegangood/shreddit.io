@@ -15,7 +15,7 @@ let toggleActiveNav = mediaQuery => {
 }
 
 // listen for screen width changes
-// mediaQuery = window.matchMedia("(min-width: 768px)");
+// mediaQuery = window.matchMedia("(min-width: 400px)");
 // mediaQuery.addListener(toggleActiveNav);
 // let activeNav = toggleActiveNav(mediaQuery);
 

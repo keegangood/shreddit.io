@@ -55,7 +55,7 @@
     cursor: pointer;
 }
 
-@media only screen and (min-width: 768px){
+@media only screen and (min-width: 400px){
     .message-display .row {
         width: 50%;
     }

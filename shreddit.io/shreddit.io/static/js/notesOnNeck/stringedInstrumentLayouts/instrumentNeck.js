@@ -71,11 +71,11 @@ class InstrumentNeck {
             
             if(this.orientation == 'vertical'){
                 
-                // console.log("< 400px");
+                // console.log("< 768px");
                 
                 this.container.append(string.container);
             } else if(this.orientation == 'horizontal') {
-                // console.log("> 400px");
+                // console.log("> 768px");
                 
                 this.container.prepend(string.container);
             }

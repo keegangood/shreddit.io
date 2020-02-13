@@ -21,7 +21,7 @@
 
 
 /* mobile vertical*/ 
-@media only screen and (max-width:768px){
+@media only screen and (max-width:400px){
     #instrument-container {
         display: flex;
         height: 60vh;
@@ -83,7 +83,7 @@
 }
 
 /* larger screens */
-@media only screen and (min-width: 768px){
+@media only screen and (min-width: 400px){
     .instrument-row {
     }
     
