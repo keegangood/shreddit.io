@@ -53,14 +53,14 @@
                 </div>
             </div>
 
-            <div class="col s8 l8 offset-l1" id="instrument-container">
+            <div class="col s8 l6 offset-l1" id="instrument-container">
                 <!-- build instrument with JS -->
             </div>
         </div>
 
 
         <!-- note legend horizontal -->
-        <div class="row">
+        <div class="row center hide">
             <div class="col s12 hide-on-medium-and-down note-legend note-legend-horizontal">
                 <div class="note-legend-markers">
                     <!-- <div class="note-legend-marker">
@@ -114,8 +114,8 @@
             </div>
         </div>
 
-        <div class="row progression-info" id="progression-info">
-            <div class="col s4 previous-chord blue-grey-text text-darken-2">
+        <div class="row progression-info hidden" id="progression-info">
+            <div class="col s4 l2 previous-chord blue-grey-text text-darken-2">
                 <div class='previous-chord-name'>
                     <div class="root">
                         F
@@ -126,7 +126,7 @@
                 </div>
             </div>
 
-            <div class="col s4 current-chord blue-grey-text text-darken-4">
+            <div class="col s4 l4 current-chord blue-grey-text text-darken-4">
                 <p>&middot;</p>
                 <p>&middot;</p>
                 <p>&middot;</p>
@@ -143,7 +143,7 @@
                 <p>&middot;</p>
             </div>
 
-            <div class="col s4 next-chord blue-grey-text text-darken-2">
+            <div class="col s4 l2 next-chord blue-grey-text text-darken-2">
                 <div class='current-chord-name'>
                     <div class="root">
                         Bb
@@ -245,7 +245,7 @@
                                 
                                 </form>
                                 {% else %}
-                                <p><a href="{% url 'login' %}">Login</a><br/>to save progressions</p>
+                                <p class="nav-link"><a href="{% url 'login' %}">Login</a><br/>to save progressions</p class="nav-link">
                                 {% endif %}
                             </div>
                             <ul id="progression-items">

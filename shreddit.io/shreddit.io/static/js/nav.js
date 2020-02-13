@@ -12,11 +12,14 @@ updateTunings(neck.instrument, navTuningInput);
 navInstrumentInput.addEventListener('change', function(e, otherNavInput=mobileInstrumentInput){
     newInstrument = navInstrumentInput.value;
     
-    updateTunings(newInstrument, navInstrumentInput);
+    // console.log(newInstrument);
+    
+
+    updateTunings(newInstrument, navTuningInput);
     updateTunings(newInstrument, otherNavInput);
 
     updateInstrument(navInstrumentInput, navTuningInput);
-    updateNoteLegend();
+    // updateNoteLegend();
 
     otherNavInput.value = newInstrument;
     
@@ -26,7 +29,7 @@ navInstrumentInput.addEventListener('change', function(e, otherNavInput=mobileIn
 navTuningInput.addEventListener('change', function(e, otherTuningInput=mobileTuningInput){
     updateInstrument(navInstrumentInput, navTuningInput);
     updateInstrument(navInstrumentInput, otherTuningInput);
-    updateNoteLegend();
+    // updateNoteLegend();
 
     otherTuningInput.value = navTuningInput.value;
 });

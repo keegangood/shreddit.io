@@ -1,9 +1,7 @@
 let toggleActiveNav = mediaQuery => {
     let navBars = document.querySelectorAll('.navigation'),
         navBar;
-    
-    console.log(navBars);
-    
+        
     if(mediaQuery.matches){
         navBar = navBars[1];
         navBar.classList.toggle('active-nav');
@@ -39,15 +37,13 @@ burger.addEventListener('click', () => {
     mobileNavMenu.classList.toggle('mobile-menu-active');
     settingsMenuContent.classList.toggle('hidden');
 
-    if(document.querySelector('.settings-menu-content')){
-        settingsIcon = document.querySelector('.settings-icon');
-        settingsIcon.classList.toggle('hidden');
-    }
+    mobileScettingsIcon.classList.toggle('hidden');
+    
 });
 
 mobileSettingsIcon.addEventListener('click', () => {
     mobileSettingsIcon.classList.toggle('mobile-nav-icon-active');
-    mobileSettingsIcon.classList.toggle('settings-icon-active')
+    mobileSettingsIcon.classList.toggle('mobile-settings-icon-active')
     mobileNavMenuContent.classList.toggle('hidden');
 
     burger.classList.toggle('hidden');
@@ -63,7 +59,7 @@ mobileInstrumentInput.addEventListener('change', function(e, otherNavInput=navIn
     updateTunings(newInstrument, otherNavInput);
 
     updateInstrument(mobileInstrumentInput, mobileTuningInput);
-    updateNoteLegend();
+    // updateNoteLegend();
 
     otherNavInput.value = newInstrument;
     

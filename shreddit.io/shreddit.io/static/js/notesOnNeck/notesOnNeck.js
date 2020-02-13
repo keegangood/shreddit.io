@@ -24,11 +24,11 @@ let neck = new InstrumentNeck('guitar', 'standard', 0, 13);
 instrumentNames = neck.getInstrumentTunings('all');
 tunings = neck.getInstrumentTunings('guitar');
 
-console.log('inst_names: ', instrumentNames);
-console.log('tunings: ', tunings);
+// console.log('inst_names: ', instrumentNames);
+// console.log('tunings: ', tunings);
 
-console.log('navInstInput: ', navInstrumentInput);
-console.log('mobileInstIn: ', mobileInstrumentInput);
+// console.log('navInstInput: ', navInstrumentInput);
+// console.log('mobileInstIn: ', mobileInstrumentInput);
 
 
 for(let i in instrumentNames){
@@ -55,14 +55,14 @@ for(let i in instrumentNames){
 // update input options to
 // selected instrument's tunings
 const updateTunings = (newInstrument, tuningInput) => {
-    console.log(newInstrument, tuningInput);
+    // console.log(newInstrument, tuningInput);
 
     while(tuningInput.hasChildNodes()){
         tuningInput.removeChild(tuningInput.lastChild);
     }
 
     tunings = neck.getInstrumentTunings(newInstrument);
-    console.log('newInstrument ', newInstrument);
+    // console.log('newInstrument ', newInstrument);
     
     for(tuning in tunings){
 
@@ -79,7 +79,7 @@ const updateTunings = (newInstrument, tuningInput) => {
     }
 }
 
-updateTunings(neck.instrument, mobileTuningInput);  
+updateTunings(neck.instrument, mobileTuningInput);
 updateTunings(neck.instrument, navTuningInput);
 
 
@@ -105,8 +105,6 @@ const updateNoteMarkers = () => {
 
         neck.chordName = chordName;
         neck.findCompatibleScales();
-
-
     }
 
     neck.removeNoteMarkers();
@@ -134,10 +132,10 @@ const updateInstrument = (instrumentInput=mobileInstrumentInput, tuningInput=mob
     neck.totalStrings = neck.stringNames.length;
     neck.strings = neck.drawStrings();
 
-    updateNoteMarkers();
+    // updateNoteMarkers();
 }
 
-updateInstrument(mobileInstrumentInput, mobileTuningInput);
+// updateInstrument(mobileInstrumentInput, mobileTuningInput);
 
 // update neck and change note legend orientation
 // when screen size changes
@@ -229,7 +227,7 @@ exploreMode = mobileExploreModeInput.value;
 neck.placeNoteMarkers();
 updateScaleOrChordInfo();
 
-updateNoteLegend();
+// updateNoteLegend();
 
 
 

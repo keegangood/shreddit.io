@@ -137,10 +137,10 @@
     left: 11vw;
 }
 
-.mobile-nav .avatar {
+.mobile-nav-menu .avatar {
     height: 30vh;
     margin: 10px;
-    padding-bottom: 30px;
+    /* padding-bottom: 30px; */
     max-height: 30vw;
     max-width: 30vh;
     width: 30vw;
@@ -216,14 +216,15 @@
     opacity: 1;
     position: relative;
     top: -30vh;
-    transition: transform .1s ease, opacity 2s ease;
+    transition: transform .1s ease, opacity 3s ease;
     transition-delay: .1s;
 }
 
-.settings-menu-content .instrument-inputs {
+.mobile-nav .settings-menu-content .instrument-inputs {
     align-items: center;
     display: flex;
     flex-direction: column;
+    padding-top: 50px;
 }
 
 .nav-divider {

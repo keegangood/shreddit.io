@@ -36,6 +36,7 @@
     align-items: center;
     display: flex;
     flex-direction: row;
+    justify-content: center;
 }
 
 .note-legend-marker {
@@ -91,9 +92,9 @@
 }
 
 .progression-info {
-    align-items: center;
-    display: flex;
-    justify-content: center;
+    /* align-items: center; */
+    /* display: flex; */
+    /* justify-content: center; */
     font-family: 'Quicksand', sans-serif;
     margin: 0;
 }
@@ -219,9 +220,7 @@
     padding: 0;
 }
 
-.progression-builder .choose-chord {
 
-}
 
 .progression-builder .choose-scale {
 
@@ -275,6 +274,12 @@
     overflow: scroll;
 }
 
+.progression-builder .choose-chord {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
 
 
 @media only screen and (min-width: 768px){
@@ -285,6 +290,13 @@
     .note-legend-markers {
         display: flex;
         flex-direction: row;
+    }
+
+    .progression-builder .choose-chord {
+        align-items: center;
+        display: block;
+        flex-direction: column;
+        width: 100%;
     }
 }
 
