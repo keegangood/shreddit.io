@@ -132,32 +132,54 @@ const updateInstrument = (instrumentInput=mobileInstrumentInput, tuningInput=mob
     neck.totalStrings = neck.stringNames.length;
     neck.strings = neck.drawStrings();
 
-    // updateNoteMarkers();
+    updateNoteMarkers();
 }
 
-// updateInstrument(mobileInstrumentInput, mobileTuningInput);
+
+
+
+
+
+// let onWindowChange = query => {
+
+//     if(query.matches){
+//         neck.orientation = 'vertical';
+//         updateInstrument();
+//     } else {
+//         neck.orientation = 'horizontal';
+//         updateInstrument();
+//     }
+    
+// }
 
 // update neck and change note legend orientation
 // when screen size changes
-let windowWidthChange = mediaQuery => {    
-
-    if(mediaQuery.matches){
-        neck.orientation = 'horizontal';
+let onWindowWidthChange = query => {    
+    console.log("size: ", query);
+    
+    if(query.matches){
         noteLegend = document.querySelector('.note-legend-horizontal .note-legend-markers')
+        neck.orientation = 'horizontal';
+        
         updateInstrument(); 
-
+        
     } else {
-        neck.orientation = 'vertical';
         noteLegend = document.querySelector('.note-legend-vertical .note-legend-markers')
+        neck.orientation = 'vertical';
+        
         updateInstrument();
     }
 }
 
 // listen for screen width changes
-const mediaQuery = window.matchMedia("(min-width: 768px)");
-mediaQuery.addListener(windowWidthChange);
-windowWidthChange(mediaQuery);
+const sizeQuery = window.matchMedia("(min-width: 768px)");
+sizeQuery.addListener(onWindowWidthChange);
 
+// const orientationQuery = window.matchMedia("(orientation: portrait)");
+// orientationQuery.addListener(onWindowOrientationChange);
+
+onWindowWidthChange(sizeQuery);
+// onWindowOrientationChange(orientationQuery);
 
 // clear old legend markers 
 // and generate new ones
