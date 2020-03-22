@@ -9,15 +9,12 @@ import json
 
 def save_progression(request):
     if request.method == 'POST' :
-        new_progression    = request.POST['progression']
-        old_progression    = request.POST['loaded-progression']
+        new_progression    = request.POST['progression'] # populated from DOM element contents
+        old_progression    = request.POST['loaded-progression'] # progression loaded from id
 
         if request.POST['loaded-progression-id']:
             old_progression_id = int(request.POST['loaded-progression-id'])
             print(type(old_progression_id))
-
-        # print(f'new == old? : {old_progression == new_progression}')
-        # print(request.POST['save-or-update'])
 
         if request.POST['save-or-update'] == 'update':
             if old_progression == new_progression:
@@ -29,13 +26,14 @@ def save_progression(request):
             else:
                 progression = ChordProgression.objects.get(id=old_progression_id)
                 progression.progression = new_progression
-                edited_at = timezone.now
+                progression.edited_at = timezone.now
                 
                 progression.save()
 
                 messages.success(request, "Progression updated successfully.")
                 return redirect('pages-explore', id=progression.id)
 
+        # 
         elif request.POST['save-or-update'] == 'save':
             if new_progression == '':
                 messages.info(request, "Progression cannot be blank.")
