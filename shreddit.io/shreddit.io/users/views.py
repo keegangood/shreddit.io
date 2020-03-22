@@ -47,4 +47,3 @@ def profile(request):
         'progressions': progressions,
     }
     return render(request, 'users/profile.html', context)
-
