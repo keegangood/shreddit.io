@@ -8,8 +8,12 @@ class UserSignupForm(UserCreationForm):
         model = CustomUser
         fields = ['email', 'password1', 'password2']
 
-
 class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = CustomUser
-        fields = []
+        fields = ['profile_image']
+
+class ProfileImageUpdateForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ['profile_image']

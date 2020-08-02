@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.utils.translation import gettext_lazy as _
 
+import PIL
 
 class CustomUserManager(BaseUserManager):
     use_in_migrations = True
@@ -41,7 +42,11 @@ class CustomUser(AbstractUser):
     # _('verbose_name') translates the verbose_name into the user's language
     email = models.EmailField(_('email address'), unique=True)
 
-    profile_image = models.ImageField(_('profile image'), default='default.jpg')
+    profile_image = models.ImageField(
+        _('profile image'),
+        default='default.jpg',
+        upload_to='media/'
+    )
     date_joined = models.DateField(_('date joined'),auto_now_add=True)
 
     USERNAME_FIELD = 'email'

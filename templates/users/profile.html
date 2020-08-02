@@ -6,7 +6,8 @@
             <div class="col s12 avatar-container">
                 <div class="avatar">
                     <img class=""
-                        src="{{ user.profile.avatar.url }}" alt="{{ user.username }}">
+                        src="{{ user.profile_image.url }}" 
+                        alt="{{ user.email }}" />
                 </div>
             </div>
         </div>
@@ -14,8 +15,7 @@
         <div class="row">
             <div class="col s12 center">
                 <div class="username-display">
-                    <h1>{{ user.username }}</h1>
-                    <h4>{{ user.email }}</h4>
+                    <h1>{{ user.email }}</h1>
                     <p><small>Joined:</small><br/>{{ user.date_joined }}</p>
                 </div>
             </div>
@@ -23,17 +23,30 @@
 
         <div class="row">
             <div class="col s8 offset-s2 l12 center">
-                <p><b>Update avatar</b></p>
                 <div class="update-form center">
                     <form method="POST" enctype="multipart/form-data"> 
                         {% csrf_token %}
-                        {% for field in p_form %}
-                            {{ field }}<br/>
-                        {% endfor %}
-
-                        <div class="form-submit">
-                            <button class="submit-button">Update</button>
+                        
+                        <label for="id_profile_image" id="profile-image-field-label">
+                            <p class="blue-grey darken-2 blue-grey-text text-lighten-5">
+                                Select profile image
+                            </p> 
+                            <div id="profile-image-field">
+                                {{ u_form.profile_image }}
+                            </div>
+                        </label>
+                        <div id="new-image">
+                            No file selected
                         </div>
+
+                            <button type="submit" 
+                                class="submit-button 
+                                blue-grey
+                                darken-2
+                                blue-grey-text
+                                text-lighten-5">
+                            Update
+                            </button>
                     </form>
                 </div>
             </div>
