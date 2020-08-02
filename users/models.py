@@ -1,36 +1,86 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.utils.translation import gettext_lazy as _
 
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 
-from PIL import Image
+class CustomUserManager(BaseUserManager):
+    use_in_migrations = True
 
-class Profile(models.Model):
-    user        = models.OneToOneField(User, on_delete=models.CASCADE)
-    avatar      = models.ImageField(default='default.jpg', upload_to='avatars')
+    def _create_user(self, email, password, **extra_fields):
+        """Create and save a User with the given email and password."""
+        if not email:
+            raise ValueError('The given email must be set')
+        email = self.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_user(self, email, password=None, **extra_fields):
+        """Create and save a regular User with the given email and password."""
+        extra_fields.setdefault('is_staff', False)
+        extra_fields.setdefault('is_superuser', False)
+        return self._create_user(email, password, **extra_fields)
+
+    def create_superuser(self, email, password, **extra_fields):
+        """Create and save a SuperUser with the given email and password."""
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('Superuser must have is_staff=True.')
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError('Superuser must have is_superuser=True.')
+
+        return self._create_user(email, password, **extra_fields)
+
+
+class CustomUser(AbstractUser):
+    username = None
+
+    # _('verbose_name') translates the verbose_name into the user's language
+    email = models.EmailField(_('email address'), unique=True)
+
+    profile_image = models.ImageField(_('profile image'), default='default.jpg')
+    date_joined = models.DateField(_('date joined'),auto_now_add=True)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
+    objects = CustomUserManager()
+
+    class Meta:
+        verbose_name = _('user')
+        verbose_name_plural = _('users')
 
     def __str__(self):
-        return f'{self.user.username}\'s profile'
+        return self.email
 
-    def save(self, *args, **kwargs):
-        super().save()
+# class Profile(models.Model):
+#     user        = models.OneToOneField(User, on_delete=models.CASCADE)
+#     avatar      = models.ImageField(default='default.jpg', upload_to='avatars')
 
-        img = Image.open(self.avatar.path)
+#     def __str__(self):
+#         return f'{self.user.username}\'s profile'
+
+#     def save(self, *args, **kwargs):
+#         super().save()
+
+#         img = Image.open(self.avatar.path)
         
-        if img.height > 500 or img.width > 500:
-            output_size = (500,500)
-            img.thumbnail(output_size)
-            img.save(self.avatar.path)
+#         if img.height > 500 or img.width > 500:
+#             output_size = (500,500)
+#             img.thumbnail(output_size)
+#             img.save(self.avatar.path)
 
-@receiver(post_save, sender=User)
-def create_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
+# @receiver(post_save, sender=User)
+# def create_profile(sender, instance, created, **kwargs):
+#     if created:
+#         Profile.objects.create(user=instance)
 
-@receiver(post_save, sender=User)
-def save_profile(sender, instance, **kwargs):
-    instance.profile.save()
+# @receiver(post_save, sender=User)
+# def save_profile(sender, instance, **kwargs):
+#     instance.profile.save()
 
 # class CustomUser(AbstractUser):
 #     email       = models.EmailField(max_length=50, unique=True)
