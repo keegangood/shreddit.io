@@ -3,7 +3,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=django,python
 
 ### Django ###
-*.sqlite3
+db.sqlite3
 *.log
 *.pot
 *.pyc
