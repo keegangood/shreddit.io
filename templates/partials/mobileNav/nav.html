@@ -21,12 +21,12 @@
             {% if user.is_authenticated %}
                 <div class="avatar">
                     <a href="{% url 'profile' %}">
-                        <img src="{{ user.profile.avatar.url }}" 
-                             alt="{{ user.username }}\'s avatar">
+                        <img src="{{ user.profile_image.url }}" 
+                             alt="profile image">
                     </a>
                 </div>
                 <div class="username-display">
-                    <p>Logged in as <br/><span>{{ user.username }}</span></p>
+                    <p>Logged in as <br/><span>{{ user.email }}</span></p>
                 </div>
             {% else %}
                 <div class="login-link right">

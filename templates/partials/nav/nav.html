@@ -26,13 +26,13 @@
         {% if user.is_authenticated %}
             <div class="username-display nav-link">
                 <a href="{% url 'profile' %}">
-                    {{ user.username }}
+                    My Profile
                 </a>
             </div>
             <div class="avatar">
                 <a href="{% url 'profile' %}">
-                    <img src="{{ user.profile.avatar.url }}" 
-                        alt="{{ user.username }}\'s avatar">
+                    <img src="{{ user.profile_image.url }}" 
+                        alt="profile image">
                 </a>
             </div>
         {% else %}
