@@ -43,8 +43,7 @@ def profile(request):
             # if an image was uploaded,
             # resize if greater than 500px, 500px
             if request.FILES:
-                old_file_name = request.user.profile_image.url
-                print(old_file_name)
+                old_file_name = request.user.profile_image.url                    
                 
                 old_image_path = path.join(
                     settings.MEDIA_ROOT,
@@ -52,8 +51,10 @@ def profile(request):
                     request.user.email,
                     f'profile_image.{old_extension}'.lower(),
                 )
-                
-                remove(old_image_path)
+
+                # delete old profile_image if it exists
+                if path.isfile(old_image_path):
+                    remove(old_image_path)
 
                 img_file = request.FILES.get('profile_image')
                 img_name = img_file.name
