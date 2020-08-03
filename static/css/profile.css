@@ -50,7 +50,7 @@
 }
 
 #profile-content form #profile-image-field {
-    /* display: none; */
+    display: none;
 }
 
 #profile-content .submit-button {

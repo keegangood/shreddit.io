@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.utils.translation import gettext_lazy as _
+from os import path
 
 import PIL
 
@@ -35,6 +36,10 @@ class CustomUserManager(BaseUserManager):
 
         return self._create_user(email, password, **extra_fields)
 
+def get_upload_path(instance, filename):
+    upload_path = path.join(f'profile_images/{instance.user.email}/, filemame')
+    print('UPLOAD PATH',upload_path)
+    return upload_path
 
 class CustomUser(AbstractUser):
     username = None
@@ -44,8 +49,8 @@ class CustomUser(AbstractUser):
 
     profile_image = models.ImageField(
         _('profile image'),
-        default='default.jpg',
-        upload_to='media/'
+        default='profile_images/default.jpg',
+        upload_to='profile_images/'
     )
     date_joined = models.DateField(_('date joined'),auto_now_add=True)
 
@@ -53,6 +58,7 @@ class CustomUser(AbstractUser):
     REQUIRED_FIELDS = []
 
     objects = CustomUserManager()
+
 
     class Meta:
         verbose_name = _('user')

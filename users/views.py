@@ -10,6 +10,11 @@ from chord_progressions.models import ChordProgression
 from .models import CustomUser
 import json
 from PIL import Image
+from os import mkdir
+from os import path, remove
+from shutil import move
+from django.conf import settings
+
 
 def signup(request):
     if request.method == 'POST':
@@ -31,23 +36,50 @@ def signup(request):
 def profile(request):
     if request.method == 'POST':
 
-        if request.FILES:            
-            img_name = request.FILES.get('profile_image')            
-            img = Image.open(img_name)
-
-            if img.height > 500 or img.width > 500:
-                output_size = (500,500)
-                img.thumbnail(output_size)
-                # img.save(f'media/{}')
         u_form = UserUpdateForm(data=request.POST, instance=request.user, files=request.FILES)
-
-        print('u_form:', u_form)
+        old_extension = request.user.profile_image.url.split('.')[-1]
 
         if u_form.is_valid():
-            
-           
-            
-            request.user.save()
+            # if an image was uploaded,
+            # resize if greater than 500px, 500px
+            if request.FILES:
+                old_file_name = request.user.profile_image.url
+                print(old_file_name)
+                
+                old_image_path = path.join(
+                    settings.MEDIA_ROOT,
+                    'profile_images',
+                    request.user.email,
+                    f'profile_image.{old_extension}'.lower(),
+                )
+                
+                remove(old_image_path)
+
+                img_file = request.FILES.get('profile_image')
+                img_name = img_file.name
+                img = Image.open(img_file)
+                img_extension = img_name.split('.')[-1]
+                # print(img_extension)
+                img_path = path.join(
+                    settings.MEDIA_ROOT,
+                    'profile_images',
+                    request.user.email
+                )
+
+                if img.height > 500 or img.width > 500:
+                    output_size = (500,500)
+                    img.thumbnail(output_size)
+
+                
+                # rename image
+                renamed_path = path.join(img_path, f'profile_image.{img_extension.lower()}')
+                
+                # save original path
+                img.save(renamed_path)
+
+                request.user.profile_image = renamed_path
+                request.user.save()
+
             messages.success(request, f'Your account has been updated!')
             return redirect('profile')
         else:
@@ -56,7 +88,7 @@ def profile(request):
     else:
         progressions = ChordProgression.objects.filter(creator=request.user)
 
-        print(f'progressions*** {progressions}')
+        # print(f'progressions*** {progressions}')
 
         u_form = UserUpdateForm(instance=request.user)
     

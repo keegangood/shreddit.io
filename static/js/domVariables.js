@@ -48,4 +48,5 @@ let burger                    = document.querySelector('.hamburger'),
     mainContent               = document.querySelector('.main-content'),
     mobileSettingsIcon        = document.querySelector('.mobile-settings-icon');
 
-
+let profileImageInput = document.querySelector('#id_profile_image'),
+    newImageUrl = document.querySelector('#profile-content #new-image');
