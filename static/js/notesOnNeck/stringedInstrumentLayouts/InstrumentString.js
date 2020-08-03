@@ -4,13 +4,14 @@ class InstrumentString{
         this.id = stringNum;
         this.name = stringName;
         this.container = this.draw();
+        this.label = this.createLabel();
         this.frets = this.createFrets();
     }
 
     draw(){
         let totalStrings = this.neck.totalStrings;
         let newString = document.createElement('div');
-
+        
         newString.id = `string-${this.id}`;
         
         newString.setAttribute('name', this.name);
@@ -23,7 +24,19 @@ class InstrumentString{
         return newString
     }
 
+    createLabel() {
+        let label = document.createElement('div');
+        if(this.name !== 'invisible'){
+            label.innerText = this.name.slice(0, this.name.length-1);
+            label.id=(`${this.name}-string-label`);
+            label.classList.add('string-label', 'blue-grey');
+            this.container.prepend(label);
+        }
+    }
+
+
     createFrets() {
+
         let frets = [];
         for(let i=this.neck.startFret; i<this.neck.endFret; i++){
             let fretNum = i;

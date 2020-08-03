@@ -30,6 +30,13 @@
         width: 60vw;
     }
 
+    .string-label {
+        font-size: 1.5em;
+        left: calc(70%);
+        padding: 5px;
+        position: relative;
+    }
+
     .string {
         background-color: #eaeaea;
         display: flex;
@@ -107,6 +114,14 @@
         width: 80%;
     }
 
+    .string-label {
+        font-size: 1.5em;
+        padding: 10px;
+        padding-right: 30px;
+        position: relative;
+        top: calc(-35%);
+        width: 2vw;
+    }
     .string {
         background-color: #eaeaea;
         display: flex;

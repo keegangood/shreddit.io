@@ -61,6 +61,7 @@ class InstrumentNeck {
         }
     };
     
+
     drawStrings(){
 
         let strings = [];
@@ -68,7 +69,7 @@ class InstrumentNeck {
             
             let stringNum = i;
             let string = new InstrumentString(this, stringNum, this.stringNames[i]);
-            
+                
             if(this.orientation == 'vertical'){
                 
                 // console.log("< 768px");
