@@ -37,7 +37,7 @@ burger.addEventListener('click', () => {
     mobileNavMenu.classList.toggle('mobile-menu-active');
     settingsMenuContent.classList.toggle('hidden');
 
-    mobileScettingsIcon.classList.toggle('hidden');
+    mobileSettingsIcon.classList.toggle('hidden');
     
 });
 
