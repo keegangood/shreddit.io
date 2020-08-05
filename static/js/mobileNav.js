@@ -62,7 +62,11 @@ mobileInstrumentInput.addEventListener('change', function(e, otherNavInput=navIn
     // updateNoteLegend();
 
     otherNavInput.value = newInstrument;
-    
+
+    burger.classList.toggle('hidden');
+
+    cover.classList.toggle('content-cover-active');
+    mobileNavMenu.classList.toggle('mobile-menu-active');
 });
 
 
@@ -72,6 +76,11 @@ mobileTuningInput.addEventListener('change', function(e, otherTuningInput=navTun
     updateNoteLegend();
 
     otherTuningInput.value = mobileTuningInput.value;
+
+    burger.classList.toggle('hidden');
+
+    cover.classList.toggle('content-cover-active');
+    mobileNavMenu.classList.toggle('mobile-menu-active');
 });
 
 
@@ -79,6 +88,11 @@ mobileExploreModeInput.addEventListener('change', (e, otherExploreModeInput=navE
     changeExploreMode(mobileExploreModeInput);
     
     otherExploreModeInput.value = mobileExploreModeInput.value;
+
+    burger.classList.toggle('hidden');
+
+    cover.classList.toggle('content-cover-active');
+    mobileNavMenu.classList.toggle('mobile-menu-active');
 });
 
 document.addEventListener('DOMContentLoaded', function() {

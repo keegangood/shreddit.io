@@ -1,5 +1,5 @@
 
-console.log(navInstrumentInput);
+// console.log(navInstrumentInput);
 settingsIcon.addEventListener('click', () => {
     settingsIcon.classList.toggle('settings-icon-active')
 
@@ -23,6 +23,8 @@ navInstrumentInput.addEventListener('change', function(e, otherNavInput=mobileIn
 
     otherNavInput.value = newInstrument;
     
+    navSettingsMenu.classList.remove('settings-menu-active');
+
 });
 
 
@@ -32,6 +34,7 @@ navTuningInput.addEventListener('change', function(e, otherTuningInput=mobileTun
     // updateNoteLegend();
 
     otherTuningInput.value = navTuningInput.value;
+    navSettingsMenu.classList.remove('settings-menu-active');
 });
 
 
@@ -39,4 +42,6 @@ navExploreModeInput.addEventListener('change', (e, otherExploreModeInput=mobileE
     changeExploreMode(navExploreModeInput);
     otherExploreModeInput.value = navExploreModeInput.value;
     
+    navSettingsMenu.classList.remove('settings-menu-active');
+
 });
