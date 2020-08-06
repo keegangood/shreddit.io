@@ -69,6 +69,8 @@ def profile(request):
                     settings.MEDIA_ROOT, "profile_images", request.user.email
                 )
 
+                print('IMAGE PATH: ',  img_path)
+
                 if img.height > 500 or img.width > 500:
                     output_size = (500, 500)
                     img.thumbnail(output_size)
@@ -78,11 +80,18 @@ def profile(request):
                     img_path, f"profile_image.{img_extension.lower()}"
                 )
 
+                print('RENAMED PATH: ', renamed_path)
+
                 # save original path
                 img.save(renamed_path)
 
+                # request.user.profile_image = path.join(img_path, img_name)
                 u_form.save()
 
+                print('IMG NAME: ', img_name)
+                print('IMAGE PATH AND NAME: ', path.join(img_path, img_name))
+                # remove original photo after upload
+                # remove(path.join(img_path, img_name))
             messages.success(request, f"Your account has been updated!")
             return redirect("profile")
         else:

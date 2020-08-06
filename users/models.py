@@ -39,8 +39,10 @@ class CustomUserManager(BaseUserManager):
 
 
 def get_upload_path(instance, filename):
-    upload_path = path.join(f"profile_images/{instance.email}/", filename)
-    print("UPLOAD PATH", upload_path)
+
+    extension = filename.split('.')[-1]
+
+    upload_path = path.join(f"profile_images/{instance.email}/", f'profile_image.{extension}')
     return upload_path
 
 
