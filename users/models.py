@@ -5,13 +5,14 @@ from os import path
 
 import PIL
 
+
 class CustomUserManager(BaseUserManager):
     use_in_migrations = True
 
     def _create_user(self, email, password, **extra_fields):
         """Create and save a User with the given email and password."""
         if not email:
-            raise ValueError('The given email must be set')
+            raise ValueError("The given email must be set")
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
@@ -20,52 +21,56 @@ class CustomUserManager(BaseUserManager):
 
     def create_user(self, email, password=None, **extra_fields):
         """Create and save a regular User with the given email and password."""
-        extra_fields.setdefault('is_staff', False)
-        extra_fields.setdefault('is_superuser', False)
+        extra_fields.setdefault("is_staff", False)
+        extra_fields.setdefault("is_superuser", False)
         return self._create_user(email, password, **extra_fields)
 
     def create_superuser(self, email, password, **extra_fields):
         """Create and save a SuperUser with the given email and password."""
-        extra_fields.setdefault('is_staff', True)
-        extra_fields.setdefault('is_superuser', True)
+        extra_fields.setdefault("is_staff", True)
+        extra_fields.setdefault("is_superuser", True)
 
-        if extra_fields.get('is_staff') is not True:
-            raise ValueError('Superuser must have is_staff=True.')
-        if extra_fields.get('is_superuser') is not True:
-            raise ValueError('Superuser must have is_superuser=True.')
+        if extra_fields.get("is_staff") is not True:
+            raise ValueError("Superuser must have is_staff=True.")
+        if extra_fields.get("is_superuser") is not True:
+            raise ValueError("Superuser must have is_superuser=True.")
 
         return self._create_user(email, password, **extra_fields)
 
+
 def get_upload_path(instance, filename):
-    upload_path = path.join(f'profile_images/{instance.user.email}/, filemame')
-    print('UPLOAD PATH',upload_path)
+
+    extension = filename.split('.')[-1]
+
+    upload_path = path.join(f"profile_images/{instance.email}/", f'profile_image.{extension}')
     return upload_path
+
 
 class CustomUser(AbstractUser):
     username = None
 
     # _('verbose_name') translates the verbose_name into the user's language
-    email = models.EmailField(_('email address'), unique=True)
+    email = models.EmailField(_("email address"), unique=True)
 
     profile_image = models.ImageField(
-        _('profile image'),
-        default='profile_images/default.jpg',
-        upload_to='profile_images/'
+        _("profile image"),
+        default="profile_images/default.jpg",
+        upload_to=get_upload_path,
     )
-    date_joined = models.DateField(_('date joined'),auto_now_add=True)
+    date_joined = models.DateField(_("date joined"), auto_now_add=True)
 
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
     objects = CustomUserManager()
 
-
     class Meta:
-        verbose_name = _('user')
-        verbose_name_plural = _('users')
+        verbose_name = _("user")
+        verbose_name_plural = _("users")
 
     def __str__(self):
         return self.email
+
 
 # class Profile(models.Model):
 #     user        = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -78,7 +83,7 @@ class CustomUser(AbstractUser):
 #         super().save()
 
 #         img = Image.open(self.avatar.path)
-        
+
 #         if img.height > 500 or img.width > 500:
 #             output_size = (500,500)
 #             img.thumbnail(output_size)
