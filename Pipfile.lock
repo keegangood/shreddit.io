@@ -64,7 +64,7 @@
                 "sha256:ffe538682dc19cc542ae7c3e504fdf54ca7f86fb8a135e59dd6bc8627eae6cce"
             ],
             "index": "pypi",
-            "version": "==7.2.0"
+            "version": "==9.0.1"
         },
         "pytz": {
             "hashes": [
@@ -72,6 +72,7 @@
                 "sha256:eb10ce3e7736052ed3623d49975ce333bcd712c7bb19a58b9e2089d4057d0798"
             ],
             "version": "==2021.1"
+
         },
         "sqlparse": {
             "hashes": [
